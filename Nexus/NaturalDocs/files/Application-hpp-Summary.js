@@ -1,0 +1,1 @@
+NDFramePage.OnPageTitleLoaded("File:Application.hpp","Application.hpp");NDSummary.OnSummaryLoaded("File:Application.hpp",[["C/C++","C"]],[["Classes","Class"],["Files","File"]],[[3,0,1,"<span class=\"Qualifier\">Include\\&#8203;Nexus\\</span>&#8203;Application.hpp.","Include\\Nexus\\Application.hpp."],[4,0,0,"Application","Application"]]);

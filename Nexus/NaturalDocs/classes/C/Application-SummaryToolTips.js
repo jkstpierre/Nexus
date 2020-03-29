@@ -1,0 +1,1 @@
+NDSummary.OnToolTipsLoaded("CClass:Application",{4:"<div class=\"NDToolTip TClass LC\"><div class=\"NDClassPrototype\" id=\"NDClassPrototype4\"><div class=\"CPEntry TClass Current\"><div class=\"CPName\">Application</div></div></div><div class=\"TTSummary\">Summary:&nbsp; An application.</div></div>"});

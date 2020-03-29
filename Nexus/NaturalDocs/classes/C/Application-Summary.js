@@ -1,0 +1,1 @@
+NDFramePage.OnPageTitleLoaded("CClass:Application","Application");NDSummary.OnSummaryLoaded("CClass:Application",[["C/C++","C"]],[["Classes","Class"]],[[4,0,0,"Application"]]);
