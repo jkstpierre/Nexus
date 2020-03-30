@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("isr",["Function"],[["IsRunning",,[["Application",,,,0,"File:Application.hpp:Application.IsRunning","CClass:Application:IsRunning"]]]]);

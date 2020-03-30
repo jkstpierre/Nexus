@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("exc",["Class","File"],[["Exception",,[[,,,,0,"File:Exception.hpp:Exception","CClass:Exception"],["Include\\Nexus\\","Exception.hpp.",,,1,"File:Exception.hpp:Include\\Nexus\\Exception.hpp."]]]]);

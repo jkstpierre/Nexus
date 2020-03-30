@@ -1,1 +1,1 @@
-NDMenu.OnSectionLoaded("classes.js",[[1,"Application"]]);
+NDMenu.OnSectionLoaded("classes.js",[[1,"Application"],[1,"Exception"]]);

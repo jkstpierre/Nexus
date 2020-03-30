@@ -1,1 +1,1 @@
-NDSearch.OnPrefixIndexLoaded(["app","hpp"]);
+NDSearch.OnPrefixIndexLoaded(["app","exc","hpp","isr","onr","ont","rea","run","sto","~ap","~ex"]);
