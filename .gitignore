@@ -364,3 +364,12 @@ bin/
 obj/
 CLI.Package.MSI/
 CLI.Package.ZIP/
+
+Nexus/NaturalDocs/classes
+Nexus/NaturalDocs/Working Data
+Nexus/NaturalDocs/files
+Nexus/NaturalDocs/index.html
+Nexus/NaturalDocs/menu
+Nexus/NaturalDocs/other
+Nexus/NaturalDocs/search
+Nexus/NaturalDocs/styles
