@@ -1,1 +1,0 @@
-NDSearch.OnPrefixDataLoaded("sto",["Function"],[["Stop",,[["Application",,,,0,"File:Application.hpp:Application.Stop","CClass:Application:Stop"]]]]);

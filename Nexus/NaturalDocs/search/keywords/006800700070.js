@@ -1,1 +1,0 @@
-NDSearch.OnPrefixDataLoaded("hpp",["File"],[["hpp",,[["Include\\Nexus\\","Application.hpp.",,,0,"File:Application.hpp:Include\\Nexus\\Application.hpp."],["Include\\Nexus\\","Exception.hpp.",,,0,"File:Exception.hpp:Include\\Nexus\\Exception.hpp."]]]]);

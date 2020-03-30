@@ -1,1 +1,0 @@
-NDSearch.OnPrefixDataLoaded("~ex",["Function"],[["~Exception",,[["Exception::Exception",,,,0,"File:Exception.hpp:Exception.Exception.~Exception","CClass:Exception:Exception.~Exception"]]]]);

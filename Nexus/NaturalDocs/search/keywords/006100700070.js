@@ -1,1 +1,0 @@
-NDSearch.OnPrefixDataLoaded("app",["Class","File"],[["Application",,[[,,,,0,"File:Application.hpp:Application","CClass:Application"],["Include\\Nexus\\","Application.hpp.",,,1,"File:Application.hpp:Include\\Nexus\\Application.hpp."]]]]);
