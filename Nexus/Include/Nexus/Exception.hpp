@@ -5,12 +5,13 @@
 #ifndef __NEXUS_EXCEPTION_HPP__
 #define __NEXUS_EXCEPTION_HPP__
 
+#include <exception>
 #include <string>
 
-namespace Nexus {
-
+namespace Nexus
+{
 /// Summary:  Size of the exception message buffer.
-const int EXCEPTION_MESSAGE_BUFFER_SIZE = 512;
+const unsigned int EXCEPTION_MESSAGE_BUFFER_SIZE = 1024U;
 
 /// Class:  Exception
 ///
@@ -19,7 +20,8 @@ const int EXCEPTION_MESSAGE_BUFFER_SIZE = 512;
 /// Author: jkstpierre
 ///
 /// Date: 3/29/2020
-class Exception {
+class Exception : std::exception
+{
 private:
   /// Summary:  The error message to display.
   char mMessage[EXCEPTION_MESSAGE_BUFFER_SIZE];
@@ -36,7 +38,7 @@ public:
   /// Parameters:
   /// format -    The message format for the exception.
   /// ... -       Variable arguments providing additional information.
-  Exception(const char *format, ...) noexcept;
+  Exception(const char* format, ...) noexcept;
 
   /// Function: Exception::~Exception
   ///
@@ -57,9 +59,9 @@ public:
   /// Date: 3/29/2020
   ///
   /// Returns:  Null if it fails, else the message.
-  const char *ReadMessage() const noexcept;
+  const char* ReadMessage() const noexcept;
 };
-} // namespace Nexus
+}
 
 #endif
 

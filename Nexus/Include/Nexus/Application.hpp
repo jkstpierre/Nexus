@@ -5,8 +5,8 @@
 #ifndef __NEXUS_APPLICATION_HPP__
 #define __NEXUS_APPLICATION_HPP__
 
-namespace Nexus {
-
+namespace Nexus
+{
 /// Class:  Application
 ///
 /// Summary:  An abstract base class for programs wishing to run on Nexus.
@@ -14,13 +14,14 @@ namespace Nexus {
 /// Author: jkstpierre
 ///
 /// Date: 3/29/2020
-class Application {
+class Application
+{
 private:
   /// Summary:  The window.
-  void *mWindow;
+  void* mWindow;
 
   /// Summary:  The OpenGL context.
-  void *mContext;
+  void* mContext;
 
   /// Summary:  True if game loop is running.
   bool mRunning;
@@ -40,9 +41,9 @@ public:
   /// windowHeight -      Height of the window.
   /// windowFullscreen -  True to window fullscreen mode.
   /// windowUseVSync -    True to window v synchronize.
-  Application(const char *windowName, const unsigned int &windowWidth,
-              const unsigned int &windowHeight, const bool &windowFullscreen,
-              const bool &windowUseVSync);
+  Application(const char* windowName, const unsigned int& windowWidth,
+              const unsigned int& windowHeight, const bool& windowFullscreen,
+              const bool& windowUseVSync);
 
   /// Function: Application::~Application
   ///
@@ -86,7 +87,7 @@ public:
   ///
   /// Parameters:
   /// deltaTime -   The delta time between ticks.
-  virtual void OnTick(const float &deltaTime) = 0;
+  virtual void OnTick(const float& deltaTime) = 0;
 
   /// Function: OnRender
   ///
@@ -100,7 +101,7 @@ public:
   ///
   /// Parameters:
   /// alpha -   The alpha value used for interpolation.
-  virtual void OnRender(const float &alpha) = 0;
+  virtual void OnRender(const float& alpha) = 0;
 
 public:
   /// Function: IsRunning
@@ -112,9 +113,9 @@ public:
   /// Date: 3/29/2020
   ///
   /// Returns:  A reference to a const bool.
-  const bool &IsRunning() const noexcept;
+  const bool& IsRunning() const noexcept;
 };
-} // namespace Nexus
+}
 
 #endif
 

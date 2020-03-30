@@ -20,10 +20,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Nexus\Application.hpp" />
+    <ClInclude Include="Include\Nexus\DebugWriter.hpp" />
     <ClInclude Include="Include\Nexus\Exception.hpp" />
+    <ClInclude Include="Include\Nexus\Macros.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Nexus\Application.cpp" />
+    <ClCompile Include="Source\Nexus\DebugWriter.cpp" />
     <ClCompile Include="Source\Nexus\Exception.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
