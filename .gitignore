@@ -355,3 +355,12 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+#ignore thumbnails created by windows
+Thumbs.db
+#Ignore files build by Visual Studio
+*.csproj.user
+bin/
+obj/
+CLI.Package.MSI/
+CLI.Package.ZIP/
