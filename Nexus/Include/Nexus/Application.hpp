@@ -5,6 +5,9 @@
 #ifndef __NEXUS_APPLICATION_HPP__
 #define __NEXUS_APPLICATION_HPP__
 
+#include <Nexus\Keyboard.hpp>
+#include <Nexus\Mouse.hpp>
+
 namespace Nexus
 {
 /// Class:  Application
@@ -25,6 +28,12 @@ private:
 
   /// Summary:  True if game loop is running.
   bool mRunning;
+
+  /// Summary:  The keyboard.
+  Keyboard mKeyboard;
+
+  /// Summary:  The mouse.
+  Mouse mMouse;
 
 public:
   /// Function: Application::Application
@@ -114,6 +123,28 @@ public:
   ///
   /// Returns:  A reference to a const bool.
   const bool& IsRunning() const noexcept;
+
+  /// Function: GetKeyboard
+  ///
+  /// Summary:  Gets the keyboard.
+  ///
+  /// Author: jkstpierre.
+  ///
+  /// Date: 4/4/2020.
+  ///
+  /// Returns:  The keyboard.
+  const Keyboard& GetKeyboard() const noexcept;
+
+  /// Function: GetMouse
+  ///
+  /// Summary:  Gets the mouse.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/5/2020
+  ///
+  /// Returns:  The mouse.
+  const Mouse& GetMouse() const noexcept;
 };
 }
 

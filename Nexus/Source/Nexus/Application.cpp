@@ -52,6 +52,18 @@ Application::Application(const char* windowName, const unsigned int& windowWidth
                     SDL_GetError());
   }
 
+  // Check for vertical sync
+  if ( windowUseVSync )
+  {
+    // Enable vsync
+    SDL_GL_SetSwapInterval(1);
+  }
+  else
+  {
+    // Disable vsync
+    SDL_GL_SetSwapInterval(0);
+  }
+
   // Load OpenGL extensions using GLAD
   if ( !gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress) )
   {
@@ -79,6 +91,8 @@ int Application::Run()
   {
     mRunning = true; // Indicate game loop is active
 
+    
+
     // Run game loop until shutdown
     while ( IsRunning() )
     {
@@ -91,15 +105,37 @@ int Application::Run()
         {
           Stop(); // Stop the game loop
         }
+        // Check if user has pressed a key
         else if ( e.type == SDL_KEYDOWN )
         {
-
+          mKeyboard.Press(static_cast<Nexus::Key>(e.key.keysym.sym));
         }
+        // Check if user has released a key
         else if ( e.type == SDL_KEYUP )
         {
-
+          mKeyboard.Release(static_cast<Nexus::Key>(e.key.keysym.sym));
+        }
+        // Check if user has pressed a mouse button
+        else if ( e.type == SDL_MOUSEBUTTONDOWN )
+        {
+          mMouse.Press(static_cast<Nexus::MouseButton>(e.button.button));
+        }
+        // Check if user has released a mouse button
+        else if ( e.type == SDL_MOUSEBUTTONUP )
+        {
+          mMouse.Release(static_cast<Nexus::MouseButton>(e.button.button));
+        }
+        // Check if user has moved the mouse
+        else if ( e.type == SDL_MOUSEMOTION )
+        {
+          mMouse.SetPosition(Math::Vector2i(e.motion.x, e.motion.y));
         }
       }
+
+      OnTick(0.0f);
+
+      /// Summary:  Swap window buffers.
+      SDL_GL_SwapWindow((SDL_Window*)mWindow);
     }
 
     return 0;
@@ -118,6 +154,16 @@ void Application::Stop() noexcept
 const bool& Application::IsRunning() const noexcept
 {
   return mRunning;
+}
+
+const Keyboard& Application::GetKeyboard() const noexcept
+{
+  return mKeyboard;
+}
+
+const Mouse& Application::GetMouse() const noexcept
+{
+  return mMouse;
 }
 }
 

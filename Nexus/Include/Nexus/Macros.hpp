@@ -1,6 +1,6 @@
 /// File: Include\Nexus\Macros.hpp.
 ///
-/// Summary:  Declares the macros class.
+/// Summary:  A suite of macros for miscellaneous purposes.
 
 #ifndef __NEXUS_MACROS_HPP__
 #define __NEXUS_MACROS_HPP__

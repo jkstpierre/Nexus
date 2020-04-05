@@ -3,11 +3,9 @@
 /// Summary:  Implements the debug writer class.
 
 #include <Nexus\Macros.hpp>
-
 #ifdef __NEXUS_OS_WINDOWS__
 #include <Windows.h>
 #endif
-
 #include <cstdio>
 #include <Nexus\DebugWriter.hpp>
 

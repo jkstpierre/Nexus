@@ -22,6 +22,27 @@
     <Filter Include="Resource Files\Nexus">
       <UniqueIdentifier>{96ae9e62-db32-4c91-99fc-eea2b78f082c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Nexus\Graphics">
+      <UniqueIdentifier>{49de2861-3907-4257-9234-01f2bfd15b91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Nexus\Graphics">
+      <UniqueIdentifier>{7193595b-d9b0-45ae-a597-89f6012fb312}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Nexus\Math">
+      <UniqueIdentifier>{aa93e5c8-695e-4b3c-bd38-93540517cbcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Nexus\Audio">
+      <UniqueIdentifier>{6d59aa8d-11e0-4c63-9b42-7f0e61f34f30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Nexus\Math">
+      <UniqueIdentifier>{6eb5ee3a-2372-4ebe-a995-836bd82d3436}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Nexus\Math\Base">
+      <UniqueIdentifier>{6d7d1d45-b4a3-412b-a360-0d3e4d94b0a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Nexus\Audio">
+      <UniqueIdentifier>{e608e69f-50ea-4660-a381-5d7a5f0fc2b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Nexus\Application.hpp">
@@ -36,6 +57,33 @@
     <ClInclude Include="Include\Nexus\Macros.hpp">
       <Filter>Header Files\Nexus</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Nexus\Keyboard.hpp">
+      <Filter>Header Files\Nexus</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Nexus\Mouse.hpp">
+      <Filter>Header Files\Nexus</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Nexus\Timer.hpp">
+      <Filter>Header Files\Nexus</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Nexus\Graphics\GLDevice.hpp">
+      <Filter>Header Files\Nexus\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Nexus\Audio\ALDevice.hpp">
+      <Filter>Header Files\Nexus\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Nexus\Math\Base\Vector.hpp">
+      <Filter>Header Files\Nexus\Math\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Nexus\Math\Vector3.hpp">
+      <Filter>Header Files\Nexus\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Nexus\Math\Vector2.hpp">
+      <Filter>Header Files\Nexus\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Nexus\Math\Vector4.hpp">
+      <Filter>Header Files\Nexus\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Nexus\Application.cpp">
@@ -46,6 +94,18 @@
     </ClCompile>
     <ClCompile Include="Source\Nexus\DebugWriter.cpp">
       <Filter>Source Files\Nexus</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Nexus\Keyboard.cpp">
+      <Filter>Source Files\Nexus</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Nexus\Mouse.cpp">
+      <Filter>Source Files\Nexus</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Nexus\Timer.cpp">
+      <Filter>Source Files\Nexus</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Nexus\Graphics\GLDevice.cpp">
+      <Filter>Source Files\Nexus\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

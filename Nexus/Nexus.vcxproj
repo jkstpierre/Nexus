@@ -20,14 +20,27 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Nexus\Application.hpp" />
+    <ClInclude Include="Include\Nexus\Audio\ALDevice.hpp" />
     <ClInclude Include="Include\Nexus\DebugWriter.hpp" />
     <ClInclude Include="Include\Nexus\Exception.hpp" />
+    <ClInclude Include="Include\Nexus\Graphics\GLDevice.hpp" />
+    <ClInclude Include="Include\Nexus\Math\Base\Vector.hpp" />
+    <ClInclude Include="Include\Nexus\Math\Vector2.hpp" />
+    <ClInclude Include="Include\Nexus\Math\Vector3.hpp" />
+    <ClInclude Include="Include\Nexus\Math\Vector4.hpp" />
+    <ClInclude Include="Include\Nexus\Timer.hpp" />
+    <ClInclude Include="Include\Nexus\Keyboard.hpp" />
     <ClInclude Include="Include\Nexus\Macros.hpp" />
+    <ClInclude Include="Include\Nexus\Mouse.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Nexus\Application.cpp" />
     <ClCompile Include="Source\Nexus\DebugWriter.cpp" />
     <ClCompile Include="Source\Nexus\Exception.cpp" />
+    <ClCompile Include="Source\Nexus\Graphics\GLDevice.cpp" />
+    <ClCompile Include="Source\Nexus\Timer.cpp" />
+    <ClCompile Include="Source\Nexus\Keyboard.cpp" />
+    <ClCompile Include="Source\Nexus\Mouse.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -117,6 +130,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -134,6 +148,7 @@
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -156,6 +171,7 @@
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <FloatingPointModel>Fast</FloatingPointModel>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -180,6 +196,7 @@
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <FloatingPointModel>Fast</FloatingPointModel>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
