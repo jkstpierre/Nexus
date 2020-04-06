@@ -7,9 +7,17 @@
 
 #include <Nexus\Keyboard.hpp>
 #include <Nexus\Mouse.hpp>
+#include <Nexus\Graphics\GLDevice.hpp>
 
 namespace Nexus
 {
+/// Summary:  The application default ticks per second.
+const unsigned int APPLICATION_DEFAULT_TICKS_PER_SECOND = 50U;
+/// Summary:  The application default gl major version.
+const unsigned int APPLICATION_DEFAULT_GL_MAJOR_VERSION = 4U;
+/// Summary:  The application default gl minor version.
+const unsigned int APPLICATION_DEFAULT_GL_MINOR_VERSION = 6U;
+
 /// Class:  Application
 ///
 /// Summary:  An abstract base class for programs wishing to run on Nexus.
@@ -29,11 +37,17 @@ private:
   /// Summary:  True if game loop is running.
   bool mRunning;
 
+  /// Summary:  The ticks per second.
+  unsigned int mTicksPerSecond;
+
   /// Summary:  The keyboard.
   Keyboard mKeyboard;
 
   /// Summary:  The mouse.
   Mouse mMouse;
+
+  /// Summary:  The gl device.
+  Graphics::GLDevice mGLDevice;
 
 public:
   /// Function: Application::Application
@@ -96,7 +110,7 @@ public:
   ///
   /// Parameters:
   /// deltaTime -   The delta time between ticks.
-  virtual void OnTick(const float& deltaTime) = 0;
+  virtual void OnTick(const double& deltaTime) = 0;
 
   /// Function: OnRender
   ///
@@ -110,7 +124,20 @@ public:
   ///
   /// Parameters:
   /// alpha -   The alpha value used for interpolation.
-  virtual void OnRender(const float& alpha) = 0;
+  virtual void OnRender(const double& alpha) = 0;
+
+public:
+  /// Function: SetTicksPerSecond
+  ///
+  /// Summary:  Sets ticks per second. Will do nothing if ticksPerSecond is 0.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/6/2020
+  ///
+  /// Parameters:
+  /// ticksPerSecond -  The ticks per second.
+  void SetTicksPerSecond(const unsigned int& ticksPerSecond) noexcept;
 
 public:
   /// Function: IsRunning
@@ -123,6 +150,17 @@ public:
   ///
   /// Returns:  A reference to a const bool.
   const bool& IsRunning() const noexcept;
+
+  /// Function: GetTicksPerSecond
+  ///
+  /// Summary:  Gets ticks per second.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/6/2020
+  ///
+  /// Returns:  The ticks per second.
+  const unsigned int& GetTicksPerSecond() const noexcept;
 
   /// Function: GetKeyboard
   ///
@@ -145,6 +183,17 @@ public:
   ///
   /// Returns:  The mouse.
   const Mouse& GetMouse() const noexcept;
+
+  /// Function: GetGLDevice
+  ///
+  /// Summary:  Gets gl device.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/6/2020
+  ///
+  /// Returns:  The gl device.
+  Graphics::GLDevice& GetGLDevice() noexcept;
 };
 }
 

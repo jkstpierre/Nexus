@@ -138,6 +138,16 @@ public:
     return Base::Vector<Vector4<T>, T, 4>::GetComponents()[3];
   }
 };
+
+/// Typedef:  Vector4<float> Vector4f
+///
+/// Summary:  Defines an alias representing the vector 4f.
+typedef Vector4<float> Vector4f;
+
+/// Typedef:  Vector4<int> Vector4i
+///
+/// Summary:  Defines an alias representing the vector 4i.
+typedef Vector4<int> Vector4i;
 }
 
 #endif

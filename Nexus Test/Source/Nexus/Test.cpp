@@ -3,12 +3,12 @@
 /// Summary:  Implements the test class.
 
 #include <Nexus\Macros.hpp>
-
 #ifdef __NEXUS_OS_WINDOWS__
 #include <Windows.h>
 #endif
-
 #include <Nexus\Application.hpp>
+#include <Nexus\DebugWriter.hpp>
+#include <Nexus\Math\Vector2.hpp>
 
 namespace Nexus
 {
@@ -68,8 +68,27 @@ public:
   ///
   /// Parameters:
   /// deltaTime -   The delta time.
-  void OnTick(const float& deltaTime) override
-  {}
+  void OnTick(const double& deltaTime) override
+  {
+    if ( GetKeyboard().IsPressed(Key::ESCAPE) )
+    {
+      Stop();
+      
+      Math::Vector2f A;
+      Math::Vector2i B(95, 26);
+
+      A += Math::Vector2f(50.0f, 60.0f) + B;
+
+      DebugWriter().Write(L"Size = %u\nX = %f Y = %f\n", sizeof(A), A.GetX(), A.GetY());
+      DebugWriter().Write(L"dt = %lf\n", deltaTime);
+    }
+
+    if ( GetMouse().IsPressed(MouseButton::LEFT) )
+    {
+      DebugWriter().Write(L"Position = %d %d\n", GetMouse().GetPosition().GetX(), GetMouse().GetPosition().GetY());
+      GetGLDevice().SetClearColor({ 1.0f, 0.0f, 1.0f, 1.0f });
+    }
+  }
 
   /// Function: OnRender
   ///
@@ -81,13 +100,12 @@ public:
   ///
   /// Parameters:
   /// alpha -   The alpha.
-  void OnRender(const float& alpha) override
+  void OnRender(const double& alpha) override
   {}
 };
 }
 
-#if defined(WIN32) || defined(_WIN32) || defined(__WIN32)
-
+#ifdef __NEXUS_OS_WINDOWS__
 /// Function: WinMain
 ///
 /// Summary:  Main entry point for Windows applications
@@ -103,13 +121,12 @@ public:
 /// nCmdShow -        The command show.
 ///
 /// Returns:  An APIENTRY.
-int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow)
 {
   return Nexus::Test("Test", 800, 600, false, true).Run();
 }
 
 #elif
-
 /// Function: main
 ///
 /// Summary:  Main entry-point for non windows applications

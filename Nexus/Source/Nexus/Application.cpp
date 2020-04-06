@@ -7,13 +7,15 @@
 #include <Nexus\Application.hpp>
 #include <Nexus\DebugWriter.hpp>
 #include <Nexus\Exception.hpp>
+#include <Nexus\Timer.hpp>
 
 namespace Nexus
 {
 Application::Application(const char* windowName, const unsigned int& windowWidth,
                          const unsigned int& windowHeight, const bool& windowFullscreen,
                          const bool& windowUseVSync)
-  : mWindow(NULL), mRunning(false)
+  : mWindow(NULL), mContext(NULL), mRunning(false), mTicksPerSecond(APPLICATION_DEFAULT_TICKS_PER_SECOND), 
+  mGLDevice(APPLICATION_DEFAULT_GL_MAJOR_VERSION, APPLICATION_DEFAULT_GL_MINOR_VERSION)
 {
   // Initialize required SDL subsystems
   if ( SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_TIMER) < 0 )
@@ -23,8 +25,8 @@ Application::Application(const char* windowName, const unsigned int& windowWidth
   }
 
   // Target OpenGL 4.6 core
-  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
-  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 6);
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, GetGLDevice().GetGLMajorVersion());
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, GetGLDevice().GetGLMinorVersion());
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
   // Setup window flags
@@ -91,7 +93,11 @@ int Application::Run()
   {
     mRunning = true; // Indicate game loop is active
 
-    
+    /// Summary:  The frame timer for keeping the game loop running consistently.
+    Timer frameTimer;
+
+    /// Summary:  The accumulator for adding up ticks.
+    Uint64 accumulator = 0;
 
     // Run game loop until shutdown
     while ( IsRunning() )
@@ -132,10 +138,31 @@ int Application::Run()
         }
       }
 
-      OnTick(0.0f);
+      // Increment the accumulator with this frame's delta ticks
+      accumulator += frameTimer.ComputeDeltaTicks(); 
+      // Compute number of ticks per update
+      const Uint64 ticksPerUpdate = frameTimer.GetFrequency() / GetTicksPerSecond();
+      // Process as many updates as required
+      while ( accumulator >= ticksPerUpdate )
+      {
+        OnTick(static_cast<double>(ticksPerUpdate) / frameTimer.GetFrequency());
+        accumulator -= ticksPerUpdate;
+      }
 
-      /// Summary:  Swap window buffers.
-      SDL_GL_SwapWindow((SDL_Window*)mWindow);
+      {
+        // Render the scene for this frame
+        
+        // Clear all the buffers for the frame
+        GetGLDevice().ClearColorBuffer();
+        GetGLDevice().ClearDepthBuffer();
+        GetGLDevice().ClearStencilBuffer();
+
+        // Render a frame using interpolation
+        OnRender(static_cast<double>(accumulator) / ticksPerUpdate);
+
+        /// Summary:  Swap window buffers.
+        SDL_GL_SwapWindow((SDL_Window*)mWindow);
+      }
     }
 
     return 0;
@@ -143,6 +170,14 @@ int Application::Run()
   else
   {
     return -1;
+  }
+}
+
+void Application::SetTicksPerSecond(const unsigned int& ticksPerSecond) noexcept
+{
+  if ( ticksPerSecond > 0 )
+  {
+    mTicksPerSecond = ticksPerSecond;
   }
 }
 
@@ -156,6 +191,11 @@ const bool& Application::IsRunning() const noexcept
   return mRunning;
 }
 
+const unsigned int& Application::GetTicksPerSecond() const noexcept
+{
+  return mTicksPerSecond;
+}
+
 const Keyboard& Application::GetKeyboard() const noexcept
 {
   return mKeyboard;
@@ -164,6 +204,11 @@ const Keyboard& Application::GetKeyboard() const noexcept
 const Mouse& Application::GetMouse() const noexcept
 {
   return mMouse;
+}
+
+Graphics::GLDevice& Application::GetGLDevice() noexcept
+{
+  return mGLDevice;
 }
 }
 
