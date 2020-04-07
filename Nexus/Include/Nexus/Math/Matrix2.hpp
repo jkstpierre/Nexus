@@ -54,8 +54,23 @@ public:
   /// a22 -       The 22.
   Matrix2(const T& a11, const T& a12, 
           const T& a21, const T& a22) noexcept : 
-    Base::Matrix<Matrix2<T>, T, 2>({a11, a21, 
-                                   a12, a22})
+    Matrix2(std::array<T, 4>{a11, a21,
+                            a12, a22})
+  {
+
+  }
+
+  /// Function: Matrix2::Matrix2
+  ///
+  /// Summary:  Constructor.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/7/2020
+  ///
+  /// Parameters:
+  /// data -  The data.
+  Matrix2(const std::array<T, 4>& data) noexcept : Base::Matrix<Matrix2<T>, T, 2>(data)
   {
 
   }

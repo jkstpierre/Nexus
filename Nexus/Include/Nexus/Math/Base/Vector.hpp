@@ -68,7 +68,7 @@ public:
   /// rhs -   The right hand side.
   ///
   /// Returns:  True if the parameters are considered equivalent.
-  bool operator ==(const V& rhs) noexcept
+  bool operator ==(const V& rhs) const noexcept
   {
     bool r = true;
 
@@ -92,9 +92,9 @@ public:
   /// rhs -   The right hand side.
   ///
   /// Returns:  True if the parameters are not considered equivalent.
-  bool operator !=(const V& rhs) noexcept
+  bool operator !=(const V& rhs) const noexcept
   {
-    return !(*this == rhs);
+    return !(static_cast<const V&>(*this) == rhs);
   }
 
   /// Function: +
@@ -109,7 +109,7 @@ public:
   /// rhs -   The right hand side.
   ///
   /// Returns:  The result of the operation.
-  V operator +(const V& rhs) noexcept
+  V operator +(const V& rhs) const noexcept
   {
     std::array<T, N> components;
 
@@ -135,10 +135,7 @@ public:
   /// Returns:  The result of the operation.
   V& operator +=(const V& rhs) noexcept
   {
-    for ( size_t i = 0; i < N; i++ )
-    {
-      mComponents[i] += rhs.mComponents.at(i);
-    }
+    static_cast<V&>(*this) = static_cast<V&>(*this) + rhs;
 
     return static_cast<V&>(*this);
   }
@@ -155,7 +152,7 @@ public:
   /// rhs -   The right hand side.
   ///
   /// Returns:  The result of the operation.
-  V operator -(const V& rhs) noexcept
+  V operator -(const V& rhs) const noexcept
   {
     std::array<T, N> components;
     for ( size_t i = 0; i < N; i++ )
@@ -180,10 +177,7 @@ public:
   /// Returns:  The result of the operation.
   V& operator -=(const V& rhs) noexcept
   {
-    for ( size_t i = 0; i < N; i++ )
-    {
-      mComponents[i] -= rhs.mComponents.at(i);
-    }
+    static_cast<V&>(*this) = static_cast<V&>(*this) - rhs;
 
     return static_cast<V&>(*this);
   }
@@ -200,7 +194,7 @@ public:
   /// rhs -   The right hand side.
   ///
   /// Returns:  The result of the operation.
-  V operator*(const T& rhs) noexcept
+  V operator*(const T& rhs) const noexcept
   {
     std::array<T, N> components;
 
@@ -226,12 +220,7 @@ public:
   /// Returns:  The result of the operation.
   V& operator*=(const T& rhs) noexcept
   {
-    std::array<T, N> components;
-
-    for ( size_t i = 0; i < N; i++ )
-    {
-      mComponents[i] *= rhs;
-    }
+    static_cast<V&>(*this) = static_cast<V&>(*this) * rhs;
 
     return static_cast<V&>(*this);
   }
@@ -246,16 +235,16 @@ public:
   /// Date: 4/5/2020.
   ///
   /// Returns:  The calculated magnitude.
-  double Magnitude() const noexcept
+  float Magnitude() const noexcept
   {
-    double s = 0.0;
+    T s = 0;
 
     for ( size_t i = 0; i < N; i++ )
     {
       s += mComponents.at(i) * mComponents.at(i);
     }
 
-    return sqrt(s);
+    return sqrtf(s);
   }
 
   /// Function: Dot
@@ -270,9 +259,9 @@ public:
   /// rhs -   The right hand side.
   ///
   /// Returns:  A double.
-  double Dot(const V& rhs) noexcept
+  T Dot(const V& rhs) const noexcept
   {
-    double r = 0.0;
+    T r = 0;
     
     for ( size_t i = 0; i < N; i++ )
     {
@@ -280,6 +269,20 @@ public:
     }
 
     return r;
+  }
+
+  /// Function: Normalize
+  ///
+  /// Summary:  Computes the normalization vector.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/7/2020
+  ///
+  /// Returns:  A V.
+  V Normalize() const noexcept
+  {
+    return static_cast<const V&>(*this) * (1 / Magnitude());
   }
 
 public:

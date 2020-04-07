@@ -24,7 +24,7 @@ public:
   /// Author: jkstpierre
   ///
   /// Date: 4/7/2020
-  ALDevice();
+  ALDevice() noexcept;
 
   /// Function: ALDevice::~ALDevice
   ///
@@ -34,6 +34,25 @@ public:
   ///
   /// Date: 4/7/2020
   virtual ~ALDevice() noexcept;
+
+public:
+  /// Function: Initialize
+  ///
+  /// Summary:  Initializes this. 
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/7/2020
+  void Initialize();
+
+  /// Function: Shutdown
+  ///
+  /// Summary:  Shuts down this  and frees any resources it is using.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/7/2020
+  void Shutdown() noexcept;
 };
 }
 

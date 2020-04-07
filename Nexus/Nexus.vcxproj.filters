@@ -96,6 +96,9 @@
     <ClInclude Include="Include\Nexus\Math\Matrix4.hpp">
       <Filter>Header Files\Nexus\Math</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Nexus\Math\Constants.hpp">
+      <Filter>Header Files\Nexus\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Nexus\Application.cpp">
@@ -118,6 +121,9 @@
     </ClCompile>
     <ClCompile Include="Source\Nexus\Graphics\GLDevice.cpp">
       <Filter>Source Files\Nexus\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Nexus\Audio\ALDevice.cpp">
+      <Filter>Source Files\Nexus\Audio</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

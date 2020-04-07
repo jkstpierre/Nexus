@@ -11,7 +11,7 @@ namespace Nexus::Math::Base
 {
 /// Class:  Matrix
 ///
-/// Summary:  A matrix.
+/// Summary:  A column major matrix implementation.
 ///
 /// Author: jkstpierre
 ///
@@ -52,6 +52,244 @@ protected:
   {
     // Ensure M is a matrix inheriting from this class
     static_assert(std::is_base_of<Matrix<M, T, N>, M>::value);
+  }
+
+public:
+  /// Function: ==
+  ///
+  /// Summary:  Equality operator.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/7/2020
+  ///
+  /// Parameters:
+  /// rhs -   The right hand side.
+  ///
+  /// Returns:  True if the parameters are considered equivalent.
+  bool operator==(const M& rhs) const noexcept
+  {
+    bool r = true;
+
+    for ( size_t i = 0; i < N && r; i++ )
+    {
+      for ( size_t j = 0; j < N && r; j++ )
+      {
+        r = mData[j * N + i] == rhs.GetData()[j * N + i];
+      }
+    }
+
+    return r;
+  }
+
+  /// Function: !=
+  ///
+  /// Summary:  Inequality operator.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/7/2020
+  ///
+  /// Parameters:
+  /// rhs -   The right hand side.
+  ///
+  /// Returns:  True if the parameters are not considered equivalent.
+  bool operator!=(const M& rhs) const noexcept
+  {
+    return !(static_cast<const M&>(*this) == rhs);
+  }
+
+  /// Function: +
+  ///
+  /// Summary:  Addition operator.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/7/2020
+  ///
+  /// Parameters:
+  /// rhs -   The right hand side.
+  ///
+  /// Returns:  The result of the operation.
+  M operator+(const M& rhs) const noexcept
+  {
+    std::array<T, N * N> data;
+
+    for ( size_t i = 0; i < N; i++ )
+    {
+      for ( size_t j = 0; j < N; j++ )
+      {
+        data[j * N + i] = mData[j * N + i] + rhs.GetData()[j * N + i];
+      }
+    }
+
+    // Return a matrix containing the result of the addition
+    return M(data);
+  }
+
+  /// Function: +=
+  ///
+  /// Summary:  Addition assignment operator.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/7/2020
+  ///
+  /// Parameters:
+  /// rhs -   The right hand side.
+  ///
+  /// Returns:  The result of the operation.
+  M& operator +=(const M& rhs) noexcept
+  {
+    static_cast<M&>(*this) = static_cast<M&>(*this) + rhs;
+
+    return static_cast<M&>(*this);
+  }
+
+  /// Function: -
+  ///
+  /// Summary:  Subtraction operator.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/7/2020
+  ///
+  /// Parameters:
+  /// rhs -   The right hand side.
+  ///
+  /// Returns:  The result of the operation.
+  M operator-(const M& rhs) const noexcept
+  {
+    std::array<T, N * N> data;
+
+    for ( size_t i = 0; i < N; i++ )
+    {
+      for ( size_t j = 0; j < N; j++ )
+      {
+        data[j * N + i] = mData[j * N + i] - rhs.GetData()[j * N + i];
+      }
+    }
+
+    // Return a matrix containing the result of the subtraction
+    return M(data);
+  }
+
+  /// Function: -=
+  ///
+  /// Summary:  Subtraction assignment operator.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/7/2020
+  ///
+  /// Parameters:
+  /// rhs -   The right hand side.
+  ///
+  /// Returns:  The result of the operation.
+  M& operator -=(const M& rhs) noexcept
+  {
+    static_cast<M&>(*this) = static_cast<M&>(*this) - rhs;
+
+    return static_cast<M&>(*this);
+  }
+
+  /// Function: *
+  ///
+  /// Summary:  Multiply matrix by a scalar
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/7/2020
+  ///
+  /// Parameters:
+  /// rhs -   The right hand side.
+  ///
+  /// Returns:  The result of the operation.
+  M operator*(const T& rhs) const noexcept
+  {
+    std::array<T, N * N> data;
+
+    for ( size_t i = 0; i < N; i++ )
+    {
+      for ( size_t j = 0; j < N; j++ )
+      {
+        data[j * N + i] = mData[j * N + i] * rhs;
+      }
+    }
+
+    return M(data);
+  }
+
+  /// Function: *=
+  ///
+  /// Summary:  Multiplication assignment operator.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/7/2020
+  ///
+  /// Parameters:
+  /// rhs -   The right hand side.
+  ///
+  /// Returns:  The result of the operation.
+  M& operator*=(const T& rhs) noexcept
+  {
+    static_cast<M&>(*this) = static_cast<M&>(*this)* rhs;
+
+    return rhs;
+  }
+
+  /// Function: *
+  ///
+  /// Summary:  Multiplication operator.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/7/2020
+  ///
+  /// Parameters:
+  /// rhs -   The right hand side.
+  ///
+  /// Returns:  The result of the operation.
+  M operator*(const M& rhs) const noexcept
+  {
+    std::array<T, N * N> data;
+
+    // Multiply the two matrices
+    for ( size_t i = 0; i < N; i++ )
+    {
+      for ( size_t j = 0; j < N; j++ )
+      {
+        data[j * N + i] = 0;
+
+        for ( size_t k = 0; k < N; k++ )
+        {
+          data[j * N + i] += mData[k * N + i] * rhs.GetData()[j * N + k];
+        }
+      }
+    }
+
+    // Return the resulting matrix
+    return M(data);
+  }
+
+  /// Function: *=
+  ///
+  /// Summary:  Multiplication assignment operator.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/7/2020
+  ///
+  /// Parameters:
+  /// rhs -   The right hand side.
+  ///
+  /// Returns:  The result of the operation.
+  M& operator*=(const M& rhs) noexcept
+  {
+    static_cast<M&>(*this) = static_cast<M&>(*this) * rhs;
+
+    return static_cast<M&>(*this);
   }
 
 public:

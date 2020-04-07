@@ -26,6 +26,7 @@
     <ClInclude Include="Include\Nexus\Graphics\GLDevice.hpp" />
     <ClInclude Include="Include\Nexus\Math\Base\Matrix.hpp" />
     <ClInclude Include="Include\Nexus\Math\Base\Vector.hpp" />
+    <ClInclude Include="Include\Nexus\Math\Constants.hpp" />
     <ClInclude Include="Include\Nexus\Math\Matrix2.hpp" />
     <ClInclude Include="Include\Nexus\Math\Matrix3.hpp" />
     <ClInclude Include="Include\Nexus\Math\Matrix4.hpp" />
@@ -39,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Nexus\Application.cpp" />
+    <ClCompile Include="Source\Nexus\Audio\ALDevice.cpp" />
     <ClCompile Include="Source\Nexus\DebugWriter.cpp" />
     <ClCompile Include="Source\Nexus\Exception.cpp" />
     <ClCompile Include="Source\Nexus\Graphics\GLDevice.cpp" />

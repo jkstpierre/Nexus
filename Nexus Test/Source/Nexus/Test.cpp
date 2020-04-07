@@ -78,7 +78,11 @@ public:
       Math::Vector2f A;
       Math::Vector2i B(95, 26);
 
-      Math::Matrix2f C;
+      Math::Matrix2f C(1.0f, 0.5f,
+                       0.0f, 0.37f);
+      Math::Matrix2f D;
+
+      C *= D;
 
       const float* data = C.GetData();
 
