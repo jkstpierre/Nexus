@@ -306,7 +306,7 @@ public:
   /// Date: 4/5/2020
   ///
   /// Returns:  The size.
-  const size_t& GetSize() const noexcept
+  size_t GetSize() const noexcept
   {
     return mComponents.size();
   }

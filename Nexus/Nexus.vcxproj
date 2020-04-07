@@ -24,7 +24,11 @@
     <ClInclude Include="Include\Nexus\DebugWriter.hpp" />
     <ClInclude Include="Include\Nexus\Exception.hpp" />
     <ClInclude Include="Include\Nexus\Graphics\GLDevice.hpp" />
+    <ClInclude Include="Include\Nexus\Math\Base\Matrix.hpp" />
     <ClInclude Include="Include\Nexus\Math\Base\Vector.hpp" />
+    <ClInclude Include="Include\Nexus\Math\Matrix2.hpp" />
+    <ClInclude Include="Include\Nexus\Math\Matrix3.hpp" />
+    <ClInclude Include="Include\Nexus\Math\Matrix4.hpp" />
     <ClInclude Include="Include\Nexus\Math\Vector2.hpp" />
     <ClInclude Include="Include\Nexus\Math\Vector3.hpp" />
     <ClInclude Include="Include\Nexus\Math\Vector4.hpp" />
@@ -137,7 +141,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>glad.lib;SDL2.lib;SDL2main.lib;Setupapi.lib;Version.lib;winmm.lib;Imm32.lib</AdditionalDependencies>
+      <AdditionalDependencies>glad.lib;SDL2.lib;SDL2main.lib;OpenAL32.lib;Setupapi.lib;Version.lib;winmm.lib;Imm32.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -155,7 +159,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>glad.lib;SDL2.lib;SDL2main.lib;Setupapi.lib;Version.lib;winmm.lib;Imm32.lib</AdditionalDependencies>
+      <AdditionalDependencies>glad.lib;SDL2.lib;SDL2main.lib;OpenAL32.lib;Setupapi.lib;Version.lib;winmm.lib;Imm32.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -180,7 +184,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>glad.lib;SDL2.lib;SDL2main.lib;Setupapi.lib;Version.lib;winmm.lib;Imm32.lib</AdditionalDependencies>
+      <AdditionalDependencies>glad.lib;SDL2.lib;SDL2main.lib;OpenAL32.lib;Setupapi.lib;Version.lib;winmm.lib;Imm32.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -205,7 +209,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>glad.lib;SDL2.lib;SDL2main.lib;Setupapi.lib;Version.lib;winmm.lib;Imm32.lib</AdditionalDependencies>
+      <AdditionalDependencies>glad.lib;SDL2.lib;SDL2main.lib;OpenAL32.lib;Setupapi.lib;Version.lib;winmm.lib;Imm32.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

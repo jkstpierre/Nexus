@@ -9,6 +9,7 @@
 #include <Nexus\Application.hpp>
 #include <Nexus\DebugWriter.hpp>
 #include <Nexus\Math\Vector2.hpp>
+#include <Nexus\Math\Matrix2.hpp>
 
 namespace Nexus
 {
@@ -76,6 +77,12 @@ public:
       
       Math::Vector2f A;
       Math::Vector2i B(95, 26);
+
+      Math::Matrix2f C;
+
+      const float* data = C.GetData();
+
+      DebugWriter().Write(L"{%f %f %f %f}\n", data[0], data[1], data[2], data[3]);
 
       A += Math::Vector2f(50.0f, 60.0f) + B;
 
