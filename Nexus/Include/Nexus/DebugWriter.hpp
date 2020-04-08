@@ -20,8 +20,10 @@ const unsigned int DEBUG_WRITER_MESSAGE_BUFFER_SIZE = 512U;
 class DebugWriter
 {
 private:
+#ifdef _DEBUG
   /// Summary:  The message[ debug writer message buffer size].
-  wchar_t mMessage[DEBUG_WRITER_MESSAGE_BUFFER_SIZE];
+  char mMessage[DEBUG_WRITER_MESSAGE_BUFFER_SIZE];
+#endif
 
 public:
   /// Function: DebugWriter::DebugWriter
@@ -54,7 +56,7 @@ public:
   /// Parameters:
   /// format -    Describes the format to use.
   /// ... -       Variable arguments providing additional information.
-  void Write(const wchar_t* format, ...) noexcept;
+  void Write(const char* format, ...) noexcept;
 };
 }
 

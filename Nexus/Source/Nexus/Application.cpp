@@ -15,7 +15,7 @@ Application::Application(const char* windowName, const unsigned int& windowWidth
                          const unsigned int& windowHeight, const bool& windowFullscreen,
                          const bool& windowUseVSync)
   : mWindow(NULL), mContext(NULL), mRunning(false), mTicksPerSecond(APPLICATION_DEFAULT_TICKS_PER_SECOND), 
-  mGLDevice(APPLICATION_DEFAULT_GL_MAJOR_VERSION, APPLICATION_DEFAULT_GL_MINOR_VERSION)
+  mKeyboard(), mMouse(), mGLDevice(APPLICATION_DEFAULT_GL_MAJOR_VERSION, APPLICATION_DEFAULT_GL_MINOR_VERSION)
 {
   // Initialize required SDL subsystems
   if ( SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_TIMER) < 0 )
@@ -72,11 +72,17 @@ Application::Application(const char* windowName, const unsigned int& windowWidth
     throw Exception("Error: Failed to load GLAD.\n");
   }
 
-  DebugWriter().Write(L"Nexus online...\n");
+  // Initialize the Graphics pipeline
+  GetGLDevice().Initialize();
+
+  DebugWriter().Write("Nexus online...\n");
 }
 
 Application::~Application()
 {
+  // Shutdown Graphics pipeline
+  GetGLDevice().Shutdown();
+
   // Free the context and window
   SDL_GL_DeleteContext(mContext);
   SDL_DestroyWindow((SDL_Window*)mWindow);
@@ -84,7 +90,7 @@ Application::~Application()
 
   SDL_Quit(); // Shutdown SDL
 
-  DebugWriter().Write(L"Nexus offline...\n"); 
+  DebugWriter().Write("Nexus offline...\n"); 
 }
 
 int Application::Run()

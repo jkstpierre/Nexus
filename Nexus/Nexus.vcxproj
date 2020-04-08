@@ -21,9 +21,14 @@
   <ItemGroup>
     <ClInclude Include="Include\Nexus\Application.hpp" />
     <ClInclude Include="Include\Nexus\Audio\ALDevice.hpp" />
+    <ClInclude Include="Include\Nexus\Audio\Base\ALObject.hpp" />
     <ClInclude Include="Include\Nexus\DebugWriter.hpp" />
     <ClInclude Include="Include\Nexus\Exception.hpp" />
+    <ClInclude Include="Include\Nexus\Graphics\Base\GLObject.hpp" />
     <ClInclude Include="Include\Nexus\Graphics\GLDevice.hpp" />
+    <ClInclude Include="Include\Nexus\Graphics\GLPipeline.hpp" />
+    <ClInclude Include="Include\Nexus\Graphics\GLProgram.hpp" />
+    <ClInclude Include="Include\Nexus\Graphics\GLShader.hpp" />
     <ClInclude Include="Include\Nexus\Math\Base\Matrix.hpp" />
     <ClInclude Include="Include\Nexus\Math\Base\Vector.hpp" />
     <ClInclude Include="Include\Nexus\Math\Constants.hpp" />
@@ -43,7 +48,11 @@
     <ClCompile Include="Source\Nexus\Audio\ALDevice.cpp" />
     <ClCompile Include="Source\Nexus\DebugWriter.cpp" />
     <ClCompile Include="Source\Nexus\Exception.cpp" />
+    <ClCompile Include="Source\Nexus\Graphics\Base\GLObject.cpp" />
     <ClCompile Include="Source\Nexus\Graphics\GLDevice.cpp" />
+    <ClCompile Include="Source\Nexus\Graphics\GLPipeline.cpp" />
+    <ClCompile Include="Source\Nexus\Graphics\GLProgram.cpp" />
+    <ClCompile Include="Source\Nexus\Graphics\GLShader.cpp" />
     <ClCompile Include="Source\Nexus\Timer.cpp" />
     <ClCompile Include="Source\Nexus\Keyboard.cpp" />
     <ClCompile Include="Source\Nexus\Mouse.cpp" />
@@ -178,6 +187,8 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -203,6 +214,8 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

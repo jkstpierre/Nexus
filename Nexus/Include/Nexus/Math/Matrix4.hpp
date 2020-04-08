@@ -26,7 +26,7 @@ namespace Nexus::Math
 /// See:
 /// Base::Matrix{Matrix4{T}, T, 4} - 
 template <typename T>
-class Matrix4 : Base::Matrix<Matrix4<T>, T, 4>
+class Matrix4 : public Base::Matrix<Matrix4<T>, T, 4>
 {
 public:
   /// Function: Matrix4::Matrix4
@@ -98,7 +98,7 @@ public:
   /// Returns:  The result of the operation.
   Vector4<T> operator*(const Vector4<T>& rhs) const noexcept
   {
-    const T* data = GetData();
+    const T* data = Base::Matrix<Matrix4<T>, T, 4>::GetData();
 
     // Multiply the vector by the matrix
     return Vector4<T>(data[0] * rhs.GetX() + data[4] * rhs.GetY() + data[8] * rhs.GetZ() + data[12] * rhs.GetW(),

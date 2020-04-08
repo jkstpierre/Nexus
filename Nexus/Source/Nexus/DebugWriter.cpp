@@ -11,21 +11,28 @@
 
 namespace Nexus
 {
+#ifdef _DEBUG
 DebugWriter::DebugWriter() noexcept : mMessage{ NULL }
 {}
+#else
+DebugWriter::DebugWriter() noexcept 
+{}
+#endif
 
-void DebugWriter::Write(const wchar_t* format, ...) noexcept
+void DebugWriter::Write(const char* format, ...) noexcept
 {
+#ifdef _DEBUG
   // Build string from format in buffer
   va_list args;
   va_start(args, format);
-  vswprintf_s(mMessage, sizeof(mMessage), format, args);
+  vsnprintf_s(mMessage, DEBUG_WRITER_MESSAGE_BUFFER_SIZE, format, args);
   va_end(args);
 
 #ifdef __NEXUS_OS_WINDOWS__
-  OutputDebugString(mMessage);  // Output to Windows debug console
+  OutputDebugStringA(mMessage);  // Output to Windows debug console
 #elif
-  wprintf(mMessage);  // Output to other consoles
+  printf(mMessage);  // Output to other consoles
+#endif
 #endif
 }
 }

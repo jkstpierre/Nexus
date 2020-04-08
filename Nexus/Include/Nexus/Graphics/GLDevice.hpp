@@ -11,6 +11,10 @@ namespace Nexus::Graphics
 {
 /// Summary:  The gldevice default framebuffer clear color.
 const Math::Vector4f GLDEVICE_DEFAULT_CLEAR_COLOR = { 0.0f, 0.0f, 0.0f, 1.0f };
+/// Summary:  Depth of the gldevice default clear.
+const float GLDEVICE_DEFAULT_CLEAR_DEPTH = 1.0f;
+/// Summary:  The gldevice default clear stencil.
+const int GLDEVICE_DEFAULT_CLEAR_STENCIL = 0;
 
 /// Class:  GLDevice
 ///
@@ -33,8 +37,14 @@ private:
     unsigned int minorVersion;
   } mGLVersion;
 
-  /// Summary:  The clear color for the default frame buffer.
+  /// Summary:  The color to clear the color buffer.
   Math::Vector4f mClearColor;
+
+  /// Summary:  The value for clearing the depth buffer.
+  float mClearDepth;
+
+  /// Summary:  The value to clear the stencil buffer with.
+  int mClearStencil;
 
 public:
   /// Function: GLDevice::GLDevice
@@ -48,7 +58,7 @@ public:
   /// Parameters:
   /// glMajorVersion -  The gl major version.
   /// glMinorVersion -  The gl minor version.
-  GLDevice(const unsigned int& glMajorVersion, const unsigned int& glMinorVersion);
+  GLDevice(const unsigned int& glMajorVersion, const unsigned int& glMinorVersion) noexcept;
 
   /// Function: GLDevice::~GLDevice
   ///
@@ -118,6 +128,30 @@ public:
   /// clearColor -  The clear color.
   void SetClearColor(const Math::Vector4f& clearColor) noexcept;
 
+  /// Function: SetClearDepth
+  ///
+  /// Summary:  Sets clear depth.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/7/2020
+  ///
+  /// Parameters:
+  /// clearDepth -  Depth of the clear.
+  void SetClearDepth(const float& clearDepth) noexcept;
+
+  /// Function: SetClearStencil
+  ///
+  /// Summary:  Sets clear stencil.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/7/2020
+  ///
+  /// Parameters:
+  /// clearStencil -  The clear stencil.
+  void SetClearStencil(const int& clearStencil) noexcept;
+
 public:
   /// Function: GetGLMajorVersion
   ///
@@ -151,6 +185,28 @@ public:
   ///
   /// Returns:  The clear color.
   const Math::Vector4f& GetClearColor() const noexcept;
+
+  /// Function: GetClearDepth
+  ///
+  /// Summary:  Gets clear depth.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/7/2020
+  ///
+  /// Returns:  The clear depth.
+  const float& GetClearDepth() const noexcept;
+
+  /// Function: GetClearStencil
+  ///
+  /// Summary:  Gets clear stencil.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/7/2020
+  ///
+  /// Returns:  The clear stencil.
+  const int& GetClearStencil() const noexcept;
 };
 }
 

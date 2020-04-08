@@ -10,6 +10,8 @@
 #include <Nexus\DebugWriter.hpp>
 #include <Nexus\Math\Vector2.hpp>
 #include <Nexus\Math\Matrix2.hpp>
+#include <Nexus\Exception.hpp>
+#include <Nexus\Graphics\GLProgram.hpp>
 
 namespace Nexus
 {
@@ -74,30 +76,48 @@ public:
     if ( GetKeyboard().IsPressed(Key::ESCAPE) )
     {
       Stop();
-      
-      Math::Vector2f A;
-      Math::Vector2i B(95, 26);
-
-      Math::Matrix2f C(1.0f, 0.5f,
-                       0.0f, 0.37f);
-      Math::Matrix2f D;
-
-      C *= D;
-
-      const float* data = C.GetData();
-
-      DebugWriter().Write(L"{%f %f %f %f}\n", data[0], data[1], data[2], data[3]);
-
-      A += Math::Vector2f(50.0f, 60.0f) + B;
-
-      DebugWriter().Write(L"Size = %u\nX = %f Y = %f\n", sizeof(A), A.GetX(), A.GetY());
-      DebugWriter().Write(L"dt = %lf\n", deltaTime);
     }
 
     if ( GetMouse().IsPressed(MouseButton::LEFT) )
     {
-      DebugWriter().Write(L"Position = %d %d\n", GetMouse().GetPosition().GetX(), GetMouse().GetPosition().GetY());
+      DebugWriter().Write("Position = %d %d\n", GetMouse().GetPosition().GetX(), GetMouse().GetPosition().GetY());
       GetGLDevice().SetClearColor({ 1.0f, 0.0f, 1.0f, 1.0f });
+    }
+
+    if ( GetMouse().IsPressed(MouseButton::RIGHT) )
+    {
+      try
+      {
+        Graphics::GLProgram program(
+          false, 
+          Graphics::GLShader(
+            Graphics::GLShaderType::VERTEX, 
+            "#version 460 core\n\
+            layout(location = 0) in vec3 aPos;\
+            layout(location = 1) in vec3 aColor;\
+            out vec3 col; \
+            void main()\
+            {\
+              gl_Position = vec4(aPos, 1.0);\
+              col = aColor;\
+            }"
+          ),  
+          Graphics::GLShader(
+            Graphics::GLShaderType::FRAGMENT, 
+            "#version 460 core\n\
+            out vec4 FragColor;\
+            in vec3 col;\
+            void main()\
+            {\
+              FragColor = vec4(col, 1.0f);\
+            }"
+          )
+        );
+      }
+      catch ( Exception& e )
+      {
+        DebugWriter().Write(e.ReadMessage());
+      }
     }
   }
 
