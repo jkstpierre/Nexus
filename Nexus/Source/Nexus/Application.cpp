@@ -28,6 +28,12 @@ Application::Application(const char* windowName, const unsigned int& windowWidth
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, GetGLDevice().GetGLMajorVersion());
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, GetGLDevice().GetGLMinorVersion());
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+  
+  // OpenGL context flags
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG);  // Disable deprecated functions
+#ifdef _DEBUG
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG); // Enable debug mode for debug builds
+#endif
 
   // Setup window flags
   Uint32 flags = 0;
@@ -158,6 +164,15 @@ int Application::Run()
       {
         // Render the scene for this frame
         
+      #ifdef _DEBUG
+        // Check for debug messages in debug mode and print them to the debug console
+        Graphics::GLMessage message = Graphics::GLMESSAGE_NONE;
+        while ( (message = GetGLDevice().PopMessage()) != Graphics::GLMESSAGE_NONE )
+        {
+          DebugWriter().Write("GLMessage (id = %u): %s\n", message.GetGLID(), message.ReadMessage());
+        }
+      #endif
+
         // Clear all the buffers for the frame
         GetGLDevice().ClearColorBuffer();
         GetGLDevice().ClearDepthBuffer();

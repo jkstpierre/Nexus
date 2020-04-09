@@ -15,11 +15,11 @@ namespace Nexus
 /// Summary:  Values that represent mouse buttons.
 enum class MouseButton : unsigned int
 {
-  LEFT = 0x01,
-  MIDDLE = 0x02,
-  RIGHT = 0x03,
-  X1 = 0x04,
-  X2 = 0x05
+  _LEFT = 0x01,
+  _MIDDLE = 0x02,
+  _RIGHT = 0x03,
+  _X1 = 0x04,
+  _X2 = 0x05
 };
 
 /// Class:  Mouse

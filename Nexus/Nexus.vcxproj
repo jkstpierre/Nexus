@@ -26,6 +26,7 @@
     <ClInclude Include="Include\Nexus\Exception.hpp" />
     <ClInclude Include="Include\Nexus\Graphics\Base\GLObject.hpp" />
     <ClInclude Include="Include\Nexus\Graphics\GLDevice.hpp" />
+    <ClInclude Include="Include\Nexus\Graphics\GLMessage.hpp" />
     <ClInclude Include="Include\Nexus\Graphics\GLPipeline.hpp" />
     <ClInclude Include="Include\Nexus\Graphics\GLProgram.hpp" />
     <ClInclude Include="Include\Nexus\Graphics\GLShader.hpp" />
@@ -38,10 +39,12 @@
     <ClInclude Include="Include\Nexus\Math\Vector2.hpp" />
     <ClInclude Include="Include\Nexus\Math\Vector3.hpp" />
     <ClInclude Include="Include\Nexus\Math\Vector4.hpp" />
+    <ClInclude Include="Include\Nexus\ResourceLoader.hpp" />
     <ClInclude Include="Include\Nexus\Timer.hpp" />
     <ClInclude Include="Include\Nexus\Keyboard.hpp" />
     <ClInclude Include="Include\Nexus\Macros.hpp" />
     <ClInclude Include="Include\Nexus\Mouse.hpp" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Nexus\Application.cpp" />
@@ -50,9 +53,11 @@
     <ClCompile Include="Source\Nexus\Exception.cpp" />
     <ClCompile Include="Source\Nexus\Graphics\Base\GLObject.cpp" />
     <ClCompile Include="Source\Nexus\Graphics\GLDevice.cpp" />
+    <ClCompile Include="Source\Nexus\Graphics\GLMessage.cpp" />
     <ClCompile Include="Source\Nexus\Graphics\GLPipeline.cpp" />
     <ClCompile Include="Source\Nexus\Graphics\GLProgram.cpp" />
     <ClCompile Include="Source\Nexus\Graphics\GLShader.cpp" />
+    <ClCompile Include="Source\Nexus\ResourceLoader.cpp" />
     <ClCompile Include="Source\Nexus\Timer.cpp" />
     <ClCompile Include="Source\Nexus\Keyboard.cpp" />
     <ClCompile Include="Source\Nexus\Mouse.cpp" />

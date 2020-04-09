@@ -73,18 +73,18 @@ public:
   /// deltaTime -   The delta time.
   void OnTick(const double& deltaTime) override
   {
-    if ( GetKeyboard().IsPressed(Key::ESCAPE) )
+    if ( GetKeyboard().IsPressed(Key::_ESCAPE) )
     {
       Stop();
     }
 
-    if ( GetMouse().IsPressed(MouseButton::LEFT) )
+    if ( GetMouse().IsPressed(MouseButton::_LEFT) )
     {
       DebugWriter().Write("Position = %d %d\n", GetMouse().GetPosition().GetX(), GetMouse().GetPosition().GetY());
       GetGLDevice().SetClearColor({ 1.0f, 0.0f, 1.0f, 1.0f });
     }
 
-    if ( GetMouse().IsPressed(MouseButton::RIGHT) )
+    if ( GetMouse().IsPressed(MouseButton::_RIGHT) )
     {
       try
       {
@@ -95,7 +95,7 @@ public:
             "#version 460 core\n\
             layout(location = 0) in vec3 aPos;\
             layout(location = 1) in vec3 aColor;\
-            out vec3 col; \
+            out vec3 col;\
             void main()\
             {\
               gl_Position = vec4(aPos, 1.0);\

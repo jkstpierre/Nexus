@@ -33,6 +33,18 @@ public:
   /// Date: 4/7/2020
   GLObject() noexcept;
 
+  /// Function: GLObject::GLObject
+  ///
+  /// Summary:  Constructor.
+  ///
+  /// Author: jkstpierre.
+  ///
+  /// Date: 4/9/2020.
+  ///
+  /// Parameters:
+  /// glID -  The glid.
+  GLObject(const unsigned int& glID) noexcept;
+
   /// Function: GLObject::~GLObject
   ///
   /// Summary:  Destructor.

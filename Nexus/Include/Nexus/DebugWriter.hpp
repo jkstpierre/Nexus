@@ -8,7 +8,7 @@
 namespace Nexus
 {
 /// Summary:  Size of the debug writer message buffer.
-const unsigned int DEBUG_WRITER_MESSAGE_BUFFER_SIZE = 512U;
+const unsigned int DEBUG_WRITER_MESSAGE_BUFFER_SIZE = 1024U;
 
 /// Class:  DebugWriter
 ///

@@ -19,6 +19,7 @@ namespace Nexus::Graphics
 class GLPipeline : public Base::GLObject
 {
 public:
+
 };
 }
 

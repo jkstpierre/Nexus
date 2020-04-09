@@ -67,7 +67,7 @@ public:
   template <class... Sargs>
   GLProgram(const bool& separable, const GLShader& shader, Sargs&&... shaders) : GLProgram(separable, shaders...)
   {
-    LinkShader(shader);
+    LinkShader(shader);   // Recursively link each shader
   }
 
   /// Function: GLProgram::~GLProgram

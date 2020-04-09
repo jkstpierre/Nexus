@@ -52,6 +52,9 @@
     <Filter Include="Source Files\Nexus\Graphics\Base">
       <UniqueIdentifier>{64838350-1de2-4761-b2ea-fc1858ce02ae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Nexus\Shaders">
+      <UniqueIdentifier>{583bb40a-22a1-472f-ab63-254d9a70e926}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Nexus\Application.hpp">
@@ -123,6 +126,15 @@
     <ClInclude Include="Include\Nexus\Audio\Base\ALObject.hpp">
       <Filter>Header Files\Nexus\Audio\Base</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Nexus\ResourceLoader.hpp">
+      <Filter>Header Files\Nexus</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Nexus\Graphics\GLMessage.hpp">
+      <Filter>Header Files\Nexus\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Nexus\Application.cpp">
@@ -160,6 +172,12 @@
     </ClCompile>
     <ClCompile Include="Source\Nexus\Graphics\Base\GLObject.cpp">
       <Filter>Source Files\Nexus\Graphics\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Nexus\Graphics\GLMessage.cpp">
+      <Filter>Source Files\Nexus\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Nexus\ResourceLoader.cpp">
+      <Filter>Source Files\Nexus</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

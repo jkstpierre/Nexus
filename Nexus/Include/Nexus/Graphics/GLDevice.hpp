@@ -5,7 +5,9 @@
 #ifndef __NEXUS_GRAPHICS_GLDEVICE_HPP__
 #define __NEXUS_GRAPHICS_GLDEVICE_HPP__
 
+#include <queue>
 #include <Nexus\Math\Vector4.hpp>
+#include <Nexus\Graphics\GLMessage.hpp>
 
 namespace Nexus::Graphics
 {
@@ -45,6 +47,9 @@ private:
 
   /// Summary:  The value to clear the stencil buffer with.
   int mClearStencil;
+
+  /// Summary:  Queue of messages.
+  std::queue<GLMessage> mMessageQueue;
 
 public:
   /// Function: GLDevice::GLDevice
@@ -88,6 +93,17 @@ public:
   void Shutdown() noexcept;
 
 public:
+  /// Function: PopMessage
+  ///
+  /// Summary:  Pops a message or returns a GLMESSAGE_NONE if there is no message.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/9/2020
+  ///
+  /// Returns:  A GLMessage.
+  GLMessage PopMessage() noexcept;
+
   /// Function: ClearColorBuffer
   ///
   /// Summary:  Clears the color buffer.
@@ -116,6 +132,18 @@ public:
   void ClearStencilBuffer() noexcept;
 
 public:
+  /// Function: PushMessage
+  ///
+  /// Summary:  Pushes a message onto the queue.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/9/2020
+  ///
+  /// Parameters:
+  /// message -   The message.
+  void PushMessage(const GLMessage& message) noexcept;
+
   /// Function: SetClearColor
   ///
   /// Summary:  Sets clear color.
