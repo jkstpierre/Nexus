@@ -26,7 +26,6 @@
     <ClInclude Include="Include\Nexus\Exception.hpp" />
     <ClInclude Include="Include\Nexus\Graphics\Base\GLBuffer.hpp" />
     <ClInclude Include="Include\Nexus\Graphics\Base\GLObject.hpp" />
-    <ClInclude Include="Include\Nexus\Graphics\Base\GLVertexArray.hpp" />
     <ClInclude Include="Include\Nexus\Graphics\Base\GLVertexArrayBindingPoint.hpp" />
     <ClInclude Include="Include\Nexus\Graphics\GLBuffer.hpp" />
     <ClInclude Include="Include\Nexus\Graphics\GLDevice.hpp" />
@@ -60,7 +59,6 @@
     <ClCompile Include="Source\Nexus\Exception.cpp" />
     <ClCompile Include="Source\Nexus\Graphics\Base\GLBuffer.cpp" />
     <ClCompile Include="Source\Nexus\Graphics\Base\GLObject.cpp" />
-    <ClCompile Include="Source\Nexus\Graphics\Base\GLVertexArray.cpp" />
     <ClCompile Include="Source\Nexus\Graphics\Base\GLVertexArrayBindingPoint.cpp" />
     <ClCompile Include="Source\Nexus\Graphics\GLBuffer.cpp" />
     <ClCompile Include="Source\Nexus\Graphics\GLDevice.cpp" />

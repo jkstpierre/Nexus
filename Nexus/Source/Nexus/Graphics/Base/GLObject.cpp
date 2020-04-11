@@ -7,14 +7,10 @@
 namespace Nexus::Graphics::Base
 {
 GLObject::GLObject() noexcept : GLObject(GLOBJECT_GLID_NONE)
-{
-
-}
+{}
 
 GLObject::GLObject(const unsigned int& glID) noexcept : mGLID(glID)
-{
-
-}
+{}
 
 const unsigned int& GLObject::GetGLID() const noexcept
 {

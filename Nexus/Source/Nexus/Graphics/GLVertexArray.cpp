@@ -4,12 +4,16 @@
 
 #include <GLAD\GL.h>
 #include <Nexus\Graphics\GLVertexArray.hpp>
+#include <Nexus\DebugWriter.hpp>
 #include <Nexus\Exception.hpp>
 
 namespace Nexus::Graphics
 {
 GLVertexArray::GLVertexArray() noexcept : mAttributes{ NULL }, mBindingPoints{ NULL }
 {
+  // Create vao
+  glCreateVertexArrays(1, &mGLID);
+
   // Create starting attributes
   for ( unsigned int i = 0; i < GLVERTEXARRAY_MAX_ATTRIBUTES; i++ )
   {
@@ -21,10 +25,15 @@ GLVertexArray::GLVertexArray() noexcept : mAttributes{ NULL }, mBindingPoints{ N
   {
     mBindingPoints[i] = new GLVertexArrayBindingPoint(mGLID, i);
   }
+
+  DebugWriter().Write("GLVertexArray %u created.\n", mGLID);
 }
 
 GLVertexArray::~GLVertexArray() noexcept
 {
+  // Delete vao
+  glDeleteVertexArrays(1, &mGLID);
+
   // Delete all attributes
   for ( auto& attribute : mAttributes )
   {
@@ -36,6 +45,8 @@ GLVertexArray::~GLVertexArray() noexcept
   {
     delete bindingPoint;
   }
+
+  DebugWriter().Write("GLVertexArray %u destroyed.\n");
 }
 
 void GLVertexArray::Bind() noexcept

@@ -6,7 +6,7 @@
 #define __NEXUS_GRAPHICS_GLVERTEXARRAY_HPP__
 
 #include <array>
-#include <Nexus\Graphics\Base\GLVertexArray.hpp>
+#include <Nexus\Graphics\Base\GLObject.hpp>
 #include <Nexus\Graphics\GLVertexArrayAttribute.hpp>
 #include <Nexus\Graphics\GLVertexArrayBindingPoint.hpp>
 
@@ -24,7 +24,7 @@ const unsigned int GLVERTEXARRAY_MAX_BINDING_POINTS = 16U;
 /// Author: jkstpierre
 ///
 /// Date: 4/9/2020
-class GLVertexArray : public Base::GLVertexArray
+class GLVertexArray : public Base::GLObject
 {
 private:
   /// Summary:  The attributes.
