@@ -30,15 +30,6 @@ const int GLDEVICE_DEFAULT_CLEAR_STENCIL = 0;
 class GLDevice
 {
 private:
-  /// Summary:  An anonymous struct for the currently running version of OpenGL.
-  struct
-  {
-    /// Summary:  The major version.
-    unsigned int majorVersion;
-    /// Summary:  The minor version.
-    unsigned int minorVersion;
-  } mGLVersion;
-
   /// Summary:  The color to clear the color buffer.
   Math::Vector4f mClearColor;
 
@@ -54,16 +45,12 @@ private:
 public:
   /// Function: GLDevice::GLDevice
   ///
-  /// Summary:  Constructor.
+  /// Summary:  Default constructor.
   ///
   /// Author: jkstpierre
   ///
-  /// Date: 4/6/2020
-  ///
-  /// Parameters:
-  /// glMajorVersion -  The gl major version.
-  /// glMinorVersion -  The gl minor version.
-  GLDevice(const unsigned int& glMajorVersion, const unsigned int& glMinorVersion) noexcept;
+  /// Date: 4/11/2020
+  GLDevice() noexcept;
 
   /// Function: GLDevice::~GLDevice
   ///
@@ -196,28 +183,6 @@ public:
   void SetViewport(const int& x, const int& y, const int& width, const int& height) noexcept;
 
 public:
-  /// Function: GetGLMajorVersion
-  ///
-  /// Summary:  Gets gl major version.
-  ///
-  /// Author: jkstpierre
-  ///
-  /// Date: 4/6/2020
-  ///
-  /// Returns:  The gl major version.
-  const unsigned int& GetGLMajorVersion() const noexcept;
-
-  /// Function: GetGLMinorVersion
-  ///
-  /// Summary:  Gets gl minor version.
-  ///
-  /// Author: jkstpierre
-  ///
-  /// Date: 4/6/2020
-  ///
-  /// Returns:  The gl minor version.
-  const unsigned int& GetGLMinorVersion() const noexcept;
-
   /// Function: GetClearColor
   ///
   /// Summary:  Gets clear color.

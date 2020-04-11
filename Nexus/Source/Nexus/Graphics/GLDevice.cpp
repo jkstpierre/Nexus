@@ -32,11 +32,9 @@ void GLAPIENTRY glMessageCallback(GLenum source, GLenum type, GLuint id, GLenum 
     GLMessage(static_cast<GLMessageSource>(source), static_cast<GLMessageType>(type), static_cast<GLMessageSeverity>(severity), id, message, length));
 }
 
-GLDevice::GLDevice(const unsigned int& glMajorVersion, const unsigned int& glMinorVersion) noexcept :
-  mGLVersion{ glMajorVersion, glMajorVersion }, mClearColor(GLDEVICE_DEFAULT_CLEAR_COLOR),
-  mClearDepth(GLDEVICE_DEFAULT_CLEAR_DEPTH), mClearStencil(GLDEVICE_DEFAULT_CLEAR_STENCIL)
+GLDevice::GLDevice() noexcept
 {
-  // Do nothing
+  // Do nothing for now
 }
 
 GLDevice::~GLDevice() noexcept
@@ -116,16 +114,6 @@ void GLDevice::SetClearStencil(const int& clearStencil) noexcept
 void GLDevice::SetViewport(const int& x, const int& y, const int& width, const int& height) noexcept
 {
   glViewport(x, y, width, height);
-}
-
-const unsigned int& GLDevice::GetGLMajorVersion() const noexcept
-{
-  return mGLVersion.majorVersion;
-}
-
-const unsigned int& GLDevice::GetGLMinorVersion() const noexcept
-{
-  return mGLVersion.minorVersion;
 }
 
 const Math::Vector4f& GLDevice::GetClearColor() const noexcept

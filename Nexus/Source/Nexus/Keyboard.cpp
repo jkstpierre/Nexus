@@ -16,7 +16,7 @@ void Keyboard::Release(const Key& key) noexcept
   mKeys[key] = false;
 }
 
-const bool& Keyboard::IsPressed(const Key& key) const noexcept
+const bool Keyboard::IsPressed(const Key& key) const noexcept
 {
   if ( mKeys.find(key) != mKeys.end() )
   {

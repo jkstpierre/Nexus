@@ -94,7 +94,7 @@ public:
   /// button -  The button.
   ///
   /// Returns:  A reference to a const bool.
-  const bool& IsPressed(const MouseButton& button) const noexcept;
+  const bool IsPressed(const MouseButton& button) const noexcept;
 
 public:
   /// Function: SetPosition

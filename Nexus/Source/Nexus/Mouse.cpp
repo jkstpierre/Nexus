@@ -16,7 +16,7 @@ void Mouse::Release(const MouseButton& button) noexcept
   mButtons[button] = false;
 }
 
-const bool& Mouse::IsPressed(const MouseButton& button) const noexcept
+const bool Mouse::IsPressed(const MouseButton& button) const noexcept
 {
   if ( mButtons.find(button) != mButtons.end() )
   {

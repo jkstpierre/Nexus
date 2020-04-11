@@ -12,6 +12,7 @@
 #include <Nexus\Math\Matrix2.hpp>
 #include <Nexus\Exception.hpp>
 #include <Nexus\Graphics\GLProgram.hpp>
+#include <Nexus\Graphics\GLVertexArray.hpp>
 
 namespace Nexus
 {
@@ -80,8 +81,7 @@ public:
 
     if ( GetMouse().IsPressed(MouseButton::_LEFT) )
     {
-      DebugWriter().Write("Position = %d %d\n", GetMouse().GetPosition().GetX(), GetMouse().GetPosition().GetY());
-      GetGLDevice().SetClearColor({ 1.0f, 1.0f, 1.0f, 1.0f });
+      Graphics::GLVertexArray vao;
     }
 
     if ( GetMouse().IsPressed(MouseButton::_RIGHT) )

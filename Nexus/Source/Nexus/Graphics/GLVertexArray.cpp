@@ -46,7 +46,7 @@ GLVertexArray::~GLVertexArray() noexcept
     delete bindingPoint;
   }
 
-  DebugWriter().Write("GLVertexArray %u destroyed.\n");
+  DebugWriter().Write("GLVertexArray %u destroyed.\n", mGLID);
 }
 
 void GLVertexArray::Bind() noexcept

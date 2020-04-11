@@ -15,7 +15,7 @@ Application::Application(const char* windowName, const unsigned int& windowWidth
                          const unsigned int& windowHeight, const bool& windowFullscreen,
                          const bool& windowUseVSync)
   : mWindow(NULL), mContext(NULL), mRunning(false), mTicksPerSecond(APPLICATION_DEFAULT_TICKS_PER_SECOND), 
-  mKeyboard(), mMouse(), mGLDevice(APPLICATION_DEFAULT_GL_MAJOR_VERSION, APPLICATION_DEFAULT_GL_MINOR_VERSION)
+  mKeyboard(), mMouse(), mGLDevice()
 {
   // Initialize required SDL subsystems
   if ( SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_TIMER) < 0 )
@@ -25,8 +25,9 @@ Application::Application(const char* windowName, const unsigned int& windowWidth
   }
 
   // Target OpenGL 4.6 core
-  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, GetGLDevice().GetGLMajorVersion());
-  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, GetGLDevice().GetGLMinorVersion());
+  SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, APPLICATION_DEFAULT_GL_MAJOR_VERSION);
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, APPLICATION_DEFAULT_GL_MINOR_VERSION);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
   
   // OpenGL context flags
@@ -59,6 +60,13 @@ Application::Application(const char* windowName, const unsigned int& windowWidth
     throw Exception("Error: Failed to create OpenGL context.\n  Reason: %s\n",
                     SDL_GetError());
   }
+
+  // Query what version of OpenGL is running
+  int glMajorVersion, glMinorVersion;
+  SDL_GL_GetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, &glMajorVersion);
+  SDL_GL_GetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, &glMinorVersion);
+
+  DebugWriter().Write("Targetting OpenGL %u.%u.\n", glMajorVersion, glMinorVersion);
 
   // Check for vertical sync
   if ( windowUseVSync )

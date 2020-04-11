@@ -321,7 +321,7 @@ public:
   /// key -   The key.
   ///
   /// Returns:  A reference to a const bool.
-  const bool& IsPressed(const Key& key) const noexcept;
+  const bool IsPressed(const Key& key) const noexcept;
 };
 }
 
