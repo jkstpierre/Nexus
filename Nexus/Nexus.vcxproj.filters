@@ -153,6 +153,9 @@
     <ClInclude Include="Include\Nexus\Graphics\GLVertexArrayAttribute.hpp">
       <Filter>Header Files\Nexus\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Nexus\Graphics\Base\GLRenderer.hpp">
+      <Filter>Header Files\Nexus\Graphics\Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Nexus\Application.cpp">

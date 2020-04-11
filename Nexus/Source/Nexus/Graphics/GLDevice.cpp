@@ -32,7 +32,8 @@ void GLAPIENTRY glMessageCallback(GLenum source, GLenum type, GLuint id, GLenum 
     GLMessage(static_cast<GLMessageSource>(source), static_cast<GLMessageType>(type), static_cast<GLMessageSeverity>(severity), id, message, length));
 }
 
-GLDevice::GLDevice() noexcept
+GLDevice::GLDevice() noexcept : 
+  mClearColor(GLDEVICE_DEFAULT_CLEAR_COLOR), mClearDepth(GLDEVICE_DEFAULT_CLEAR_DEPTH), mClearStencil(GLDEVICE_DEFAULT_CLEAR_STENCIL)
 {
   // Do nothing for now
 }

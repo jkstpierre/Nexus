@@ -26,6 +26,7 @@
     <ClInclude Include="Include\Nexus\Exception.hpp" />
     <ClInclude Include="Include\Nexus\Graphics\Base\GLBuffer.hpp" />
     <ClInclude Include="Include\Nexus\Graphics\Base\GLObject.hpp" />
+    <ClInclude Include="Include\Nexus\Graphics\Base\GLRenderer.hpp" />
     <ClInclude Include="Include\Nexus\Graphics\Base\GLVertexArrayBindingPoint.hpp" />
     <ClInclude Include="Include\Nexus\Graphics\GLBuffer.hpp" />
     <ClInclude Include="Include\Nexus\Graphics\GLDevice.hpp" />

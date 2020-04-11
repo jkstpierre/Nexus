@@ -29,9 +29,11 @@ Application::Application(const char* windowName, const unsigned int& windowWidth
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, APPLICATION_DEFAULT_GL_MAJOR_VERSION);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, APPLICATION_DEFAULT_GL_MINOR_VERSION);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG);  // Disable deprecated functions
   
   // OpenGL context flags
-  SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG);  // Disable deprecated functions
+  SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);    // Enable double buffering
+  SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);     // Set size of the depth buffer
 #ifdef _DEBUG
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG); // Enable debug mode for debug builds
 #endif
@@ -62,11 +64,12 @@ Application::Application(const char* windowName, const unsigned int& windowWidth
   }
 
   // Query what version of OpenGL is running
-  int glMajorVersion, glMinorVersion;
+  int glMajorVersion, glMinorVersion, glProfileMask;
   SDL_GL_GetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, &glMajorVersion);
   SDL_GL_GetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, &glMinorVersion);
+  SDL_GL_GetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, &glProfileMask);
 
-  DebugWriter().Write("Targetting OpenGL %u.%u.\n", glMajorVersion, glMinorVersion);
+  DebugWriter().Write("OpenGL %u.%u %s profile created.\n", glMajorVersion, glMinorVersion, glProfileMask == SDL_GL_CONTEXT_PROFILE_CORE ? "Core" : "Compatibility");
 
   // Check for vertical sync
   if ( windowUseVSync )
