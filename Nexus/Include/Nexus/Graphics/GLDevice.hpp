@@ -146,7 +146,7 @@ public:
 
   /// Function: SetClearColor
   ///
-  /// Summary:  Sets clear color.
+  /// Summary:  Sets clear color for ClearColorBuffer calls.
   ///
   /// Author: jkstpierre
   ///
@@ -158,7 +158,7 @@ public:
 
   /// Function: SetClearDepth
   ///
-  /// Summary:  Sets clear depth.
+  /// Summary:  Sets clear depth for ClearDepthBuffer calls.
   ///
   /// Author: jkstpierre
   ///
@@ -170,7 +170,7 @@ public:
 
   /// Function: SetClearStencil
   ///
-  /// Summary:  Sets clear stencil.
+  /// Summary:  Sets clear stencil for ClearStencilBuffer calls.
   ///
   /// Author: jkstpierre
   ///
@@ -179,6 +179,21 @@ public:
   /// Parameters:
   /// clearStencil -  The clear stencil.
   void SetClearStencil(const int& clearStencil) noexcept;
+
+  /// Function: SetViewport
+  ///
+  /// Summary:  Sets the viewport for subsequent drawcalls.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/9/2020
+  ///
+  /// Parameters:
+  /// x -         An int to process.
+  /// y -         An int to process.
+  /// width -     The width.
+  /// height -    The height.
+  void SetViewport(const int& x, const int& y, const int& width, const int& height) noexcept;
 
 public:
   /// Function: GetGLMajorVersion

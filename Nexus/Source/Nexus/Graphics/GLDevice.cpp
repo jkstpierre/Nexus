@@ -32,8 +32,8 @@ void GLAPIENTRY glMessageCallback(GLenum source, GLenum type, GLuint id, GLenum 
     GLMessage(static_cast<GLMessageSource>(source), static_cast<GLMessageType>(type), static_cast<GLMessageSeverity>(severity), id, message, length));
 }
 
-GLDevice::GLDevice(const unsigned int& glMajorVersion, const unsigned int& glMinorVersion) noexcept : 
-  mGLVersion{ glMajorVersion, glMajorVersion }, mClearColor(GLDEVICE_DEFAULT_CLEAR_COLOR), 
+GLDevice::GLDevice(const unsigned int& glMajorVersion, const unsigned int& glMinorVersion) noexcept :
+  mGLVersion{ glMajorVersion, glMajorVersion }, mClearColor(GLDEVICE_DEFAULT_CLEAR_COLOR),
   mClearDepth(GLDEVICE_DEFAULT_CLEAR_DEPTH), mClearStencil(GLDEVICE_DEFAULT_CLEAR_STENCIL)
 {
   // Do nothing
@@ -47,7 +47,7 @@ GLDevice::~GLDevice() noexcept
 void GLDevice::Initialize()
 {
   // Setup OpenGL here
-  
+
 #ifdef _DEBUG
   glEnable(GL_DEBUG_OUTPUT);  // Enable debug output
   glDebugMessageCallback(glMessageCallback, this);  // Setup debug message callback
@@ -111,6 +111,11 @@ void GLDevice::SetClearDepth(const float& clearDepth) noexcept
 void GLDevice::SetClearStencil(const int& clearStencil) noexcept
 {
   mClearStencil = clearStencil;
+}
+
+void GLDevice::SetViewport(const int& x, const int& y, const int& width, const int& height) noexcept
+{
+  glViewport(x, y, width, height);
 }
 
 const unsigned int& GLDevice::GetGLMajorVersion() const noexcept

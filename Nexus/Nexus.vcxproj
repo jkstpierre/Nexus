@@ -24,12 +24,20 @@
     <ClInclude Include="Include\Nexus\Audio\Base\ALObject.hpp" />
     <ClInclude Include="Include\Nexus\DebugWriter.hpp" />
     <ClInclude Include="Include\Nexus\Exception.hpp" />
+    <ClInclude Include="Include\Nexus\Graphics\Base\GLBuffer.hpp" />
     <ClInclude Include="Include\Nexus\Graphics\Base\GLObject.hpp" />
+    <ClInclude Include="Include\Nexus\Graphics\Base\GLVertexArray.hpp" />
+    <ClInclude Include="Include\Nexus\Graphics\Base\GLVertexArrayBindingPoint.hpp" />
+    <ClInclude Include="Include\Nexus\Graphics\GLBuffer.hpp" />
     <ClInclude Include="Include\Nexus\Graphics\GLDevice.hpp" />
     <ClInclude Include="Include\Nexus\Graphics\GLMessage.hpp" />
     <ClInclude Include="Include\Nexus\Graphics\GLPipeline.hpp" />
     <ClInclude Include="Include\Nexus\Graphics\GLProgram.hpp" />
     <ClInclude Include="Include\Nexus\Graphics\GLShader.hpp" />
+    <ClInclude Include="Include\Nexus\Graphics\GLType.hpp" />
+    <ClInclude Include="Include\Nexus\Graphics\GLVertexArray.hpp" />
+    <ClInclude Include="Include\Nexus\Graphics\GLVertexArrayAttribute.hpp" />
+    <ClInclude Include="Include\Nexus\Graphics\GLVertexArrayBindingPoint.hpp" />
     <ClInclude Include="Include\Nexus\Math\Base\Matrix.hpp" />
     <ClInclude Include="Include\Nexus\Math\Base\Vector.hpp" />
     <ClInclude Include="Include\Nexus\Math\Constants.hpp" />
@@ -44,19 +52,25 @@
     <ClInclude Include="Include\Nexus\Keyboard.hpp" />
     <ClInclude Include="Include\Nexus\Macros.hpp" />
     <ClInclude Include="Include\Nexus\Mouse.hpp" />
-    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Nexus\Application.cpp" />
     <ClCompile Include="Source\Nexus\Audio\ALDevice.cpp" />
     <ClCompile Include="Source\Nexus\DebugWriter.cpp" />
     <ClCompile Include="Source\Nexus\Exception.cpp" />
+    <ClCompile Include="Source\Nexus\Graphics\Base\GLBuffer.cpp" />
     <ClCompile Include="Source\Nexus\Graphics\Base\GLObject.cpp" />
+    <ClCompile Include="Source\Nexus\Graphics\Base\GLVertexArray.cpp" />
+    <ClCompile Include="Source\Nexus\Graphics\Base\GLVertexArrayBindingPoint.cpp" />
+    <ClCompile Include="Source\Nexus\Graphics\GLBuffer.cpp" />
     <ClCompile Include="Source\Nexus\Graphics\GLDevice.cpp" />
     <ClCompile Include="Source\Nexus\Graphics\GLMessage.cpp" />
     <ClCompile Include="Source\Nexus\Graphics\GLPipeline.cpp" />
     <ClCompile Include="Source\Nexus\Graphics\GLProgram.cpp" />
     <ClCompile Include="Source\Nexus\Graphics\GLShader.cpp" />
+    <ClCompile Include="Source\Nexus\Graphics\GLVertexArray.cpp" />
+    <ClCompile Include="Source\Nexus\Graphics\GLVertexArrayAttribute.cpp" />
+    <ClCompile Include="Source\Nexus\Graphics\GLVertexArrayBindingPoint.cpp" />
     <ClCompile Include="Source\Nexus\ResourceLoader.cpp" />
     <ClCompile Include="Source\Nexus\Timer.cpp" />
     <ClCompile Include="Source\Nexus\Keyboard.cpp" />

@@ -25,7 +25,7 @@ void DebugWriter::Write(const char* format, ...) noexcept
   // Build string from format in buffer
   va_list args;
   va_start(args, format);
-  vsnprintf_s(mMessage, DEBUG_WRITER_MESSAGE_BUFFER_SIZE, format, args);
+  vsnprintf_s(mMessage, DEBUGWRITER_MESSAGE_BUFFER_SIZE, format, args);
   va_end(args);
 
 #ifdef __NEXUS_OS_WINDOWS__

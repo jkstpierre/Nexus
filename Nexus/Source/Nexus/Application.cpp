@@ -178,6 +178,10 @@ int Application::Run()
         GetGLDevice().ClearDepthBuffer();
         GetGLDevice().ClearStencilBuffer();
 
+        // Set default viewport
+        Math::Vector2i windowSize = GetWindowDimensions();
+        GetGLDevice().SetViewport(0, 0, windowSize.GetX(), windowSize.GetY());
+
         // Render a frame using interpolation
         OnRender(static_cast<double>(accumulator) / ticksPerUpdate);
 
@@ -202,6 +206,11 @@ void Application::SetTicksPerSecond(const unsigned int& ticksPerSecond) noexcept
   }
 }
 
+void Application::SetWindowDimensions(const Math::Vector2i& windowDimensions) noexcept
+{
+  SDL_SetWindowSize((SDL_Window*)mWindow, windowDimensions.GetX(), windowDimensions.GetY());
+}
+
 void Application::Stop() noexcept
 {
   mRunning = false;
@@ -215,6 +224,13 @@ const bool& Application::IsRunning() const noexcept
 const unsigned int& Application::GetTicksPerSecond() const noexcept
 {
   return mTicksPerSecond;
+}
+
+Math::Vector2i Application::GetWindowDimensions() const noexcept
+{
+  int w, h;
+  SDL_GetWindowSize((SDL_Window*)mWindow, &w, &h);
+  return Math::Vector2i(w, h);
 }
 
 const Keyboard& Application::GetKeyboard() const noexcept

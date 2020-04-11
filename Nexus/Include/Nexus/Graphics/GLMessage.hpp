@@ -15,7 +15,7 @@ namespace Nexus::Graphics
 /// Summary:  Values that represent gl message sources.
 enum class GLMessageSource : unsigned int
 {
-  _NONE = 0x00,
+  _NONE = 0x0000,
   _API = 0x8246,
   _WINDOW_SYSTEM = 0x8247,
   _SHADER_COMPILER = 0x8248,
@@ -29,7 +29,7 @@ enum class GLMessageSource : unsigned int
 /// Summary:  Values that represent gl message types.
 enum class GLMessageType : unsigned int
 {
-  _NONE = 0x00,
+  _NONE = 0x0000,
   _ERROR = 0x824C,
   _DEPRECATED_BEHAVIOR = 0x824D,
   _UNDEFINED_BEHAVIOR = 0x824E,
@@ -46,7 +46,7 @@ enum class GLMessageType : unsigned int
 /// Summary:  Values that represent gl message severities.
 enum class GLMessageSeverity : unsigned int
 {
-  _NONE = 0x00,
+  _NONE = 0x0000,
   _HIGH = 0x9146,
   _MEDIUM = 0x9147,
   _LOW = 0x9148,

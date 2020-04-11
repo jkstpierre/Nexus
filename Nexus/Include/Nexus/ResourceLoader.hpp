@@ -2,8 +2,8 @@
 ///
 /// Summary:  Declares the resource loader class.
 
-#ifndef __NEXUS_RESOURCE_LOADER_HPP__
-#define __NEXUS_RESOURCE_LOADER_HPP__
+#ifndef __NEXUS_RESOURCELOADER_HPP__
+#define __NEXUS_RESOURCELOADER_HPP__
 
 #include <Nexus\Macros.hpp>
 #ifdef __NEXUS_OS_WINDOWS__

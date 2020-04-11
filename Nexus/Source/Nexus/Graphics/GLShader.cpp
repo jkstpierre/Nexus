@@ -5,6 +5,7 @@
 #include <GLAD\GL.h>
 #include <Nexus\Graphics\GLShader.hpp>
 #include <Nexus\Exception.hpp>
+#include <Nexus\DebugWriter.hpp>
 
 namespace Nexus::Graphics
 {
@@ -32,6 +33,11 @@ GLShader::GLShader(const GLShaderType& type, const char* source) : mType(type)
       mGLID = Base::GLOBJECT_GLID_NONE;
       throw Exception("GLShader Error: Failed to compile.\nGLSL %s\n", errorLog);
     }
+    else
+    {
+      // Shader compiled successfully
+      DebugWriter().Write("GLShader %u created.\n", mGLID);
+    }
   }
   else
   {
@@ -43,7 +49,7 @@ GLShader::GLShader(const GLShaderType& type, const char* source) : mType(type)
 GLShader::~GLShader() noexcept
 {
   glDeleteShader(mGLID);
-  mGLID = Base::GLOBJECT_GLID_NONE;
+  DebugWriter().Write("GLShader %u destroyed.\n", mGLID);
 }
 
 const GLShaderType& GLShader::GetType() const noexcept

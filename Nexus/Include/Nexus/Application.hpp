@@ -8,6 +8,7 @@
 #include <Nexus\Keyboard.hpp>
 #include <Nexus\Mouse.hpp>
 #include <Nexus\Graphics\GLDevice.hpp>
+#include <Nexus\Math\Vector2.hpp>
 
 namespace Nexus
 {
@@ -139,6 +140,18 @@ public:
   /// ticksPerSecond -  The ticks per second.
   void SetTicksPerSecond(const unsigned int& ticksPerSecond) noexcept;
 
+  /// Function: SetWindowDimensions
+  ///
+  /// Summary:  Sets window dimensions.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/9/2020
+  ///
+  /// Parameters:
+  /// windowDimensions -  The window dimensions.
+  void SetWindowDimensions(const Math::Vector2i& windowDimensions) noexcept;
+
 public:
   /// Function: IsRunning
   ///
@@ -161,6 +174,17 @@ public:
   ///
   /// Returns:  The ticks per second.
   const unsigned int& GetTicksPerSecond() const noexcept;
+
+  /// Function: GetWindowDimensions
+  ///
+  /// Summary:  Gets window dimensions.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/9/2020
+  ///
+  /// Returns:  The window dimensions.
+  Math::Vector2i GetWindowDimensions() const noexcept;
 
   /// Function: GetKeyboard
   ///

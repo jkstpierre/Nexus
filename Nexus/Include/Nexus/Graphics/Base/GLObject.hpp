@@ -12,7 +12,7 @@ const unsigned int GLOBJECT_GLID_NONE = 0U;
 
 /// Class:  GLObject
 ///
-/// Summary:  A gl object.
+/// Summary:  Base class for all objects created by the OpenGL API. This class stores their registered id numbers.
 ///
 /// Author: jkstpierre
 ///
@@ -23,7 +23,7 @@ protected:
   /// Summary:  The glid.
   unsigned int mGLID;
 
-public:
+protected:
   /// Function: GLObject::GLObject
   ///
   /// Summary:  Default constructor.

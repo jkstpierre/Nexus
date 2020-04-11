@@ -81,7 +81,7 @@ public:
     if ( GetMouse().IsPressed(MouseButton::_LEFT) )
     {
       DebugWriter().Write("Position = %d %d\n", GetMouse().GetPosition().GetX(), GetMouse().GetPosition().GetY());
-      GetGLDevice().SetClearColor({ 1.0f, 0.0f, 1.0f, 1.0f });
+      GetGLDevice().SetClearColor({ 1.0f, 1.0f, 1.0f, 1.0f });
     }
 
     if ( GetMouse().IsPressed(MouseButton::_RIGHT) )

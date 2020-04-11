@@ -129,10 +129,31 @@
     <ClInclude Include="Include\Nexus\ResourceLoader.hpp">
       <Filter>Header Files\Nexus</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Include\Nexus\Graphics\GLMessage.hpp">
+      <Filter>Header Files\Nexus\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Nexus\Graphics\GLVertexArray.hpp">
+      <Filter>Header Files\Nexus\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Nexus\Graphics\Base\GLBuffer.hpp">
+      <Filter>Header Files\Nexus\Graphics\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Nexus\Graphics\GLBuffer.hpp">
+      <Filter>Header Files\Nexus\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Nexus\Graphics\Base\GLVertexArray.hpp">
+      <Filter>Header Files\Nexus\Graphics\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Nexus\Graphics\GLType.hpp">
+      <Filter>Header Files\Nexus\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Nexus\Graphics\Base\GLVertexArrayBindingPoint.hpp">
+      <Filter>Header Files\Nexus\Graphics\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Nexus\Graphics\GLVertexArrayBindingPoint.hpp">
+      <Filter>Header Files\Nexus\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Nexus\Graphics\GLVertexArrayAttribute.hpp">
       <Filter>Header Files\Nexus\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
@@ -178,6 +199,27 @@
     </ClCompile>
     <ClCompile Include="Source\Nexus\ResourceLoader.cpp">
       <Filter>Source Files\Nexus</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Nexus\Graphics\Base\GLBuffer.cpp">
+      <Filter>Source Files\Nexus\Graphics\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Nexus\Graphics\Base\GLVertexArray.cpp">
+      <Filter>Source Files\Nexus\Graphics\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Nexus\Graphics\GLBuffer.cpp">
+      <Filter>Source Files\Nexus\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Nexus\Graphics\Base\GLVertexArrayBindingPoint.cpp">
+      <Filter>Source Files\Nexus\Graphics\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Nexus\Graphics\GLVertexArrayBindingPoint.cpp">
+      <Filter>Source Files\Nexus\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Nexus\Graphics\GLVertexArrayAttribute.cpp">
+      <Filter>Source Files\Nexus\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Nexus\Graphics\GLVertexArray.cpp">
+      <Filter>Source Files\Nexus\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
