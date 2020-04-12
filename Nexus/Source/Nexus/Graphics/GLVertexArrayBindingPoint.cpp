@@ -8,7 +8,7 @@
 namespace Nexus::Graphics
 {
 GLVertexArrayBindingPoint::GLVertexArrayBindingPoint(const unsigned int& vaoGLID, const unsigned int& vaoBindingIndex) noexcept :
-  mGLVertexArrayGLID(vaoGLID), mBindingIndex(vaoBindingIndex), mDivisor(0)
+  mGLVertexArrayGLID(vaoGLID), mBindingIndex(vaoBindingIndex), mDivisor(0), mVertexBuffer(nullptr)
 {}
 
 void GLVertexArrayBindingPoint::SetDivisor(const unsigned int& divisor) noexcept

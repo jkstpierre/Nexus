@@ -11,13 +11,13 @@ namespace Nexus::Graphics::Base
 GLBuffer::GLBuffer() noexcept
 {
   glCreateBuffers(1, &mGLID);
-  DebugWriter().Write("GLBuffer %u created...\n", mGLID);
+  DebugWriter().Write("GLBuffer %u created.\n", mGLID);
 }
 
 GLBuffer::~GLBuffer() noexcept
 {
   glDeleteBuffers(1, &mGLID);
-  DebugWriter().Write("GLBuffer %u destroyed...\n", mGLID);
+  DebugWriter().Write("GLBuffer %u destroyed.\n", mGLID);
 }
 
 void GLBuffer::SetData(const void* data, const unsigned long& size, const unsigned int& usage) noexcept

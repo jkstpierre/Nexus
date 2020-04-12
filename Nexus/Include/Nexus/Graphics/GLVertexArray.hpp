@@ -16,6 +16,8 @@ namespace Nexus::Graphics
 const unsigned int GLVERTEXARRAY_MAX_ATTRIBUTES = 16U;
 /// Summary:  The glvertexarray maximum binding points.
 const unsigned int GLVERTEXARRAY_MAX_BINDING_POINTS = 16U;
+/// Summary:  The glvertexarray default binding point.
+const unsigned int GLVERTEXARRAY_DEFAULT_BINDING_POINT = 0U;
 
 /// Class:  GLVertexArray
 ///

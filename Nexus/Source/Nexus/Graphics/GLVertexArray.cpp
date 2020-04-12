@@ -14,16 +14,19 @@ GLVertexArray::GLVertexArray() noexcept : mAttributes{ NULL }, mBindingPoints{ N
   // Create vao
   glCreateVertexArrays(1, &mGLID);
 
-  // Create starting attributes
-  for ( unsigned int i = 0; i < GLVERTEXARRAY_MAX_ATTRIBUTES; i++ )
-  {
-    mAttributes[i] = new GLVertexArrayAttribute(mGLID, i);
-  }
-
   // Create starting binding points
   for ( unsigned int i = 0; i < GLVERTEXARRAY_MAX_BINDING_POINTS; i++ )
   {
     mBindingPoints[i] = new GLVertexArrayBindingPoint(mGLID, i);
+  }
+
+  // Get reference to the default binding point
+  const GLVertexArrayBindingPoint& defaultBindingPoint = *mBindingPoints.at(GLVERTEXARRAY_DEFAULT_BINDING_POINT);
+
+  // Create starting attributes
+  for ( unsigned int i = 0; i < GLVERTEXARRAY_MAX_ATTRIBUTES; i++ )
+  {
+    mAttributes[i] = new GLVertexArrayAttribute(mGLID, i, defaultBindingPoint);
   }
 
   DebugWriter().Write("GLVertexArray %u created.\n", mGLID);

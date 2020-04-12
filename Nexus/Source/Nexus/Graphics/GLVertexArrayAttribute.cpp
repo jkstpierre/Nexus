@@ -7,24 +7,37 @@
 
 namespace Nexus::Graphics
 {
-GLVertexArrayAttribute::GLVertexArrayAttribute(const unsigned int& vaoGLID, const unsigned int& vaoAttributeIndex) noexcept :
+GLVertexArrayAttribute::GLVertexArrayAttribute(const unsigned int& vaoGLID, const unsigned int& vaoAttributeIndex, const GLVertexArrayBindingPoint& vaoBindingPoint) noexcept :
   mGLVertexArrayGLID(vaoGLID), mAttributeIndex(vaoAttributeIndex), 
   mSize(GLVERTEXARRAYATTRIBUTE_DEFAULT_SIZE), 
   mType(GLVERTEXARRAYATTRIBUTE_DEFAULT_TYPE),
-  mNormalized(GLVERTEXARRAYATTRIBUTE_DEFAULT_NORMALIZED),
   mRelativeOffset(GLVERTEXARRAYATTRIBUTE_DEFAULT_RELATIVE_OFFSET),
-  mEnabled(GLVERTEXARRAYATTRIBUTE_DEFAULT_ENABLED)
+  mEnabled(GLVERTEXARRAYATTRIBUTE_DEFAULT_ENABLED),
+  mBindingPoint(&vaoBindingPoint)
 {
-
+  SetBindingPoint(vaoBindingPoint); // Set the initial binding point for the attribute
 }
 
-void GLVertexArrayAttribute::Format(const unsigned int& size, const GLType& type, const bool& normalized, const unsigned int& relativeOffset) noexcept
+void GLVertexArrayAttribute::Format(const unsigned int& size, const GLType& type, const unsigned int& relativeOffset) noexcept
 {
-  glVertexArrayAttribFormat(mGLVertexArrayGLID, mAttributeIndex, size, static_cast<GLenum>(type), normalized, relativeOffset);
-
+  if ( type == GLType::_FLOAT )
+  {
+    // Format regular floating point attributes
+    glVertexArrayAttribFormat(mGLVertexArrayGLID, mAttributeIndex, size, static_cast<GLenum>(type), GL_FALSE, relativeOffset);
+  }
+  else if ( type == GLType::_DOUBLE )
+  {
+    // Format double precision floating point attributes
+    glVertexArrayAttribLFormat(mGLVertexArrayGLID, mAttributeIndex, size, static_cast<GLenum>(type), relativeOffset);
+  }
+  else
+  {
+    // Format integer attributes
+    glVertexArrayAttribIFormat(mGLVertexArrayGLID, mAttributeIndex, size, static_cast<GLenum>(type), relativeOffset);
+  }
+  
   mSize = size;
   mType = type;
-  mNormalized = normalized;
   mRelativeOffset = relativeOffset;
 }
 
@@ -43,6 +56,7 @@ void GLVertexArrayAttribute::Disable() noexcept
 void GLVertexArrayAttribute::SetBindingPoint(const GLVertexArrayBindingPoint& vaoBindingPoint) noexcept
 {
   glVertexArrayAttribBinding(mGLVertexArrayGLID, mAttributeIndex, vaoBindingPoint.GetBindingIndex());
+  mBindingPoint = &vaoBindingPoint; // Set the binding point for the attribute
 }
 
 const unsigned int& GLVertexArrayAttribute::GetGLVertexArrayGLID() const noexcept
@@ -65,11 +79,6 @@ const GLType& GLVertexArrayAttribute::GetType() const noexcept
   return mType;
 }
 
-const bool& GLVertexArrayAttribute::IsNormalized() const noexcept
-{
-  return mNormalized;
-}
-
 const unsigned int& GLVertexArrayAttribute::GetRelativeOffset() const noexcept
 {
   return mRelativeOffset;
@@ -78,6 +87,11 @@ const unsigned int& GLVertexArrayAttribute::GetRelativeOffset() const noexcept
 const bool& GLVertexArrayAttribute::IsEnabled() const noexcept
 {
   return mEnabled;
+}
+
+const GLVertexArrayBindingPoint& GLVertexArrayAttribute::GetBindingPoint() const noexcept
+{
+  return *mBindingPoint;
 }
 }
 

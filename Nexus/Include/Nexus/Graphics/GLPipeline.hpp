@@ -14,10 +14,12 @@ namespace Nexus::Graphics
 /// Summary:  Values that represent gl pipeline stages.
 enum class GLPipelineStage : unsigned int
 {
-  _VERTEX_SHADER_BIT = 0x00000001,
-  _FRAGMENT_SHADER_BIT = 0x00000002,
-  _GEOMETRY_SHADER_BIT = 0x00000004,
-  _COMPUTE_SHADER_BIT = 0x00000020
+  _VERTEX_SHADER = 0x00000001,
+  _FRAGMENT_SHADER = 0x00000002,
+  _GEOMETRY_SHADER = 0x00000004,
+  _TESS_CONTROL_SHADER = 0x00000008,
+  _TESS_EVALUATION_SHADER = 0x00000010,
+  _COMPUTE_SHADER = 0x00000020
 };
 
 /// Class:  GLPipeline

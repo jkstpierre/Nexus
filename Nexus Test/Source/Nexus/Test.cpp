@@ -12,7 +12,7 @@
 #include <Nexus\Math\Matrix2.hpp>
 #include <Nexus\Exception.hpp>
 #include <Nexus\Graphics\GLProgram.hpp>
-#include <Nexus\Graphics\GLVertexArray.hpp>
+#include <Nexus\Graphics\GLRenderer2D.hpp>
 
 namespace Nexus
 {

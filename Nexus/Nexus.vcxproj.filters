@@ -55,6 +55,15 @@
     <Filter Include="Resource Files\Nexus\Shaders">
       <UniqueIdentifier>{583bb40a-22a1-472f-ab63-254d9a70e926}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Nexus\Shaders\Vertex">
+      <UniqueIdentifier>{8e298b95-9977-4b54-900e-8cca79bad913}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Nexus\Shaders\Fragment">
+      <UniqueIdentifier>{e4ceb477-c6c8-45a8-beda-1cfcb8972055}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Nexus\Shaders\Geometry">
+      <UniqueIdentifier>{1a16ee59-ab54-4f9d-ac94-4201364b4f4d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Nexus\Application.hpp">
@@ -156,6 +165,15 @@
     <ClInclude Include="Include\Nexus\Graphics\Base\GLRenderer.hpp">
       <Filter>Header Files\Nexus\Graphics\Base</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Nexus\Graphics\GLRenderer2D.hpp">
+      <Filter>Header Files\Nexus\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Nexus\Resources.hpp">
+      <Filter>Header Files\Nexus</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Nexus\Graphics\Base\GLTexture.hpp">
+      <Filter>Header Files\Nexus\Graphics\Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Nexus\Application.cpp">
@@ -218,5 +236,27 @@
     <ClCompile Include="Source\Nexus\Graphics\GLVertexArray.cpp">
       <Filter>Source Files\Nexus\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Nexus\Graphics\GLRenderer2D.cpp">
+      <Filter>Source Files\Nexus\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Nexus\Graphics\Base\GLTexture.cpp">
+      <Filter>Source Files\Nexus\Graphics\Base</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\Nexus\Shaders\Vertex\GLRenderer2D.vs">
+      <Filter>Resource Files\Nexus\Shaders\Vertex</Filter>
+    </None>
+    <None Include="Resource\Nexus\Shaders\Vertex\GLRenderer3D.vs">
+      <Filter>Resource Files\Nexus\Shaders\Vertex</Filter>
+    </None>
+    <None Include="Resource\Nexus\Shaders\Fragment\GLRenderer.fs">
+      <Filter>Resource Files\Nexus\Shaders\Fragment</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Nexus.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

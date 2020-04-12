@@ -29,6 +29,8 @@ private:
   unsigned int mBindingIndex;
   /// Summary:  The divisor.
   unsigned int mDivisor;
+  /// Summary:  The buffer currently bound to this binding point.
+  const Base::GLBuffer* mVertexBuffer;
 
 public:
   /// Function: GLVertexArrayBindingPoint::GLVertexArrayBindingPoint
@@ -68,6 +70,7 @@ public:
   void SetVertexBuffer(const GLBuffer<T>* vbo) noexcept
   {
     Base::GLVertexArrayBindingPoint::SetVertexBuffer(mGLVertexArrayGLID, mBindingIndex, vbo ? vbo->GetGLID() : 0, 0, sizeof(T));
+    mVertexBuffer = vbo;  // Capture the currently bound buffer
   }
 
   /// Function: SetDivisor
@@ -115,6 +118,19 @@ public:
   ///
   /// Returns:  The divisor.
   const unsigned int& GetDivisor() const noexcept;
+
+  /// Function: GetVertexBuffer< T>
+  ///
+  /// Summary:  Gets vertex buffer.
+  ///
+  /// Typeparams:
+  /// T -   Generic type parameter.
+  ///
+  /// Returns:  Null if it fails, else the vertex buffer.
+  const Base::GLBuffer* GetVertexBuffer() const noexcept
+  {
+    return mVertexBuffer;
+  }
 };
 }
 

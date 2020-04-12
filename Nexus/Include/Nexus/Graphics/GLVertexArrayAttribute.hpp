@@ -21,6 +21,22 @@ const unsigned int GLVERTEXARRAYATTRIBUTE_DEFAULT_RELATIVE_OFFSET = 0U;
 /// Summary:  True to enable, false to disable the glvertexarrayattribute default.
 const bool GLVERTEXARRAYATTRIBUTE_DEFAULT_ENABLED = false;
 
+/// Function: offset_of< T1, T2>
+///
+/// Summary:  Calculates the offset in bytes for fields
+///
+/// Typeparams:
+/// T1 -        Generic type parameter.
+/// T2 -        Generic type parameter.
+/// Parameters:
+/// member -  [in,out] If non-null, the member.
+template <typename T1, typename T2>
+inline size_t constexpr offset_of(T1 T2::* member)
+{
+  constexpr T2 object{};
+  return size_t(&(object.*member)) - size_t(&object);
+}
+
 /// Class:  GLVertexArrayAttribute
 ///
 /// Summary:  Attribute for gl vertex array.
@@ -39,42 +55,42 @@ private:
   unsigned int mSize;
   /// Summary:  The type.
   GLType mType;
-  /// Summary:  True if normalized.
-  bool mNormalized;
   /// Summary:  The relative offset.
   unsigned int mRelativeOffset;
   /// Summary:  True to enable, false to disable.
   bool mEnabled;
+  /// Summary:  The binding point this attribute is reading from.
+  const GLVertexArrayBindingPoint* mBindingPoint;
 
 public:
   /// Function: GLVertexArrayAttribute::GLVertexArrayAttribute
   ///
   /// Summary:  Constructor.
   ///
-  /// Author: jkstpierre
+  /// Author: jkstpierre.
   ///
-  /// Date: 4/11/2020
+  /// Date: 4/11/2020.
   ///
   /// Parameters:
   /// vaoGLID -             The vao glid.
   /// vaoAttributeIndex -   Zero-based index of the vao attribute.
-  GLVertexArrayAttribute(const unsigned int& vaoGLID, const unsigned int& vaoAttributeIndex) noexcept;
+  /// vaoBindingPoint -     The vao binding point.
+  GLVertexArrayAttribute(const unsigned int& vaoGLID, const unsigned int& vaoAttributeIndex, const GLVertexArrayBindingPoint& vaoBindingPoint) noexcept;
 
 public:
   /// Function: Format
   ///
   /// Summary:  Formats the attribute.
   ///
-  /// Author: jkstpierre
+  /// Author: jkstpierre.
   ///
-  /// Date: 4/11/2020
+  /// Date: 4/11/2020.
   ///
   /// Parameters:
   /// size -            The size.
   /// type -            The type.
-  /// normalized -      True if normalized.
   /// relativeOffset -  The relative offset.
-  void Format(const unsigned int& size, const GLType& type, const bool& normalized, const unsigned int& relativeOffset) noexcept;
+  void Format(const unsigned int& size, const GLType& type, const unsigned int& relativeOffset) noexcept;
 
   /// Function: Enable
   ///
@@ -151,17 +167,6 @@ public:
   /// Returns:  The type.
   const GLType& GetType() const noexcept;
 
-  /// Function: IsNormalized
-  ///
-  /// Summary:  Is normalized.
-  ///
-  /// Author: jkstpierre
-  ///
-  /// Date: 4/11/2020
-  ///
-  /// Returns:  A reference to a const bool.
-  const bool& IsNormalized() const noexcept;
-
   /// Function: GetRelativeOffset
   ///
   /// Summary:  Gets relative offset.
@@ -183,6 +188,19 @@ public:
   ///
   /// Returns:  A reference to a const bool.
   const bool& IsEnabled() const noexcept;
+
+  /// Function: GetBindingPoint
+  ///
+  /// Summary:
+  ///   Gets binding point. Warning: If binding point is changed, this function needs to be called
+  ///   again to get the current binding point.
+  ///
+  /// Author: jkstpierre.
+  ///
+  /// Date: 4/12/2020.
+  ///
+  /// Returns:  The binding point.
+  const GLVertexArrayBindingPoint& GetBindingPoint() const noexcept;
 };
 }
 
