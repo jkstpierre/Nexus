@@ -53,6 +53,11 @@ void GLProgram::LinkShader(const GLShader& shader)
   }
 }
 
+void GLProgram::Use() noexcept
+{
+  glUseProgram(mGLID);
+}
+
 void GLProgram::SetUniformBool(const char* name, const bool& b) noexcept
 {
   glProgramUniform1i(mGLID, GetUniformIndex(name), b);
@@ -78,34 +83,34 @@ void GLProgram::SetUniformFloatArray(const char* name, const size_t& count, cons
   glProgramUniform1fv(mGLID, GetUniformIndex(name), count, fArray);
 }
 
-void GLProgram::SetUniformVector2f(const char* name, const Math::Vector2f& vector) noexcept
+void GLProgram::SetUniformVec2(const char* name, const glm::vec2& vector) noexcept
 {
-  glProgramUniform2fv(mGLID, GetUniformIndex(name), 1, vector.GetComponents());
+  glProgramUniform2fv(mGLID, GetUniformIndex(name), 1, &vector[0]);
 }
 
-void GLProgram::SetUniformVector3f(const char* name, const Math::Vector3f& vector) noexcept
+void GLProgram::SetUniformVec3(const char* name, const glm::vec3& vector) noexcept
 {
-  glProgramUniform3fv(mGLID, GetUniformIndex(name), 1, vector.GetComponents());
+  glProgramUniform3fv(mGLID, GetUniformIndex(name), 1, &vector[0]);
 }
 
-void GLProgram::SetUniformVector4f(const char* name, const Math::Vector4f& vector) noexcept
+void GLProgram::SetUniformVec4(const char* name, const glm::vec4& vector) noexcept
 {
-  glProgramUniform4fv(mGLID, GetUniformIndex(name), 1, vector.GetComponents());
+  glProgramUniform4fv(mGLID, GetUniformIndex(name), 1, &vector[0]);
 }
 
-void GLProgram::SetUniformMatrix2f(const char* name, const Math::Matrix2f& matrix) noexcept
+void GLProgram::SetUniformMat2(const char* name, const glm::mat2& matrix) noexcept
 {
-  glProgramUniformMatrix2fv(mGLID, GetUniformIndex(name), 1, GL_FALSE, matrix.GetData());
+  glProgramUniformMatrix2fv(mGLID, GetUniformIndex(name), 1, GL_FALSE, &matrix[0][0]);
 }
 
-void GLProgram::SetUniformMatrix3f(const char* name, const Math::Matrix3f& matrix) noexcept
+void GLProgram::SetUniformMat3(const char* name, const glm::mat3& matrix) noexcept
 {
-  glProgramUniformMatrix3fv(mGLID, GetUniformIndex(name), 1, GL_FALSE, matrix.GetData());
+  glProgramUniformMatrix3fv(mGLID, GetUniformIndex(name), 1, GL_FALSE, &matrix[0][0]);
 }
 
-void GLProgram::SetUniformMatrix4f(const char* name, const Math::Matrix4f& matrix) noexcept
+void GLProgram::SetUniformMat4(const char* name, const glm::mat4& matrix) noexcept
 {
-  glProgramUniformMatrix4fv(mGLID, GetUniformIndex(name), 1, GL_FALSE, matrix.GetData());
+  glProgramUniformMatrix4fv(mGLID, GetUniformIndex(name), 1, GL_FALSE, &matrix[0][0]);
 }
 
 const bool& GLProgram::IsSeparable() const noexcept

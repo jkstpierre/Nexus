@@ -4,7 +4,7 @@
 
 #pragma once
 
-/// Def:  Resources::__NEXUS_GLRENDERER2D_DEFAULT_VERTEX_SHADER_RID__
+/// Def:  Resources::RESOURCELOADER_GLRENDERER2D_DEFAULT_VERTEX_SHADER_RID
 ///
 /// Summary:
 ///   {{NO_DEPENDENCIES}}
@@ -14,25 +14,25 @@
 ///
 /// Date: 4/12/2020.
 
-#define NEXUS_GLRENDERER2D_DEFAULT_VERTEX_SHADER_RID      1000
+#define RESOURCELOADER_GLRENDERER2D_DEFAULT_VERTEX_SHADER_RID   1000
 
-/// Def:  Resources::__NEXUS_GLRENDERER3D_DEFAULT_VERTEX_SHADER_RID__
+/// Def:  Resources::RESOURCELOADER_GLRENDERER3D_DEFAULT_VERTEX_SHADER_RID
 ///
 /// Summary:  A macro that defines nexus glrenderer 3D default vertex shader rid.
 ///
-/// Author: jkstpierre
+/// Author: jkstpierre.
 ///
-/// Date: 4/12/2020
-#define NEXUS_GLRENDERER3D_DEFAULT_VERTEX_SHADER_RID    1001
+/// Date: 4/12/2020.
+#define RESOURCELOADER_GLRENDERER3D_DEFAULT_VERTEX_SHADER_RID    1001
 
-/// Def:  Resources::__NEXUS_GLRENDERER_DEFAULT_FRAGMENT_SHADER_RID__
+/// Def:  Resources::RESOURCELOADER_GLRENDERER2D_DEFAULT_FRAGMENT_SHADER_RID
 ///
 /// Summary:  A macro that defines nexus default fragment shader rid.
 ///
 /// Author: jkstpierre.
 ///
 /// Date: 4/12/2020.
-#define NEXUS_GLRENDERER_DEFAULT_FRAGMENT_SHADER_RID    1002
+#define RESOURCELOADER_GLRENDERER2D_DEFAULT_FRAGMENT_SHADER_RID    1002
 
 // Next default values for new objects
 // 

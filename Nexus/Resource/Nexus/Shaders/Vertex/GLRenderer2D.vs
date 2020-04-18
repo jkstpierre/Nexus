@@ -1,16 +1,17 @@
 /// File:	Resource\Nexus\Shaders\Vertex\GLRenderer2D.vs.
 ///
-/// Summary:	Gl renderer 2D class.
+/// Summary:	Default vertex shader for GLRenderer2D
 
 #version 460 core
 
-/// Summary:	Default vertex program for the GLRenderer2D.
-///
-/// Author:	jkstpierre
-///
-/// Date:	4/12/2020
-void main() {
+layout(location = 0) in vec3 aPos;
+layout(location = 1) in vec3 aColor;
+out vec3 color;
 
+void main()
+{
+	gl_Position = vec4(aPos, 1.0);
+	color = aColor;		
 }
 
 // End of Resource\Nexus\Shaders\Vertex\GLRenderer2D.vs

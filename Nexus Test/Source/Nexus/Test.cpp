@@ -12,7 +12,8 @@
 #include <Nexus\Math\Matrix2.hpp>
 #include <Nexus\Exception.hpp>
 #include <Nexus\Graphics\GLProgram.hpp>
-#include <Nexus\Graphics\GLRenderer2D.hpp>
+#include <Nexus\ResourceLoader.hpp>
+#include <Nexus\Graphics\GLVertexArray.hpp>
 
 namespace Nexus
 {
@@ -78,61 +79,47 @@ public:
     {
       Stop();
     }
-
-    if ( GetMouse().IsPressed(MouseButton::_LEFT) )
-    {
-      Graphics::GLVertexArray vao;
-    }
-
-    if ( GetMouse().IsPressed(MouseButton::_RIGHT) )
-    {
-      try
-      {
-        Graphics::GLProgram program(
-          false, 
-          Graphics::GLShader(
-            Graphics::GLShaderType::VERTEX, 
-            "#version 460 core\n\
-            layout(location = 0) in vec3 aPos;\
-            layout(location = 1) in vec3 aColor;\
-            out vec3 col;\
-            void main()\
-            {\
-              gl_Position = vec4(aPos, 1.0);\
-              col = aColor;\
-            }"
-          ),  
-          Graphics::GLShader(
-            Graphics::GLShaderType::FRAGMENT, 
-            "#version 460 core\n\
-            out vec4 FragColor;\
-            in vec3 col;\
-            void main()\
-            {\
-              FragColor = vec4(col, 1.0f);\
-            }"
-          )
-        );
-      }
-      catch ( Exception& e )
-      {
-        DebugWriter().Write(e.ReadMessage());
-      }
-    }
   }
 
   /// Function: OnRender
   ///
   /// Summary:  Executes the render action.
   ///
-  /// Author: jkstpierre
+  /// Author: jkstpierre.
   ///
-  /// Date: 3/29/2020
+  /// Date: 3/29/2020.
   ///
   /// Parameters:
-  /// alpha -   The alpha.
-  void OnRender(const double& alpha) override
-  {}
+  /// glDevice -  [in,out] The gl device.
+  /// alpha -     The alpha.
+  ///
+  /// See:
+  /// Nexus::Test.OnRender(Graphics::GLDevice&,const double&) - 
+  void OnRender(Graphics::GLDevice& glDevice, const double& alpha) override
+  {
+    if ( GetMouse().IsPressed(MouseButton::_LEFT) )
+    {
+      glDevice.ClearColor(1.0f, 0.0f, 1.0f, 1.0f);
+    }
+
+    if ( GetMouse().IsPressed(MouseButton::_RIGHT) )
+    {
+      Graphics::GLVertexArray vao;
+      auto& attributes = vao.GetAttributes();
+      auto& bindingPoints = vao.GetBindingPoints();
+
+      auto attribute = attributes[0];
+      auto bindingPoint = bindingPoints[0];
+
+      bindingPoint->SetDivisor(1);
+
+      DebugWriter().Write("Attribute Divisor = %u\n", attribute->GetDivisor());
+
+      attribute->SetBindingPoint(*bindingPoints[1]);
+
+      DebugWriter().Write("Attribute Divisor = %u\n", attribute->GetDivisor());
+    }
+  }
 };
 }
 

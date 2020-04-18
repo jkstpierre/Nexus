@@ -6,7 +6,7 @@
 #define __NEXUS_MOUSE_HPP__
 
 #include <unordered_map>
-#include <Nexus\Math\Vector2.hpp>
+#include <glm\glm.hpp>
 
 namespace Nexus
 {
@@ -35,8 +35,8 @@ private:
   /// Summary:  The buttons.
   std::unordered_map<MouseButton, bool> mButtons;
 
-  /// Summary:  The position.
-  Math::Vector2i mPosition;
+  /// Summary:  The position of the mouse.
+  glm::u32vec2 mPosition;
 
 public:
   /// Function: Mouse::Mouse
@@ -107,7 +107,7 @@ public:
   ///
   /// Parameters:
   /// position -  The position.
-  void SetPosition(const Math::Vector2i& position) noexcept;
+  void SetPosition(const glm::u32vec2& position) noexcept;
 
   /// Function: GetPosition
   ///
@@ -118,7 +118,7 @@ public:
   /// Date: 4/5/2020
   ///
   /// Returns:  The position.
-  const Math::Vector2i& GetPosition() const noexcept;
+  const glm::u32vec2& GetPosition() const noexcept;
 };
 }
 

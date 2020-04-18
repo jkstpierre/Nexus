@@ -14,7 +14,13 @@ namespace Nexus::Graphics::Base
 /// Summary:  Values that represent gl texture types.
 enum class GLTextureType : unsigned int
 {
-
+  _TEXTURE_1D = 0x0DE0,
+  _TEXTURE_2D = 0x0DE1,
+  _TEXTURE_3D = 0x806F,
+  _TEXTURE_1D_ARRAY = 0x8C18,
+  _TEXTURE_2D_ARRAY = 0x8C1A,
+  _TEXTURE_CUBE_MAP = 0x8513,
+  _TEXTURE_CUBE_MAP_ARRAY = 0x9009
 };
 
 /// Class:  GLTexture
@@ -23,13 +29,46 @@ enum class GLTextureType : unsigned int
 ///
 /// Author: jkstpierre
 ///
-/// Date: 4/12/2020
+/// Date: 4/13/2020
+///
+/// See:
+/// Base::GLObject - 
 class GLTexture : public Base::GLObject
 {
 private:
+  /// Summary:  The type of the texture.
+  GLTextureType mType;
+
+protected:
+  /// Function: GLTexture::GLTexture
+  ///
+  /// Summary:  Default constructor.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/13/2020
+  GLTexture(const GLTextureType& type) noexcept;
+
+  /// Function: GLTexture::~GLTexture
+  ///
+  /// Summary:  Destructor.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/13/2020
+  virtual ~GLTexture() noexcept;
 
 public:
-
+  /// Function: GetType
+  ///
+  /// Summary:  Gets the type.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/13/2020
+  ///
+  /// Returns:  The type.
+  const GLTextureType& GetType() const noexcept;
 };
 }
 

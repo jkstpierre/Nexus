@@ -4,6 +4,8 @@
 
 #include <GLAD\GL.h>
 #include <Nexus\Graphics\GLDevice.hpp>
+#include <Nexus\Exception.hpp>
+#include <Nexus\DebugWriter.hpp>
 
 namespace Nexus::Graphics
 {
@@ -32,31 +34,24 @@ void GLAPIENTRY glMessageCallback(GLenum source, GLenum type, GLuint id, GLenum 
     GLMessage(static_cast<GLMessageSource>(source), static_cast<GLMessageType>(type), static_cast<GLMessageSeverity>(severity), id, message, length));
 }
 
-GLDevice::GLDevice() noexcept : 
-  mClearColor(GLDEVICE_DEFAULT_CLEAR_COLOR), mClearDepth(GLDEVICE_DEFAULT_CLEAR_DEPTH), mClearStencil(GLDEVICE_DEFAULT_CLEAR_STENCIL)
+GLDevice::GLDevice() noexcept
 {
-  // Do nothing for now
-}
-
-GLDevice::~GLDevice() noexcept
-{
-  // Do nothing
-}
-
-void GLDevice::Initialize()
-{
-  // Setup OpenGL here
+  // Setup GLDevice here
 
 #ifdef _DEBUG
   glEnable(GL_DEBUG_OUTPUT);  // Enable debug output
   glDebugMessageCallback(glMessageCallback, this);  // Setup debug message callback
   glDebugMessageInsert(GL_DEBUG_SOURCE_APPLICATION, GL_DEBUG_TYPE_OTHER, 0, GL_DEBUG_SEVERITY_NOTIFICATION, -1, "Debugging enabled");
 #endif
+
+  DebugWriter().Write("GLDevice created.\n");
 }
 
-void GLDevice::Shutdown() noexcept
+GLDevice::~GLDevice() noexcept
 {
   // Free resources here
+
+  DebugWriter().Write("GLDevice destroyed.\n");
 }
 
 GLMessage GLDevice::PopMessage() noexcept
@@ -74,62 +69,47 @@ GLMessage GLDevice::PopMessage() noexcept
   }
 }
 
-void GLDevice::ClearColorBuffer() noexcept
-{
-  glClearColor(mClearColor.GetX(), mClearColor.GetY(), mClearColor.GetZ(), mClearColor.GetW());
-  glClear(GL_COLOR_BUFFER_BIT);
-}
-
-void GLDevice::ClearDepthBuffer() noexcept
-{
-  glClearDepth(mClearDepth);
-  glClear(GL_DEPTH_BUFFER_BIT);
-}
-
-void GLDevice::ClearStencilBuffer() noexcept
-{
-  glClearStencil(mClearStencil);
-  glClear(GL_STENCIL_BUFFER_BIT);
-}
-
 void GLDevice::PushMessage(const GLMessage& message) noexcept
 {
   mMessageQueue.push(message);
 }
 
-void GLDevice::SetClearColor(const Math::Vector4f& clearColor) noexcept
+void GLDevice::Viewport(const int& x, const int& y, const int& w, const int& h) noexcept
 {
-  mClearColor = clearColor;
+  glViewport(x, y, w, h);
 }
 
-void GLDevice::SetClearDepth(const float& clearDepth) noexcept
+void GLDevice::ClearColor(const float& r, const float& g, const float& b, const float& a) noexcept
 {
-  mClearDepth = clearDepth;
+  glClearColor(r, g, b, a);
+  glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void GLDevice::SetClearStencil(const int& clearStencil) noexcept
+void GLDevice::ClearColor() noexcept
 {
-  mClearStencil = clearStencil;
+  return ClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
-void GLDevice::SetViewport(const int& x, const int& y, const int& width, const int& height) noexcept
+void GLDevice::ClearDepth(const float& depth) noexcept
 {
-  glViewport(x, y, width, height);
+  glClearDepthf(depth);
+  glClear(GL_DEPTH_BUFFER_BIT);
 }
 
-const Math::Vector4f& GLDevice::GetClearColor() const noexcept
+void GLDevice::ClearDepth() noexcept
 {
-  return mClearColor;
+  return ClearDepth(1.0f);
 }
 
-const float& GLDevice::GetClearDepth() const noexcept
+void GLDevice::ClearStencil(const int& stencil) noexcept
 {
-  return mClearDepth;
+  glClearStencil(stencil);
+  glClear(GL_STENCIL_BUFFER_BIT);
 }
 
-const int& GLDevice::GetClearStencil() const noexcept
+void GLDevice::ClearStencil() noexcept
 {
-  return mClearStencil;
+  return ClearStencil(0);
 }
 }
 

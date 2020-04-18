@@ -10,16 +10,8 @@
 
 namespace Nexus::Graphics
 {
-/// Summary:  Size of the glvertexarrayattribute default.
-const unsigned int GLVERTEXARRAYATTRIBUTE_DEFAULT_SIZE = 4U;
-/// Summary:  Type of the glvertexarrayattribute default.
-const GLType GLVERTEXARRAYATTRIBUTE_DEFAULT_TYPE = GLType::_FLOAT;
-/// Summary:  True if glvertexarrayattribute default normalized.
-const bool GLVERTEXARRAYATTRIBUTE_DEFAULT_NORMALIZED = false;
-/// Summary:  The glvertexarrayattribute default relative offset.
-const unsigned int GLVERTEXARRAYATTRIBUTE_DEFAULT_RELATIVE_OFFSET = 0U;
-/// Summary:  True to enable, false to disable the glvertexarrayattribute default.
-const bool GLVERTEXARRAYATTRIBUTE_DEFAULT_ENABLED = false;
+/// Summary:  The maximum number of attributes
+const unsigned int GLVERTEXARRAYATTRIBUTE_DEFAULT_ATTRIBUTES = 16U;
 
 /// Function: offset_of< T1, T2>
 ///
@@ -48,21 +40,13 @@ class GLVertexArrayAttribute
 {
 private:
   /// Summary:  The gl vertex array glid.
-  unsigned int mGLVertexArrayGLID;
+  unsigned int mVertexArrayGLID;
   /// Summary:  Zero-based index of the attribute.
   unsigned int mAttributeIndex;
-  /// Summary:  The size.
-  unsigned int mSize;
-  /// Summary:  The type.
-  GLType mType;
-  /// Summary:  The relative offset.
-  unsigned int mRelativeOffset;
-  /// Summary:  True to enable, false to disable.
-  bool mEnabled;
   /// Summary:  The binding point this attribute is reading from.
-  const GLVertexArrayBindingPoint* mBindingPoint;
+  unsigned int mBindingPointIndex;
 
-public:
+protected:
   /// Function: GLVertexArrayAttribute::GLVertexArrayAttribute
   ///
   /// Summary:  Constructor.
@@ -76,6 +60,58 @@ public:
   /// vaoAttributeIndex -   Zero-based index of the vao attribute.
   /// vaoBindingPoint -     The vao binding point.
   GLVertexArrayAttribute(const unsigned int& vaoGLID, const unsigned int& vaoAttributeIndex, const GLVertexArrayBindingPoint& vaoBindingPoint) noexcept;
+
+  /// Function: GLVertexArrayAttribute::~GLVertexArrayAttribute
+  ///
+  /// Summary:  Destructor.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/18/2020
+  virtual ~GLVertexArrayAttribute() noexcept;
+
+public:
+  /// Function: AllocateVertexArrayAttributes
+  ///
+  /// Summary:  Allocate vertex array attributes.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/18/2020
+  ///
+  /// Parameters:
+  /// vaoGLID -           The vao glid.
+  /// vaoBindingPoint -   The vao binding point.
+  /// count -             Number of.
+  ///
+  /// Returns:  Null if it fails, else a std::vector&lt;GLVertexArrayAttribute*&gt;
+  static std::vector<GLVertexArrayAttribute*> AllocateVertexArrayAttributes(
+    const unsigned int& vaoGLID, 
+    const GLVertexArrayBindingPoint& vaoBindingPoint, 
+    const unsigned int& count);
+
+  /// Function: FreeVertexArrayAttributes
+  ///
+  /// Summary:  Free vertex array attributes.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/18/2020
+  ///
+  /// Parameters:
+  /// attributes -  [in,out] [in,out] If non-null, the attributes.
+  static void FreeVertexArrayAttributes(std::vector<GLVertexArrayAttribute*>& attributes) noexcept;
+
+  /// Function: QueryMaxVertexArrayAttributes
+  ///
+  /// Summary:  Queries maximum vertex array attributes.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/18/2020
+  ///
+  /// Returns:  The maximum vertex array attributes.
+  static unsigned int QueryMaxVertexArrayAttributes() noexcept;
 
 public:
   /// Function: Format
@@ -132,7 +168,7 @@ public:
   /// Date: 4/11/2020
   ///
   /// Returns:  The gl vertex array glid.
-  const unsigned int& GetGLVertexArrayGLID() const noexcept;
+  const unsigned int& GetVertexArrayGLID() const noexcept;
 
   /// Function: GetAttributeIndex
   ///
@@ -154,7 +190,7 @@ public:
   /// Date: 4/11/2020
   ///
   /// Returns:  The size.
-  const unsigned int& GetSize() const noexcept;
+  unsigned int GetSize() const noexcept;
 
   /// Function: GetType
   ///
@@ -165,7 +201,7 @@ public:
   /// Date: 4/11/2020
   ///
   /// Returns:  The type.
-  const GLType& GetType() const noexcept;
+  GLType GetType() const noexcept;
 
   /// Function: GetRelativeOffset
   ///
@@ -176,7 +212,33 @@ public:
   /// Date: 4/11/2020
   ///
   /// Returns:  The relative offset.
-  const unsigned int& GetRelativeOffset() const noexcept;
+  unsigned int GetRelativeOffset() const noexcept;
+
+  /// Function: GetStride
+  ///
+  /// Summary:
+  ///   Gets the distance in bytes between successive elements of this attribute. This value is set
+  ///   in the GLVertexArrayBindingPoint this attribute is attached to.
+  ///
+  /// Author: jkstpierre.
+  ///
+  /// Date: 4/18/2020.
+  ///
+  /// Returns:  The stride.
+  unsigned int GetStride() const noexcept;
+
+  /// Function: GetDivisor
+  ///
+  /// Summary:
+  ///   Gets the divisor for this attribute. This value is set in the GLVertexArrayBindingPoint this
+  ///   attribute is attached to.
+  ///
+  /// Author: jkstpierre.
+  ///
+  /// Date: 4/18/2020.
+  ///
+  /// Returns:  The divisor.
+  unsigned int GetDivisor() const noexcept;
 
   /// Function: IsEnabled
   ///
@@ -187,7 +249,7 @@ public:
   /// Date: 4/11/2020
   ///
   /// Returns:  A reference to a const bool.
-  const bool& IsEnabled() const noexcept;
+  bool IsEnabled() const noexcept;
 
   /// Function: GetBindingPoint
   ///
@@ -200,7 +262,7 @@ public:
   /// Date: 4/12/2020.
   ///
   /// Returns:  The binding point.
-  const GLVertexArrayBindingPoint& GetBindingPoint() const noexcept;
+  const unsigned int& GetBindingPointIndex() const noexcept;
 };
 }
 

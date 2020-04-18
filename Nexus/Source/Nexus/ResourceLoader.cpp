@@ -8,26 +8,26 @@
 
 namespace Nexus
 {
-ResourceLoader::ResourceLoader(const int& resourceID) : mResource(NULL), mMemory(NULL), mSize(0), mData(NULL), mResourceID(0)
+ResourceLoader::ResourceLoader(const int& resourceID) : mResource(NULL), mMemory(NULL), mSize(0), mData(NULL), mResourceID(resourceID)
 {
 #ifdef __NEXUS_OS_WINDOWS__
-  if ( mResource = FindResource(NULL, MAKEINTRESOURCE(GetResourceID()), RT_RCDATA); mResource )
+  if ( mResource = FindResource(NULL, MAKEINTRESOURCE(mResourceID), RT_RCDATA); mResource )
   {
     if ( mMemory = LoadResource(NULL, mResource); mMemory )
     {
       mSize = SizeofResource(NULL, mResource);
       mData = LockResource(mMemory);
 
-      DebugWriter().Write("ResourceLoader: Loaded resource %d.\n", GetResourceID());
+      DebugWriter().Write("ResourceLoader: Loaded resource %d.\n", mResourceID);
     }
     else
     {
-      throw Exception("ResourceLoader Error: Failed to load resouce %d.\n", GetResourceID());
+      throw Exception("ResourceLoader Error: Failed to load resouce %d.\n", mResourceID);
     }
   }
   else
   {
-    throw Exception("ResourceLoader Error: Failed to find resource %d.\n", GetResourceID());
+    throw Exception("ResourceLoader Error: Failed to find resource %d.\n", mResourceID);
   }
 #endif
 }
@@ -39,16 +39,10 @@ ResourceLoader::~ResourceLoader() noexcept
   {
     UnlockResource(mMemory);
     FreeResource(mResource);
-
-    mResource = NULL;
-    mMemory = NULL;
-    mSize = 0;
-    mData = NULL;
-    mResourceID = 0;
-
-    DebugWriter().Write("ResourceLoader: Freed resource %d.\n", GetResourceID());
   }
 #endif
+
+  DebugWriter().Write("ResourceLoader: Freed resource %d.\n", mResourceID);
 }
 
 const size_t& ResourceLoader::GetSize() const noexcept

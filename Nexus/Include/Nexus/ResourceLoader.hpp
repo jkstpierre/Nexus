@@ -6,6 +6,7 @@
 #define __NEXUS_RESOURCELOADER_HPP__
 
 #include <Nexus\Macros.hpp>
+#include <Nexus\Resources.hpp>
 #ifdef __NEXUS_OS_WINDOWS__
 #include <Windows.h>
 #endif

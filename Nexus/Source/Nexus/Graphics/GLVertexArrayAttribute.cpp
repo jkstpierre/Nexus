@@ -4,18 +4,72 @@
 
 #include <GLAD\GL.h>
 #include <Nexus\Graphics\GLVertexArrayAttribute.hpp>
+#include <Nexus\DebugWriter.hpp>
+#include <Nexus\Exception.hpp>
 
 namespace Nexus::Graphics
 {
 GLVertexArrayAttribute::GLVertexArrayAttribute(const unsigned int& vaoGLID, const unsigned int& vaoAttributeIndex, const GLVertexArrayBindingPoint& vaoBindingPoint) noexcept :
-  mGLVertexArrayGLID(vaoGLID), mAttributeIndex(vaoAttributeIndex), 
-  mSize(GLVERTEXARRAYATTRIBUTE_DEFAULT_SIZE), 
-  mType(GLVERTEXARRAYATTRIBUTE_DEFAULT_TYPE),
-  mRelativeOffset(GLVERTEXARRAYATTRIBUTE_DEFAULT_RELATIVE_OFFSET),
-  mEnabled(GLVERTEXARRAYATTRIBUTE_DEFAULT_ENABLED),
-  mBindingPoint(&vaoBindingPoint)
+  mVertexArrayGLID(vaoGLID),
+  mAttributeIndex(vaoAttributeIndex), 
+  mBindingPointIndex(vaoBindingPoint.GetBindingPointIndex())
 {
   SetBindingPoint(vaoBindingPoint); // Set the initial binding point for the attribute
+
+  DebugWriter().Write("GLVertexArrayAttribute %u created for GLVertexArray %u.\n",
+                      mAttributeIndex, mVertexArrayGLID);
+}
+
+GLVertexArrayAttribute::~GLVertexArrayAttribute() noexcept
+{
+  DebugWriter().Write("GLVertexArrayAttribute %u destroyed for GLVertexArray %u.\n",
+                      mAttributeIndex, mVertexArrayGLID);
+}
+
+std::vector<GLVertexArrayAttribute*> GLVertexArrayAttribute::AllocateVertexArrayAttributes(
+  const unsigned int& vaoGLID,
+  const GLVertexArrayBindingPoint& vaoBindingPoint,
+  const unsigned int& count)
+{
+  /// Summary:  Get the maximum number of attributes that can be generated
+  unsigned int maxAttributes = QueryMaxVertexArrayAttributes();
+  
+  // Create the attributes
+  if ( count <= maxAttributes )
+  {
+    std::vector<GLVertexArrayAttribute*> attributes;
+
+    for ( unsigned int i = 0; i < count; i++ )
+    {
+      attributes.push_back(new GLVertexArrayAttribute(vaoGLID, i, vaoBindingPoint));
+    }
+
+    return attributes;
+  }
+  else
+  {
+    throw Exception("GLVertexArrayAttribute Error: Cannot allocate %u attributes. Maximum is %u.\n",
+                    count, maxAttributes);
+  }
+}
+
+void GLVertexArrayAttribute::FreeVertexArrayAttributes(std::vector<GLVertexArrayAttribute*>& attributes) noexcept
+{
+  for ( auto& attribute : attributes )
+  {
+    delete attribute;
+  }
+
+  attributes.clear();
+}
+
+unsigned int GLVertexArrayAttribute::QueryMaxVertexArrayAttributes() noexcept
+{
+  int maxAttributes;
+
+  glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &maxAttributes);
+
+  return maxAttributes;
 }
 
 void GLVertexArrayAttribute::Format(const unsigned int& size, const GLType& type, const unsigned int& relativeOffset) noexcept
@@ -23,45 +77,39 @@ void GLVertexArrayAttribute::Format(const unsigned int& size, const GLType& type
   if ( type == GLType::_FLOAT )
   {
     // Format regular floating point attributes
-    glVertexArrayAttribFormat(mGLVertexArrayGLID, mAttributeIndex, size, static_cast<GLenum>(type), GL_FALSE, relativeOffset);
+    glVertexArrayAttribFormat(mVertexArrayGLID, mAttributeIndex, size, static_cast<GLenum>(type), GL_FALSE, relativeOffset);
   }
   else if ( type == GLType::_DOUBLE )
   {
     // Format double precision floating point attributes
-    glVertexArrayAttribLFormat(mGLVertexArrayGLID, mAttributeIndex, size, static_cast<GLenum>(type), relativeOffset);
+    glVertexArrayAttribLFormat(mVertexArrayGLID, mAttributeIndex, size, static_cast<GLenum>(type), relativeOffset);
   }
   else
   {
     // Format integer attributes
-    glVertexArrayAttribIFormat(mGLVertexArrayGLID, mAttributeIndex, size, static_cast<GLenum>(type), relativeOffset);
+    glVertexArrayAttribIFormat(mVertexArrayGLID, mAttributeIndex, size, static_cast<GLenum>(type), relativeOffset);
   }
-  
-  mSize = size;
-  mType = type;
-  mRelativeOffset = relativeOffset;
 }
 
 void GLVertexArrayAttribute::Enable() noexcept
 {
-  glEnableVertexArrayAttrib(mGLVertexArrayGLID, mAttributeIndex);
-  mEnabled = true;
+  glEnableVertexArrayAttrib(mVertexArrayGLID, mAttributeIndex);
 }
 
 void GLVertexArrayAttribute::Disable() noexcept
 {
-  glDisableVertexArrayAttrib(mGLVertexArrayGLID, mAttributeIndex);
-  mEnabled = false;
+  glDisableVertexArrayAttrib(mVertexArrayGLID, mAttributeIndex);
 }
 
 void GLVertexArrayAttribute::SetBindingPoint(const GLVertexArrayBindingPoint& vaoBindingPoint) noexcept
 {
-  glVertexArrayAttribBinding(mGLVertexArrayGLID, mAttributeIndex, vaoBindingPoint.GetBindingIndex());
-  mBindingPoint = &vaoBindingPoint; // Set the binding point for the attribute
+  glVertexArrayAttribBinding(mVertexArrayGLID, mAttributeIndex, vaoBindingPoint.GetBindingPointIndex());
+  mBindingPointIndex = vaoBindingPoint.GetBindingPointIndex(); // Set the binding point for the attribute
 }
 
-const unsigned int& GLVertexArrayAttribute::GetGLVertexArrayGLID() const noexcept
+const unsigned int& GLVertexArrayAttribute::GetVertexArrayGLID() const noexcept
 {
-  return mGLVertexArrayGLID;
+  return mVertexArrayGLID;
 }
 
 const unsigned int& GLVertexArrayAttribute::GetAttributeIndex() const noexcept
@@ -69,29 +117,63 @@ const unsigned int& GLVertexArrayAttribute::GetAttributeIndex() const noexcept
   return mAttributeIndex;
 }
 
-const unsigned int& GLVertexArrayAttribute::GetSize() const noexcept
+unsigned int GLVertexArrayAttribute::GetSize() const noexcept
 {
-  return mSize;
+  int size;
+
+  glGetVertexArrayIndexediv(mVertexArrayGLID, mAttributeIndex, GL_VERTEX_ATTRIB_ARRAY_SIZE, &size);
+
+  return static_cast<unsigned int>(size);
 }
 
-const GLType& GLVertexArrayAttribute::GetType() const noexcept
+GLType GLVertexArrayAttribute::GetType() const noexcept
 {
-  return mType;
+  int type;
+
+  glGetVertexArrayIndexediv(mVertexArrayGLID, mAttributeIndex, GL_VERTEX_ATTRIB_ARRAY_TYPE, &type);
+
+  return static_cast<GLType>(type);
 }
 
-const unsigned int& GLVertexArrayAttribute::GetRelativeOffset() const noexcept
+unsigned int GLVertexArrayAttribute::GetRelativeOffset() const noexcept
 {
-  return mRelativeOffset;
+  int relativeOffset;
+
+  glGetVertexArrayIndexediv(mVertexArrayGLID, mAttributeIndex, GL_VERTEX_ATTRIB_RELATIVE_OFFSET, &relativeOffset);
+
+  return static_cast<unsigned int>(relativeOffset);
 }
 
-const bool& GLVertexArrayAttribute::IsEnabled() const noexcept
+unsigned int GLVertexArrayAttribute::GetStride() const noexcept
 {
-  return mEnabled;
+  int stride;
+
+  glGetVertexArrayIndexediv(mVertexArrayGLID, mAttributeIndex, GL_VERTEX_ATTRIB_ARRAY_STRIDE, &stride);
+
+  return static_cast<unsigned int>(stride);
 }
 
-const GLVertexArrayBindingPoint& GLVertexArrayAttribute::GetBindingPoint() const noexcept
+unsigned int GLVertexArrayAttribute::GetDivisor() const noexcept
 {
-  return *mBindingPoint;
+  int divisor;
+
+  glGetVertexArrayIndexediv(mVertexArrayGLID, mAttributeIndex, GL_VERTEX_ATTRIB_ARRAY_DIVISOR, &divisor);
+
+  return static_cast<unsigned int>(divisor);
+}
+
+bool GLVertexArrayAttribute::IsEnabled() const noexcept
+{
+  int enabled;
+
+  glGetVertexArrayIndexediv(mVertexArrayGLID, mAttributeIndex, GL_VERTEX_ATTRIB_ARRAY_ENABLED, &enabled);
+
+  return enabled;
+}
+
+const unsigned int& GLVertexArrayAttribute::GetBindingPointIndex() const noexcept
+{
+  return mBindingPointIndex;
 }
 }
 

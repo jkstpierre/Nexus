@@ -6,18 +6,10 @@
 #define __NEXUS_GRAPHICS_GLDEVICE_HPP__
 
 #include <queue>
-#include <Nexus\Math\Vector4.hpp>
 #include <Nexus\Graphics\GLMessage.hpp>
 
 namespace Nexus::Graphics
 {
-/// Summary:  The gldevice default framebuffer clear color.
-const Math::Vector4f GLDEVICE_DEFAULT_CLEAR_COLOR = { 0.0f, 0.0f, 0.0f, 1.0f };
-/// Summary:  Depth of the gldevice default clear.
-const float GLDEVICE_DEFAULT_CLEAR_DEPTH = 1.0f;
-/// Summary:  The gldevice default clear stencil.
-const int GLDEVICE_DEFAULT_CLEAR_STENCIL = 0;
-
 /// Class:  GLDevice
 ///
 /// Summary:
@@ -30,15 +22,6 @@ const int GLDEVICE_DEFAULT_CLEAR_STENCIL = 0;
 class GLDevice
 {
 private:
-  /// Summary:  The color to clear the color buffer.
-  Math::Vector4f mClearColor;
-
-  /// Summary:  The value for clearing the depth buffer.
-  float mClearDepth;
-
-  /// Summary:  The value to clear the stencil buffer with.
-  int mClearStencil;
-
   /// Summary:  Queue of messages.
   std::queue<GLMessage> mMessageQueue;
 
@@ -61,24 +44,6 @@ public:
   /// Date: 4/6/2020
   virtual ~GLDevice() noexcept;
 
-  /// Function: Initialize
-  ///
-  /// Summary:  Initializes the GLDevice. 
-  ///
-  /// Author: jkstpierre
-  ///
-  /// Date: 4/6/2020
-  void Initialize();
-
-  /// Function: Shutdown
-  ///
-  /// Summary:  Shuts down this  and frees any resources it is using.
-  ///
-  /// Author: jkstpierre
-  ///
-  /// Date: 4/6/2020
-  void Shutdown() noexcept;
-
 public:
   /// Function: PopMessage
   ///
@@ -91,34 +56,6 @@ public:
   /// Returns:  A GLMessage.
   GLMessage PopMessage() noexcept;
 
-  /// Function: ClearColorBuffer
-  ///
-  /// Summary:  Clears the color buffer.
-  ///
-  /// Author: jkstpierre
-  ///
-  /// Date: 4/6/2020
-  void ClearColorBuffer() noexcept;
-
-  /// Function: ClearDepthBuffer
-  ///
-  /// Summary:  Clears the depth buffer.
-  ///
-  /// Author: jkstpierre
-  ///
-  /// Date: 4/6/2020
-  void ClearDepthBuffer() noexcept;
-
-  /// Function: ClearStencilBuffer
-  ///
-  /// Summary:  Clears the stencil buffer.
-  ///
-  /// Author: jkstpierre
-  ///
-  /// Date: 4/6/2020
-  void ClearStencilBuffer() noexcept;
-
-public:
   /// Function: PushMessage
   ///
   /// Summary:  Pushes a message onto the queue.
@@ -131,90 +68,86 @@ public:
   /// message -   The message.
   void PushMessage(const GLMessage& message) noexcept;
 
-  /// Function: SetClearColor
+  /// Function: Viewport
   ///
-  /// Summary:  Sets clear color for ClearColorBuffer calls.
-  ///
-  /// Author: jkstpierre
-  ///
-  /// Date: 4/6/2020
-  ///
-  /// Parameters:
-  /// clearColor -  The clear color.
-  void SetClearColor(const Math::Vector4f& clearColor) noexcept;
-
-  /// Function: SetClearDepth
-  ///
-  /// Summary:  Sets clear depth for ClearDepthBuffer calls.
+  /// Summary:  Viewports.
   ///
   /// Author: jkstpierre
   ///
-  /// Date: 4/7/2020
-  ///
-  /// Parameters:
-  /// clearDepth -  Depth of the clear.
-  void SetClearDepth(const float& clearDepth) noexcept;
-
-  /// Function: SetClearStencil
-  ///
-  /// Summary:  Sets clear stencil for ClearStencilBuffer calls.
-  ///
-  /// Author: jkstpierre
-  ///
-  /// Date: 4/7/2020
-  ///
-  /// Parameters:
-  /// clearStencil -  The clear stencil.
-  void SetClearStencil(const int& clearStencil) noexcept;
-
-  /// Function: SetViewport
-  ///
-  /// Summary:  Sets the viewport for subsequent drawcalls.
-  ///
-  /// Author: jkstpierre
-  ///
-  /// Date: 4/9/2020
+  /// Date: 4/17/2020
   ///
   /// Parameters:
   /// x -         An int to process.
   /// y -         An int to process.
-  /// width -     The width.
-  /// height -    The height.
-  void SetViewport(const int& x, const int& y, const int& width, const int& height) noexcept;
+  /// w -         An int to process.
+  /// h -         An int to process.
+  void Viewport(const int& x, const int& y, const int& w, const int& h) noexcept;
 
-public:
-  /// Function: GetClearColor
+  /// Function: ClearColor
   ///
-  /// Summary:  Gets clear color.
+  /// Summary:  Clears the color.
   ///
   /// Author: jkstpierre
   ///
-  /// Date: 4/6/2020
+  /// Date: 4/17/2020
   ///
-  /// Returns:  The clear color.
-  const Math::Vector4f& GetClearColor() const noexcept;
+  /// Parameters:
+  /// r -         A float to process.
+  /// g -         A float to process.
+  /// b -         A float to process.
+  /// a -         A float to process.
+  void ClearColor(const float& r, const float& g, const float& b, const float& a) noexcept;
 
-  /// Function: GetClearDepth
+  /// Function: ClearColor
   ///
-  /// Summary:  Gets clear depth.
+  /// Summary:  Clears the color using default values.
   ///
   /// Author: jkstpierre
   ///
-  /// Date: 4/7/2020
-  ///
-  /// Returns:  The clear depth.
-  const float& GetClearDepth() const noexcept;
+  /// Date: 4/17/2020
+  void ClearColor() noexcept;
 
-  /// Function: GetClearStencil
+  /// Function: ClearDepth
   ///
-  /// Summary:  Gets clear stencil.
+  /// Summary:  Clears the depth described by depth.
   ///
   /// Author: jkstpierre
   ///
-  /// Date: 4/7/2020
+  /// Date: 4/17/2020
   ///
-  /// Returns:  The clear stencil.
-  const int& GetClearStencil() const noexcept;
+  /// Parameters:
+  /// depth -   The depth.
+  void ClearDepth(const float& depth) noexcept;
+
+  /// Function: ClearDepth
+  ///
+  /// Summary:  Clears the depth using default value.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/17/2020
+  void ClearDepth() noexcept;
+
+  /// Function: ClearStencil
+  ///
+  /// Summary:  Clears the stencil described by stencil.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/17/2020
+  ///
+  /// Parameters:
+  /// stencil -   The stencil.
+  void ClearStencil(const int& stencil) noexcept;
+
+  /// Function: ClearStencil
+  ///
+  /// Summary:  Clears the stencil buffer using default value.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/17/2020
+  void ClearStencil() noexcept;
 };
 }
 

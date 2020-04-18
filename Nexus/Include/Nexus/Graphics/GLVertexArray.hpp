@@ -12,13 +12,6 @@
 
 namespace Nexus::Graphics
 {
-/// Summary:  The glvertexarray maximum attributes.
-const unsigned int GLVERTEXARRAY_MAX_ATTRIBUTES = 16U;
-/// Summary:  The glvertexarray maximum binding points.
-const unsigned int GLVERTEXARRAY_MAX_BINDING_POINTS = 16U;
-/// Summary:  The glvertexarray default binding point.
-const unsigned int GLVERTEXARRAY_DEFAULT_BINDING_POINT = 0U;
-
 /// Class:  GLVertexArray
 ///
 /// Summary:  Frontend wrapper of the GLVertexArray object for use by the end user.
@@ -30,9 +23,9 @@ class GLVertexArray : public Base::GLObject
 {
 private:
   /// Summary:  The attributes.
-  std::array<GLVertexArrayAttribute*, GLVERTEXARRAY_MAX_ATTRIBUTES> mAttributes;
-  /// Summary:  The binding points.
-  std::array<GLVertexArrayBindingPoint*, GLVERTEXARRAY_MAX_BINDING_POINTS> mBindingPoints;
+  std::vector<GLVertexArrayAttribute*> mAttributes;
+  /// Summary:  The binding points for the VAO.
+  std::vector<GLVertexArrayBindingPoint*> mBindingPoints;
 
 public:
   /// Function: GLVertexArray::GLVertexArray
@@ -76,33 +69,27 @@ public:
   void SetElementBuffer(const GLBuffer<unsigned int>* ebo) noexcept;
 
 public:
-  /// Function: GetAttribute
+  /// Function: GetAttributes
   ///
-  /// Summary:  Gets an attribute.
+  /// Summary:  Gets the attributes.
   ///
   /// Author: jkstpierre
   ///
-  /// Date: 4/11/2020
+  /// Date: 4/18/2020
   ///
-  /// Parameters:
-  /// attributeIndex -  Zero-based index of the attribute.
-  ///
-  /// Returns:  The attribute.
-  GLVertexArrayAttribute& GetAttribute(const unsigned int& attributeIndex);
+  /// Returns:  Null if it fails, else the attributes.
+  std::vector<GLVertexArrayAttribute*>& GetAttributes() noexcept;
 
-  /// Function: GetBindingPoint
+  /// Function: GetBindingPoints
   ///
-  /// Summary:  Gets binding point.
+  /// Summary:  Gets binding points.
   ///
   /// Author: jkstpierre
   ///
-  /// Date: 4/11/2020
+  /// Date: 4/18/2020
   ///
-  /// Parameters:
-  /// bindingIndex -  Zero-based index of the binding.
-  ///
-  /// Returns:  The binding point.
-  GLVertexArrayBindingPoint& GetBindingPoint(const unsigned int& bindingIndex);
+  /// Returns:  Null if it fails, else the binding points.
+  std::vector<GLVertexArrayBindingPoint*>& GetBindingPoints() noexcept;
 };
 }
 

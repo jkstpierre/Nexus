@@ -8,6 +8,16 @@
 
 namespace Nexus::Graphics
 {
+GLPipelineStage operator|(const GLPipelineStage& lhs, const GLPipelineStage& rhs) noexcept
+{
+  return static_cast<GLPipelineStage>(static_cast<unsigned int>(lhs) | static_cast<unsigned int>(rhs));
+}
+
+GLPipelineStage operator&(const GLPipelineStage& lhs, const GLPipelineStage& rhs) noexcept
+{
+  return static_cast<GLPipelineStage>(static_cast<unsigned int>(lhs) & static_cast<unsigned int>(rhs));
+}
+
 GLPipeline::GLPipeline() noexcept
 {
   glCreateProgramPipelines(1, &mGLID);

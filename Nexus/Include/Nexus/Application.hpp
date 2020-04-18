@@ -48,7 +48,7 @@ private:
   Mouse mMouse;
 
   /// Summary:  The gl device.
-  Graphics::GLDevice mGLDevice;
+  Graphics::GLDevice* mGLDevice;
 
 public:
   /// Function: Application::Application
@@ -116,16 +116,17 @@ public:
   /// Function: OnRender
   ///
   /// Summary:
-  ///   Called upon every frame for the Application. All rendering logic should
-  ///   exist inside this method.
+  ///   Called upon every frame for the Application. All rendering logic should exist inside this
+  ///   method.
   ///
   /// Author: jkstpierre.
   ///
   /// Date: 3/29/2020.
   ///
   /// Parameters:
-  /// alpha -   The alpha value used for interpolation.
-  virtual void OnRender(const double& alpha) = 0;
+  /// glDevice -  [in,out] The gl device.
+  /// alpha -     The alpha value used for interpolation.
+  virtual void OnRender(Graphics::GLDevice& glDevice, const double& alpha) = 0;
 
 public:
   /// Function: SetTicksPerSecond
@@ -184,7 +185,7 @@ public:
   /// Date: 4/9/2020
   ///
   /// Returns:  The window dimensions.
-  Math::Vector2i GetWindowDimensions() const noexcept;
+  glm::u32vec2 GetWindowDimensions() const noexcept;
 
   /// Function: GetKeyboard
   ///
@@ -207,17 +208,6 @@ public:
   ///
   /// Returns:  The mouse.
   const Mouse& GetMouse() const noexcept;
-
-  /// Function: GetGLDevice
-  ///
-  /// Summary:  Gets gl device.
-  ///
-  /// Author: jkstpierre
-  ///
-  /// Date: 4/6/2020
-  ///
-  /// Returns:  The gl device.
-  Graphics::GLDevice& GetGLDevice() noexcept;
 };
 }
 

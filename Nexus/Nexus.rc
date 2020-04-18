@@ -58,6 +58,6 @@ END
 /////////////////////////////////////////////////////////////////////////////
 #endif    // not APSTUDIO_INVOKED
 
-NEXUS_GLRENDERER2D_DEFAULT_VERTEX_SHADER_RID    RCDATA    "Resource/Nexus/Shaders/Vertex/GLRenderer2D.vs"
-NEXUS_GLRENDERER3D_DEFAULT_VERTEX_SHADER_RID    RCDATA    "Resource/Nexus/Shaders/Vertex/GLRenderer3D.vs"
-NEXUS_GLRENDERER_DEFAULT_FRAGMENT_SHADER_RID    RCDATA    "Resource/Nexus/Shaders/Fragment/GLRenderer.fs"
+RESOURCELOADER_GLRENDERER2D_DEFAULT_VERTEX_SHADER_RID    RCDATA    "Resource/Nexus/Shaders/Vertex/GLRenderer2D.vs"
+RESOURCELOADER_GLRENDERER3D_DEFAULT_VERTEX_SHADER_RID    RCDATA    "Resource/Nexus/Shaders/Vertex/GLRenderer3D.vs"
+RESOURCELOADER_GLRENDERER2D_DEFAULT_FRAGMENT_SHADER_RID    RCDATA    "Resource/Nexus/Shaders/Fragment/GLRenderer2D.fs"

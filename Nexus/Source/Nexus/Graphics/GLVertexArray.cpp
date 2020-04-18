@@ -5,49 +5,39 @@
 #include <GLAD\GL.h>
 #include <Nexus\Graphics\GLVertexArray.hpp>
 #include <Nexus\DebugWriter.hpp>
-#include <Nexus\Exception.hpp>
 
 namespace Nexus::Graphics
 {
-GLVertexArray::GLVertexArray() noexcept : mAttributes{ NULL }, mBindingPoints{ NULL }
+GLVertexArray::GLVertexArray() noexcept : mAttributes{ NULL }
 {
   // Create vao
   glCreateVertexArrays(1, &mGLID);
 
   // Create starting binding points
-  for ( unsigned int i = 0; i < GLVERTEXARRAY_MAX_BINDING_POINTS; i++ )
-  {
-    mBindingPoints[i] = new GLVertexArrayBindingPoint(mGLID, i);
-  }
+  mBindingPoints = GLVertexArrayBindingPoint::AllocateVertexArrayBindingPoints(
+    mGLID, GLVERTEXARRAYBINDINGPOINT_DEFAULT_BINDING_POINTS);
 
-  // Get reference to the default binding point
-  const GLVertexArrayBindingPoint& defaultBindingPoint = *mBindingPoints.at(GLVERTEXARRAY_DEFAULT_BINDING_POINT);
+  // Get reference to the default binding point for all attributes
+  const GLVertexArrayBindingPoint& defaultBindingPoint = 
+    *mBindingPoints.at(GLVERTEXARRAYBINDINGPOINT_DEFAULT_BINDING_POINT_INDEX);
 
   // Create starting attributes
-  for ( unsigned int i = 0; i < GLVERTEXARRAY_MAX_ATTRIBUTES; i++ )
-  {
-    mAttributes[i] = new GLVertexArrayAttribute(mGLID, i, defaultBindingPoint);
-  }
+  mAttributes = GLVertexArrayAttribute::AllocateVertexArrayAttributes(
+    mGLID, defaultBindingPoint, GLVERTEXARRAYATTRIBUTE_DEFAULT_ATTRIBUTES);
 
   DebugWriter().Write("GLVertexArray %u created.\n", mGLID);
 }
 
 GLVertexArray::~GLVertexArray() noexcept
 {
-  // Delete vao
-  glDeleteVertexArrays(1, &mGLID);
-
   // Delete all attributes
-  for ( auto& attribute : mAttributes )
-  {
-    delete attribute;
-  }
+  GLVertexArrayAttribute::FreeVertexArrayAttributes(mAttributes);
 
   // Delete all binding points
-  for ( auto& bindingPoint : mBindingPoints )
-  {
-    delete bindingPoint;
-  }
+  GLVertexArrayBindingPoint::FreeVertexArrayBindingPoints(mBindingPoints);
+
+  // Delete vao
+  glDeleteVertexArrays(1, &mGLID);
 
   DebugWriter().Write("GLVertexArray %u destroyed.\n", mGLID);
 }
@@ -62,30 +52,14 @@ void GLVertexArray::SetElementBuffer(const GLBuffer<unsigned int>* ebo) noexcept
   glVertexArrayElementBuffer(mGLID, ebo ? ebo->GetGLID() : GL_NONE);
 }
 
-GLVertexArrayAttribute& GLVertexArray::GetAttribute(const unsigned int& attributeIndex)
+std::vector<GLVertexArrayAttribute*>& GLVertexArray::GetAttributes() noexcept
 {
-  if ( attributeIndex < GLVERTEXARRAY_MAX_ATTRIBUTES )
-  {
-    return *mAttributes.at(attributeIndex);
-  }
-  else
-  {
-    throw Exception("GLVertexArray Error: Cannot reference attribute %u. Maximum valid index is %u.\n", 
-                    attributeIndex, GLVERTEXARRAY_MAX_ATTRIBUTES - 1);
-  }
+  return mAttributes;
 }
 
-GLVertexArrayBindingPoint& GLVertexArray::GetBindingPoint(const unsigned int& bindingIndex)
+std::vector<GLVertexArrayBindingPoint*>& GLVertexArray::GetBindingPoints() noexcept
 {
-  if ( bindingIndex < GLVERTEXARRAY_MAX_BINDING_POINTS )
-  {
-    return *mBindingPoints.at(bindingIndex);
-  }
-  else
-  {
-    throw Exception("GLVertexArray Error: Cannot reference binding point %u. Maximum valid index is %u.\n", 
-                    bindingIndex, GLVERTEXARRAY_MAX_BINDING_POINTS - 1);
-  }
+  return mBindingPoints;
 }
 }
 

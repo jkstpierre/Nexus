@@ -8,12 +8,7 @@
 #include <initializer_list>
 #include <functional>
 #include <Nexus\Graphics\GLShader.hpp>
-#include <Nexus\Math\Vector2.hpp>
-#include <Nexus\Math\Vector3.hpp>
-#include <Nexus\Math\Vector4.hpp>
-#include <Nexus\Math\Matrix2.hpp>
-#include <Nexus\Math\Matrix3.hpp>
-#include <Nexus\Math\Matrix4.hpp>
+#include <glm\glm.hpp>
 
 namespace Nexus::Graphics
 {
@@ -93,6 +88,16 @@ private:
   void LinkShader(const GLShader& shader);
 
 public:
+  /// Function: Use
+  ///
+  /// Summary: Uses this program for the next draw call.
+  /// 
+  /// Author: jkstpierre.
+  ///
+  /// Date: 4/17/2020.
+  void Use() noexcept;
+
+public:
   /// Function: SetUniformBool
   ///
   /// Summary:  Sets uniform bool.
@@ -160,83 +165,83 @@ public:
   /// fArray -    The array.
   void SetUniformFloatArray(const char* name, const size_t& count, const float* fArray) noexcept;
 
-  /// Function: SetUniformVector2f
+  /// Function: SetUniformVec2
   ///
-  /// Summary:  Sets uniform vector 2f.
+  /// Summary:  Sets uniform vector 2.
   ///
   /// Author: jkstpierre
   ///
-  /// Date: 4/8/2020
+  /// Date: 4/17/2020
   ///
   /// Parameters:
   /// name -      The name.
   /// vector -    The vector.
-  void SetUniformVector2f(const char* name, const Math::Vector2f& vector) noexcept;
+  void SetUniformVec2(const char* name, const glm::vec2& vector) noexcept;
 
-  /// Function: SetUniformVector3f
+  /// Function: SetUniformVec3
   ///
-  /// Summary:  Sets uniform vector 3f.
+  /// Summary:  Sets uniform vector 3.
   ///
   /// Author: jkstpierre
   ///
-  /// Date: 4/8/2020
+  /// Date: 4/17/2020
   ///
   /// Parameters:
   /// name -      The name.
   /// vector -    The vector.
-  void SetUniformVector3f(const char* name, const Math::Vector3f& vector) noexcept;
+  void SetUniformVec3(const char* name, const glm::vec3& vector) noexcept;
 
-  /// Function: SetUniformVector4f
+  /// Function: SetUniformVec4
   ///
-  /// Summary:  Sets uniform vector 4f.
+  /// Summary:  Sets uniform vector 4.
   ///
   /// Author: jkstpierre
   ///
-  /// Date: 4/8/2020
+  /// Date: 4/17/2020
   ///
   /// Parameters:
   /// name -      The name.
   /// vector -    The vector.
-  void SetUniformVector4f(const char* name, const Math::Vector4f& vector) noexcept;
+  void SetUniformVec4(const char* name, const glm::vec4& vector) noexcept;
 
-  /// Function: SetUniformMatrix2f
+  /// Function: SetUniformMat2
   ///
-  /// Summary:  Sets uniform matrix 2f.
+  /// Summary:  Sets uniform matrix 2.
   ///
   /// Author: jkstpierre
   ///
-  /// Date: 4/8/2020
+  /// Date: 4/17/2020
   ///
   /// Parameters:
   /// name -      The name.
   /// matrix -    The matrix.
-  void SetUniformMatrix2f(const char* name, const Math::Matrix2f& matrix) noexcept;
+  void SetUniformMat2(const char* name, const glm::mat2& matrix) noexcept;
 
-  /// Function: SetUniformMatrix3f
+  /// Function: SetUniformMat3
   ///
-  /// Summary:  Sets uniform matrix 3f.
+  /// Summary:  Sets uniform matrix 3.
   ///
   /// Author: jkstpierre
   ///
-  /// Date: 4/8/2020
+  /// Date: 4/17/2020
   ///
   /// Parameters:
   /// name -      The name.
   /// matrix -    The matrix.
-  void SetUniformMatrix3f(const char* name, const Math::Matrix3f& matrix) noexcept;
+  void SetUniformMat3(const char* name, const glm::mat3& matrix) noexcept;
 
-  /// Function: SetUniformMatrix4f
+  /// Function: SetUniformMat4
   ///
-  /// Summary:  Sets uniform matrix 4f.
+  /// Summary:  Sets uniform matrix 4.
   ///
   /// Author: jkstpierre
   ///
-  /// Date: 4/8/2020
+  /// Date: 4/17/2020
   ///
   /// Parameters:
   /// name -      The name.
   /// matrix -    The matrix.
-  void SetUniformMatrix4f(const char* name, const Math::Matrix4f& matrix) noexcept;
+  void SetUniformMat4(const char* name, const glm::mat4& matrix) noexcept;
 
 public:
   /// Function: IsSeparable

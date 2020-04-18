@@ -14,8 +14,8 @@ namespace Nexus
 Application::Application(const char* windowName, const unsigned int& windowWidth,
                          const unsigned int& windowHeight, const bool& windowFullscreen,
                          const bool& windowUseVSync)
-  : mWindow(NULL), mContext(NULL), mRunning(false), mTicksPerSecond(APPLICATION_DEFAULT_TICKS_PER_SECOND), 
-  mKeyboard(), mMouse(), mGLDevice()
+  : mWindow(nullptr), mContext(nullptr), mRunning(false), mTicksPerSecond(APPLICATION_DEFAULT_TICKS_PER_SECOND), 
+  mKeyboard(), mMouse(), mGLDevice(nullptr)
 {
   // Initialize required SDL subsystems
   if ( SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_TIMER) < 0 )
@@ -90,7 +90,7 @@ Application::Application(const char* windowName, const unsigned int& windowWidth
   }
 
   // Initialize the Graphics pipeline
-  GetGLDevice().Initialize();
+  mGLDevice = new Graphics::GLDevice();
 
   DebugWriter().Write("Nexus online...\n");
 }
@@ -98,7 +98,7 @@ Application::Application(const char* windowName, const unsigned int& windowWidth
 Application::~Application()
 {
   // Shutdown Graphics pipeline
-  GetGLDevice().Shutdown();
+  delete mGLDevice;
 
   // Free the context and window
   SDL_GL_DeleteContext(mContext);
@@ -157,7 +157,7 @@ int Application::Run()
         // Check if user has moved the mouse
         else if ( e.type == SDL_MOUSEMOTION )
         {
-          mMouse.SetPosition(Math::Vector2i(e.motion.x, e.motion.y));
+          mMouse.SetPosition(glm::u32vec2(e.motion.x, e.motion.y));
         }
       }
 
@@ -178,23 +178,23 @@ int Application::Run()
       #ifdef _DEBUG
         // Check for debug messages in debug mode and print them to the debug console
         Graphics::GLMessage message = Graphics::GLMESSAGE_NONE;
-        while ( (message = GetGLDevice().PopMessage()) != Graphics::GLMESSAGE_NONE )
+        while ( (message = mGLDevice->PopMessage()) != Graphics::GLMESSAGE_NONE )
         {
           DebugWriter().Write("GLMessage (id = %u): %s\n", message.GetGLID(), message.ReadMessage());
         }
       #endif
 
-        // Clear all the buffers for the frame
-        GetGLDevice().ClearColorBuffer();
-        GetGLDevice().ClearDepthBuffer();
-        GetGLDevice().ClearStencilBuffer();
+        // Clear all the buffers for the frame using default values
+        mGLDevice->ClearColor();
+        mGLDevice->ClearDepth();
+        mGLDevice->ClearStencil();
 
         // Set default viewport
-        Math::Vector2i windowSize = GetWindowDimensions();
-        GetGLDevice().SetViewport(0, 0, windowSize.GetX(), windowSize.GetY());
+        glm::u32vec2 windowSize = GetWindowDimensions();
+        mGLDevice->Viewport(0, 0, windowSize.x, windowSize.y);
 
         // Render a frame using interpolation
-        OnRender(static_cast<double>(accumulator) / ticksPerUpdate);
+        OnRender(*mGLDevice, static_cast<double>(accumulator) / ticksPerUpdate);
 
         /// Summary:  Swap window buffers.
         SDL_GL_SwapWindow((SDL_Window*)mWindow);
@@ -237,11 +237,11 @@ const unsigned int& Application::GetTicksPerSecond() const noexcept
   return mTicksPerSecond;
 }
 
-Math::Vector2i Application::GetWindowDimensions() const noexcept
+glm::u32vec2 Application::GetWindowDimensions() const noexcept
 {
   int w, h;
   SDL_GetWindowSize((SDL_Window*)mWindow, &w, &h);
-  return Math::Vector2i(w, h);
+  return glm::u32vec2(w, h);
 }
 
 const Keyboard& Application::GetKeyboard() const noexcept
@@ -252,11 +252,6 @@ const Keyboard& Application::GetKeyboard() const noexcept
 const Mouse& Application::GetMouse() const noexcept
 {
   return mMouse;
-}
-
-Graphics::GLDevice& Application::GetGLDevice() noexcept
-{
-  return mGLDevice;
 }
 }
 

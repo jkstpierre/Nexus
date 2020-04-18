@@ -22,6 +22,36 @@ enum class GLPipelineStage : unsigned int
   _COMPUTE_SHADER = 0x00000020
 };
 
+/// Function: |
+///
+/// Summary:  Bitwise 'or' operator.
+///
+/// Author: jkstpierre
+///
+/// Date: 4/16/2020
+///
+/// Parameters:
+/// lhs -       A bit-field to process.
+/// rhs -       One or more bits to OR into the bit-field.
+///
+/// Returns:  The result of the operation.
+extern GLPipelineStage operator|(const GLPipelineStage& lhs, const GLPipelineStage& rhs) noexcept;
+
+/// Function: &
+///
+/// Summary:  Bitwise 'and' operator.
+///
+/// Author: jkstpierre
+///
+/// Date: 4/16/2020
+///
+/// Parameters:
+/// lhs -       A bit-field to process.
+/// rhs -       A mask of bits to apply to the bit-field.
+///
+/// Returns:  The result of the operation.
+extern GLPipelineStage operator&(const GLPipelineStage& lhs, const GLPipelineStage& rhs) noexcept;
+
 /// Class:  GLPipeline
 ///
 /// Summary:  A gl pipeline.

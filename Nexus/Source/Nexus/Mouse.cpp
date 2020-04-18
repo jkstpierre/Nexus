@@ -28,12 +28,12 @@ const bool Mouse::IsPressed(const MouseButton& button) const noexcept
   }
 }
 
-void Mouse::SetPosition(const Math::Vector2i& position) noexcept
+void Mouse::SetPosition(const glm::u32vec2& position) noexcept
 {
   mPosition = position;
 }
 
-const Math::Vector2i& Mouse::GetPosition() const noexcept
+const glm::u32vec2& Mouse::GetPosition() const noexcept
 {
   return mPosition;
 }

@@ -14,11 +14,11 @@ namespace Nexus::Graphics
 /// Summary:  Values that represent gl shader types.
 enum class GLShaderType : unsigned int
 {
-  VERTEX = 0x8B31,
-  TESS_CONTROL = 0x8E88,
-  TESS_EVALUATION = 0x8E87,
-  GEOMETRY = 0x8DD9,
-  FRAGMENT = 0x8B30
+  _VERTEX = 0x8B31,
+  _TESS_CONTROL = 0x8E88,
+  _TESS_EVALUATION = 0x8E87,
+  _GEOMETRY = 0x8DD9,
+  _FRAGMENT = 0x8B30
 };
 
 /// Class:  GLShader
