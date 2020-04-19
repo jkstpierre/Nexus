@@ -6,6 +6,7 @@
 #define __NEXUS_GRAPHICS_BASE_GLRENDERER_HPP__
 
 #include <Nexus\Graphics\GLTextureUnit.hpp>
+#include <Nexus\Graphics\GLVertexArray.hpp>
 
 namespace Nexus::Graphics::Base
 {
@@ -79,9 +80,11 @@ struct GLDrawElementsIndirectCommand
 /// Date: 4/17/2020.
 class GLRenderer
 {
-private:
+protected:
   /// Summary:  The texture units.
   std::vector<GLTextureUnit*> mTextureUnits;
+  /// Summary:  The vao.
+  GLVertexArray mVAO;
 
 protected:
   /// Function: GLRenderer::GLRenderer
@@ -270,17 +273,6 @@ protected:
   /// baseInstance -    The base instance.
   void DrawElementsInstancedBaseVertexBaseInstance(const GLDrawMode& mode, const int& count, const void* indices, const int& instanceCount, 
                                                    const int& baseVertex, const int& baseInstance) noexcept;
-public:
-  /// Function: GetTextureUnits
-  ///
-  /// Summary:  Gets texture units.
-  ///
-  /// Author: jkstpierre
-  ///
-  /// Date: 4/17/2020
-  ///
-  /// Returns:  Null if it fails, else the texture units.
-  std::vector<GLTextureUnit*> GetTextureUnits() noexcept;
 };
 }
 

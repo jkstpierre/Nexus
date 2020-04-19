@@ -8,22 +8,27 @@
 
 namespace Nexus::Graphics
 {
-GLVertexArray::GLVertexArray() noexcept : mAttributes{ NULL }
+GLVertexArray::GLVertexArray() : GLVertexArray(GLVERTEXARRAYATTRIBUTE_DEFAULT_ATTRIBUTES, GLVERTEXARRAYBINDINGPOINT_DEFAULT_BINDING_POINTS)
+{
+  
+}
+
+GLVertexArray::GLVertexArray(const unsigned int& attributes, const unsigned int& bindingPoints)
 {
   // Create vao
   glCreateVertexArrays(1, &mGLID);
 
   // Create starting binding points
   mBindingPoints = GLVertexArrayBindingPoint::AllocateVertexArrayBindingPoints(
-    mGLID, GLVERTEXARRAYBINDINGPOINT_DEFAULT_BINDING_POINTS);
+    mGLID, bindingPoints);
 
   // Get reference to the default binding point for all attributes
-  const GLVertexArrayBindingPoint& defaultBindingPoint = 
+  const GLVertexArrayBindingPoint& defaultBindingPoint =
     *mBindingPoints.at(GLVERTEXARRAYBINDINGPOINT_DEFAULT_BINDING_POINT_INDEX);
 
   // Create starting attributes
   mAttributes = GLVertexArrayAttribute::AllocateVertexArrayAttributes(
-    mGLID, defaultBindingPoint, GLVERTEXARRAYATTRIBUTE_DEFAULT_ATTRIBUTES);
+    mGLID, defaultBindingPoint, attributes);
 
   DebugWriter().Write("GLVertexArray %u created.\n", mGLID);
 }
@@ -60,6 +65,15 @@ std::vector<GLVertexArrayAttribute*>& GLVertexArray::GetAttributes() noexcept
 std::vector<GLVertexArrayBindingPoint*>& GLVertexArray::GetBindingPoints() noexcept
 {
   return mBindingPoints;
+}
+
+unsigned int GLVertexArray::GetElementBufferGLID() const noexcept
+{
+  int ebo;
+
+  glGetVertexArrayiv(mGLID, GL_ELEMENT_ARRAY_BUFFER_BINDING, &ebo);
+
+  return static_cast<unsigned int>(ebo);
 }
 }
 

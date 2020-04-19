@@ -214,32 +214,6 @@ public:
   /// Returns:  The relative offset.
   unsigned int GetRelativeOffset() const noexcept;
 
-  /// Function: GetStride
-  ///
-  /// Summary:
-  ///   Gets the distance in bytes between successive elements of this attribute. This value is set
-  ///   in the GLVertexArrayBindingPoint this attribute is attached to.
-  ///
-  /// Author: jkstpierre.
-  ///
-  /// Date: 4/18/2020.
-  ///
-  /// Returns:  The stride.
-  unsigned int GetStride() const noexcept;
-
-  /// Function: GetDivisor
-  ///
-  /// Summary:
-  ///   Gets the divisor for this attribute. This value is set in the GLVertexArrayBindingPoint this
-  ///   attribute is attached to.
-  ///
-  /// Author: jkstpierre.
-  ///
-  /// Date: 4/18/2020.
-  ///
-  /// Returns:  The divisor.
-  unsigned int GetDivisor() const noexcept;
-
   /// Function: IsEnabled
   ///
   /// Summary:  Is enabled.

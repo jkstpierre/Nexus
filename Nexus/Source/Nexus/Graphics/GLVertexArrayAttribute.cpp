@@ -144,24 +144,6 @@ unsigned int GLVertexArrayAttribute::GetRelativeOffset() const noexcept
   return static_cast<unsigned int>(relativeOffset);
 }
 
-unsigned int GLVertexArrayAttribute::GetStride() const noexcept
-{
-  int stride;
-
-  glGetVertexArrayIndexediv(mVertexArrayGLID, mAttributeIndex, GL_VERTEX_ATTRIB_ARRAY_STRIDE, &stride);
-
-  return static_cast<unsigned int>(stride);
-}
-
-unsigned int GLVertexArrayAttribute::GetDivisor() const noexcept
-{
-  int divisor;
-
-  glGetVertexArrayIndexediv(mVertexArrayGLID, mAttributeIndex, GL_VERTEX_ATTRIB_ARRAY_DIVISOR, &divisor);
-
-  return static_cast<unsigned int>(divisor);
-}
-
 bool GLVertexArrayAttribute::IsEnabled() const noexcept
 {
   int enabled;

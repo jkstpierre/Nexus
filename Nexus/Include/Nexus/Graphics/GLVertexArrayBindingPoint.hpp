@@ -17,8 +17,6 @@ const unsigned int GLVERTEXARRAYBINDINGPOINT_DEFAULT_BINDING_POINT_INDEX = 0U;
 const unsigned int GLVERTEXARRAYBINDINGPOINT_DEFAULT_BINDING_POINTS = 16U;
 /// Summary:  The glvertexarraybindingpoint default divisor.
 const unsigned int GLVERTEXARRAYBINDINGPOINT_DEFAULT_DIVISOR = 0U;
-/// Summary:  Buffer for glvertexarraybindingpoint default vertex data.
-const unsigned int GLVERTEXARRAYBINDINGPOINT_DEFAULT_VERTEX_BUFFER_GLID = 0U;
 
 /// Class:  GLVertexArrayBindingPoint
 ///
@@ -37,8 +35,6 @@ private:
   unsigned int mVertexArrayGLID;
   /// Summary:  Zero-based index of the binding on the parent GLVertexArray.
   unsigned int mBindingPointIndex;
-  /// Summary:  The glid of the bound vertex buffer to this binding point. 0 means no buffer is bound.
-  unsigned int mVertexBufferGLID;
 
 protected:
   /// Function: GLVertexArrayBindingPoint::GLVertexArrayBindingPoint
@@ -116,7 +112,6 @@ public:
   void SetVertexBuffer(const GLBuffer<T>* vbo) noexcept
   {
     Base::GLVertexArrayBindingPoint::SetVertexBuffer(mVertexArrayGLID, mBindingPointIndex, vbo ? vbo->GetGLID() : 0, 0, vbo ? sizeof(T) : 0);
-    mVertexBufferGLID = vbo ? vbo->GetGLID() : 0; // Store the glid of the vertex buffer set
   }
 
   /// Function: SetVertexBuffer
@@ -178,7 +173,29 @@ public:
   /// Date: 4/18/2020
   ///
   /// Returns:  The vertex buffer index.
-  const unsigned int& GetVertexBufferGLID() const noexcept;
+  unsigned int GetVertexBufferGLID() const noexcept;
+
+  /// Function: GetStride
+  ///
+  /// Summary:  Gets the stride.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/18/2020
+  ///
+  /// Returns:  The stride.
+  unsigned int GetStride() const noexcept;
+
+  /// Function: GetDivisor
+  ///
+  /// Summary:  Gets the divisor.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/18/2020
+  ///
+  /// Returns:  The divisor.
+  unsigned int GetDivisor() const noexcept;
 };
 }
 

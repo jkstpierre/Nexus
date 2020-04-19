@@ -35,7 +35,20 @@ public:
   /// Author: jkstpierre
   ///
   /// Date: 4/9/2020
-  GLVertexArray() noexcept;
+  GLVertexArray();
+
+  /// Function: GLVertexArray::GLVertexArray
+  ///
+  /// Summary:  Constructor.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/18/2020
+  ///
+  /// Parameters:
+  /// attributes -      The number of attributes to allocate.
+  /// bindingPoints -   The number of binding points to allocate.
+  GLVertexArray(const unsigned int& attributes, const unsigned int& bindingPoints);
 
   /// Function: GLVertexArray::~GLVertexArray
   ///
@@ -90,6 +103,17 @@ public:
   ///
   /// Returns:  Null if it fails, else the binding points.
   std::vector<GLVertexArrayBindingPoint*>& GetBindingPoints() noexcept;
+
+  /// Function: GetElementBufferGLID
+  ///
+  /// Summary:  Gets element buffer glid.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/18/2020
+  ///
+  /// Returns:  The element buffer glid.
+  unsigned int GetElementBufferGLID() const noexcept;
 };
 }
 

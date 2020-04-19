@@ -11,8 +11,7 @@ namespace Nexus::Graphics
 {
 GLVertexArrayBindingPoint::GLVertexArrayBindingPoint(const unsigned int& vaoGLID, const unsigned int& vaoBindingPointIndex) noexcept :
   mVertexArrayGLID(vaoGLID), 
-  mBindingPointIndex(vaoBindingPointIndex),
-  mVertexBufferGLID(GLVERTEXARRAYBINDINGPOINT_DEFAULT_VERTEX_BUFFER_GLID)
+  mBindingPointIndex(vaoBindingPointIndex)
 {
   // Set initial state
   SetDivisor(GLVERTEXARRAYBINDINGPOINT_DEFAULT_DIVISOR);
@@ -91,9 +90,31 @@ const unsigned int& GLVertexArrayBindingPoint::GetBindingPointIndex() const noex
   return mBindingPointIndex;
 }
 
-const unsigned int& GLVertexArrayBindingPoint::GetVertexBufferGLID() const noexcept
+unsigned int GLVertexArrayBindingPoint::GetVertexBufferGLID() const noexcept
 {
-  return mVertexBufferGLID;
+  int vertexBuffer;
+
+  glGetVertexArrayIndexediv(mVertexArrayGLID, mBindingPointIndex, GL_VERTEX_BINDING_BUFFER, &vertexBuffer);
+
+  return static_cast<unsigned int>(vertexBuffer);
+}
+
+unsigned int GLVertexArrayBindingPoint::GetStride() const noexcept
+{
+  int stride;
+
+  glGetVertexArrayIndexediv(mVertexArrayGLID, mBindingPointIndex, GL_VERTEX_BINDING_STRIDE, &stride);
+
+  return static_cast<unsigned int>(stride);
+}
+
+unsigned int GLVertexArrayBindingPoint::GetDivisor() const noexcept
+{
+  int divisor;
+
+  glGetVertexArrayIndexediv(mVertexArrayGLID, mBindingPointIndex, GL_VERTEX_BINDING_DIVISOR, &divisor);
+
+  return static_cast<unsigned int>(divisor);
 }
 }
 

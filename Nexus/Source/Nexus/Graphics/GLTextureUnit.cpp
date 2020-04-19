@@ -4,18 +4,23 @@
 
 #include <GLAD\GL.h>
 #include <Nexus\Graphics\GLTextureUnit.hpp>
+#include <Nexus\DebugWriter.hpp>
 #include <Nexus\Exception.hpp>
 
 namespace Nexus::Graphics
 {
 GLTextureUnit::GLTextureUnit(const unsigned int& textureUnitIndex) noexcept : 
   mTextureUnitIndex(textureUnitIndex), mSampler(nullptr), mTexture(nullptr)
-{}
+{
+  DebugWriter().Write("GLTextureUnit %u created.\n");
+}
 
 GLTextureUnit::~GLTextureUnit() noexcept
 {
   BindSampler(nullptr);   // Unbind sampler from this unit
   BindTexture(nullptr);   // Unbind texture from this unit
+
+  DebugWriter().Write("GLTextureUnit %u destroyed.\n");
 }
 
 std::vector<GLTextureUnit*> GLTextureUnit::AllocateTextureUnits(const unsigned int& count)

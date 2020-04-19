@@ -108,16 +108,7 @@ public:
       auto& attributes = vao.GetAttributes();
       auto& bindingPoints = vao.GetBindingPoints();
 
-      auto attribute = attributes[0];
-      auto bindingPoint = bindingPoints[0];
 
-      bindingPoint->SetDivisor(1);
-
-      DebugWriter().Write("Attribute Divisor = %u\n", attribute->GetDivisor());
-
-      attribute->SetBindingPoint(*bindingPoints[1]);
-
-      DebugWriter().Write("Attribute Divisor = %u\n", attribute->GetDivisor());
     }
   }
 };

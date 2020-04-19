@@ -80,11 +80,6 @@ void GLRenderer::DrawElementsInstancedBaseVertexBaseInstance(const GLDrawMode& m
 {
   glDrawElementsInstancedBaseVertexBaseInstance(static_cast<GLenum>(mode), count, GL_UNSIGNED_INT, indices, instanceCount, baseVertex, baseInstance);
 }
-
-std::vector<GLTextureUnit*> GLRenderer::GetTextureUnits() noexcept
-{
-  return mTextureUnits;
-}
 }
 
 // End of Source\Nexus\Graphics\Base\GLRenderer.cpp
