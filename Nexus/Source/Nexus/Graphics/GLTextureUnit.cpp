@@ -12,7 +12,10 @@ namespace Nexus::Graphics
 GLTextureUnit::GLTextureUnit(const unsigned int& textureUnitIndex) noexcept : 
   mTextureUnitIndex(textureUnitIndex), mSampler(nullptr), mTexture(nullptr)
 {
-  DebugWriter().Write("GLTextureUnit %u created.\n");
+  BindSampler(nullptr);   // No sampler by default
+  BindTexture(nullptr);   // No texture by default
+
+  DebugWriter().Write("GLTextureUnit %u created.\n", textureUnitIndex);
 }
 
 GLTextureUnit::~GLTextureUnit() noexcept
@@ -20,12 +23,14 @@ GLTextureUnit::~GLTextureUnit() noexcept
   BindSampler(nullptr);   // Unbind sampler from this unit
   BindTexture(nullptr);   // Unbind texture from this unit
 
-  DebugWriter().Write("GLTextureUnit %u destroyed.\n");
+  DebugWriter().Write("GLTextureUnit %u destroyed.\n", mTextureUnitIndex);
 }
 
 std::vector<GLTextureUnit*> GLTextureUnit::AllocateTextureUnits(const unsigned int& count)
 {
-  if ( count <= GLTEXTUREUNIT_MAX_TEXTURE_UNITS )
+  unsigned int maxUnits = QueryMaxTextureUnits();
+
+  if ( count <= maxUnits )
   {
     std::vector<GLTextureUnit*> textureUnits;
 
@@ -39,7 +44,7 @@ std::vector<GLTextureUnit*> GLTextureUnit::AllocateTextureUnits(const unsigned i
   else
   {
     throw Exception("GLTextureUnit Error: Cannot allocate %u indices. Maximum is %u.\n", 
-                    GLTEXTUREUNIT_MAX_TEXTURE_UNITS);
+                    count, maxUnits);
   }
 }
 
@@ -51,6 +56,15 @@ void GLTextureUnit::FreeTextureUnits(std::vector<GLTextureUnit*>& textureUnits) 
   }
 
   textureUnits.clear();
+}
+
+unsigned int GLTextureUnit::QueryMaxTextureUnits() noexcept
+{
+  int maxUnits;
+
+  glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &maxUnits);
+
+  return static_cast<unsigned int>(maxUnits);
 }
 
 void GLTextureUnit::BindSampler(const GLSampler* sampler) noexcept

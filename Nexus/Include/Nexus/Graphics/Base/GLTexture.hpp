@@ -5,6 +5,8 @@
 #ifndef __NEXUS_GRAPHICS_BASE_GLTEXTURE_HPP__
 #define __NEXUS_GRAPHICS_BASE_GLTEXTURE_HPP__
 
+#include <unordered_map>
+#include <string>
 #include <Nexus\Graphics\Base\GLObject.hpp>
 
 namespace Nexus::Graphics::Base
@@ -23,6 +25,39 @@ enum class GLTextureType : unsigned int
   _TEXTURE_CUBE_MAP_ARRAY = 0x9009
 };
 
+/// Enum: GLTextureInternalFormat
+///
+/// Summary:
+///   Values that represent gl texture internal formats. TODO: Add other internal formats later.
+enum class GLTextureInternalFormat : unsigned int
+{
+  _R8 = 0x8229,
+  _RG8 = 0x822B,
+  _RGB8 = 0x8051,
+  _RGBA8 = 0x8058
+};
+
+/// Struct: GLImage_t
+///
+/// Summary:  A gl image.
+///
+/// Author: jkstpierre.
+///
+/// Date: 4/19/2020.
+struct GLImage_t
+{
+  /// Summary:  Filename of the file.
+  std::string filename;
+  /// Summary:  The data.
+  unsigned char* data;
+  /// Summary:  The width.
+  int width;
+  /// Summary:  The height.
+  int height;
+  /// Summary:  The channels.
+  int channels;
+};
+
 /// Class:  GLTexture
 ///
 /// Summary:  A gl texture.
@@ -35,10 +70,6 @@ enum class GLTextureType : unsigned int
 /// Base::GLObject - 
 class GLTexture : public Base::GLObject
 {
-private:
-  /// Summary:  The type of the texture.
-  GLTextureType mType;
-
 protected:
   /// Function: GLTexture::GLTexture
   ///
@@ -49,6 +80,7 @@ protected:
   /// Date: 4/13/2020
   GLTexture(const GLTextureType& type) noexcept;
 
+public:
   /// Function: GLTexture::~GLTexture
   ///
   /// Summary:  Destructor.
@@ -58,17 +90,32 @@ protected:
   /// Date: 4/13/2020
   virtual ~GLTexture() noexcept;
 
-public:
-  /// Function: GetType
+protected:
+  /// Function: LoadImage
   ///
-  /// Summary:  Gets the type.
+  /// Summary:  Loads an image from disk.
+  ///
+  /// Author: jkstpierre.
+  ///
+  /// Date: 4/19/2020.
+  ///
+  /// Parameters:
+  /// filepath -  The filepath.
+  ///
+  /// Returns:  The image.
+  const GLImage_t* LoadImage(const char* filepath) const noexcept;
+
+  /// Function: FreeImage
+  ///
+  /// Summary:  Free image. Should be called after image data has been passed to OpenGL.
   ///
   /// Author: jkstpierre
   ///
-  /// Date: 4/13/2020
+  /// Date: 4/19/2020
   ///
-  /// Returns:  The type.
-  const GLTextureType& GetType() const noexcept;
+  /// Parameters:
+  /// image -   The image.
+  void FreeImage(const GLImage_t* image) const noexcept;
 };
 }
 

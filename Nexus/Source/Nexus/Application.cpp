@@ -193,8 +193,11 @@ int Application::Run()
         glm::u32vec2 windowSize = GetWindowDimensions();
         mGLDevice->Viewport(0, 0, windowSize.x, windowSize.y);
 
+        // Compute the alpha value for interpolation and store in the active gl device object
+        mGLDevice->SetAlpha(static_cast<double>(accumulator) / ticksPerUpdate);
+
         // Render a frame using interpolation
-        OnRender(*mGLDevice, static_cast<double>(accumulator) / ticksPerUpdate);
+        OnRender(*mGLDevice);
 
         /// Summary:  Swap window buffers.
         SDL_GL_SwapWindow((SDL_Window*)mWindow);

@@ -7,6 +7,8 @@
 
 #include <queue>
 #include <Nexus\Graphics\GLMessage.hpp>
+#include <Nexus\Graphics\GLTextureUnit.hpp>
+#include <Nexus\Graphics\GLTextureCache.hpp>
 
 namespace Nexus::Graphics
 {
@@ -24,6 +26,13 @@ class GLDevice
 private:
   /// Summary:  Queue of messages.
   std::queue<GLMessage> mMessageQueue;
+  /// Summary:  The texture units.
+  std::vector<GLTextureUnit*> mTextureUnits;
+  /// Summary:  The texture cache instance.
+  GLTextureCache mTextureCache;
+
+  /// Summary:  The alpha interpol for in between interpolation between states during rendering.
+  double mAlpha;
 
 public:
   /// Function: GLDevice::GLDevice
@@ -148,6 +157,53 @@ public:
   ///
   /// Date: 4/17/2020
   void ClearStencil() noexcept;
+
+public:
+  /// Function: SetAlpha
+  ///
+  /// Summary:  Sets alpha interpol.
+  ///
+  /// Author: jkstpierre.
+  ///
+  /// Date: 4/22/2020.
+  ///
+  /// Parameters:
+  /// alpha -   The alpha interpol.
+  void SetAlpha(const double& alpha) noexcept;
+
+public:
+  /// Function: GetTextureUnits
+  ///
+  /// Summary:  Gets texture units.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/20/2020
+  ///
+  /// Returns:  Null if it fails, else the texture units.
+  std::vector<GLTextureUnit*>& GetTextureUnits() noexcept;
+
+  /// Function: GetTextureCache
+  ///
+  /// Summary:  Gets texture cache.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/20/2020
+  ///
+  /// Returns:  The texture cache.
+  GLTextureCache& GetTextureCache() noexcept;
+
+  /// Function: GetAlphaInterpol
+  ///
+  /// Summary:  Gets alpha interpol.
+  ///
+  /// Author: jkstpierre.
+  ///
+  /// Date: 4/22/2020.
+  ///
+  /// Returns:  The alpha interpol.
+  const double& GetAlpha() const noexcept;
 };
 }
 

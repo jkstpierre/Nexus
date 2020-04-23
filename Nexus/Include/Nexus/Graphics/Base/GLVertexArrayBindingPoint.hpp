@@ -28,6 +28,7 @@ protected:
   /// Date: 4/11/2020
   GLVertexArrayBindingPoint() = default;
 
+public:
   /// Function: GLVertexArrayBindingPoint::~GLVertexArrayBindingPoint
   ///
   /// Summary:  Destructor.

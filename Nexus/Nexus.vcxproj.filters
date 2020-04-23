@@ -64,9 +64,6 @@
     <Filter Include="Resource Files\Nexus\Shaders\Geometry">
       <UniqueIdentifier>{1a16ee59-ab54-4f9d-ac94-4201364b4f4d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Nexus\Graphics\Data">
-      <UniqueIdentifier>{0c597733-b1d7-4c91-afa6-a01681c1a043}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\glm">
       <UniqueIdentifier>{91531c60-5a91-4761-ad8f-adca47aaed36}</UniqueIdentifier>
     </Filter>
@@ -84,6 +81,9 @@
     </Filter>
     <Filter Include="Header Files\glm\simd">
       <UniqueIdentifier>{821a5249-8477-4fb9-87d7-a2851ec7383d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\stb">
+      <UniqueIdentifier>{868d8d0b-4d5e-4b40-9b23-e09c6e635860}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -197,9 +197,6 @@
     </ClInclude>
     <ClInclude Include="Include\Nexus\Application.hpp">
       <Filter>Header Files\Nexus</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Nexus\Graphics\Data\GLVertex2D.hpp">
-      <Filter>Header Files\Nexus\Graphics\Data</Filter>
     </ClInclude>
     <ClInclude Include="Include\Nexus\Graphics\Base\GLRenderer.hpp">
       <Filter>Header Files\Nexus\Graphics\Base</Filter>
@@ -939,8 +936,23 @@
     <ClInclude Include="Include\Nexus\Graphics\GLSprite.hpp">
       <Filter>Header Files\Nexus\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Nexus\Graphics\Data\GLMaterial.hpp">
-      <Filter>Header Files\Nexus\Graphics\Data</Filter>
+    <ClInclude Include="Include\stb\stb_image.h">
+      <Filter>Header Files\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Nexus\Graphics\GLTexture2DArray.hpp">
+      <Filter>Header Files\Nexus\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Nexus\Graphics\Base\GLRenderable.hpp">
+      <Filter>Header Files\Nexus\Graphics\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Nexus\Graphics\Base\GLDeviceChild.hpp">
+      <Filter>Header Files\Nexus\Graphics\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Nexus\Graphics\GLTextureCache.hpp">
+      <Filter>Header Files\Nexus\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Nexus\Graphics\GLSpriteRenderer.hpp">
+      <Filter>Header Files\Nexus\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1018,6 +1030,24 @@
     </ClCompile>
     <ClCompile Include="Include\glm\detail\glm.cpp">
       <Filter>Header Files\glm\detail</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Nexus\Graphics\GLTexture2DArray.cpp">
+      <Filter>Source Files\Nexus\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Nexus\Graphics\Base\GLRenderable.cpp">
+      <Filter>Source Files\Nexus\Graphics\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Nexus\Graphics\Base\GLDeviceChild.cpp">
+      <Filter>Source Files\Nexus\Graphics\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Nexus\Graphics\GLSprite.cpp">
+      <Filter>Source Files\Nexus\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Nexus\Graphics\GLTextureCache.cpp">
+      <Filter>Source Files\Nexus\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Nexus\Graphics\GLSpriteRenderer.cpp">
+      <Filter>Source Files\Nexus\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

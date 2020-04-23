@@ -45,6 +45,7 @@ protected:
   /// glID -  The glid.
   GLObject(const unsigned int& glID) noexcept;
 
+public:
   /// Function: GLObject::~GLObject
   ///
   /// Summary:  Destructor.

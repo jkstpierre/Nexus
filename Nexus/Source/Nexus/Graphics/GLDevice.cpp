@@ -4,6 +4,7 @@
 
 #include <GLAD\GL.h>
 #include <Nexus\Graphics\GLDevice.hpp>
+#include <Nexus\Graphics\Base\GLDeviceChild.hpp>
 #include <Nexus\Exception.hpp>
 #include <Nexus\DebugWriter.hpp>
 
@@ -34,9 +35,9 @@ void GLAPIENTRY glMessageCallback(GLenum source, GLenum type, GLuint id, GLenum 
     GLMessage(static_cast<GLMessageSource>(source), static_cast<GLMessageType>(type), static_cast<GLMessageSeverity>(severity), id, message, length));
 }
 
-GLDevice::GLDevice() noexcept
+GLDevice::GLDevice() noexcept : mAlpha(0.0)
 {
-  // Setup GLDevice here
+  // Setup OpenGL here //
 
 #ifdef _DEBUG
   glEnable(GL_DEBUG_OUTPUT);  // Enable debug output
@@ -44,12 +45,20 @@ GLDevice::GLDevice() noexcept
   glDebugMessageInsert(GL_DEBUG_SOURCE_APPLICATION, GL_DEBUG_TYPE_OTHER, 0, GL_DEBUG_SEVERITY_NOTIFICATION, -1, "Debugging enabled");
 #endif
 
+  // Set the glDevice so renderables and renderers can see it
+  Base::GLDeviceChild::SetGLDevice(this);  
+
+  /// Summary:  Allocate maximum number of texture units possible
+  mTextureUnits = GLTextureUnit::AllocateTextureUnits(GLTextureUnit::QueryMaxTextureUnits());
+
   DebugWriter().Write("GLDevice created.\n");
 }
 
 GLDevice::~GLDevice() noexcept
 {
   // Free resources here
+
+  GLTextureUnit::FreeTextureUnits(mTextureUnits); // Free the texture units
 
   DebugWriter().Write("GLDevice destroyed.\n");
 }
@@ -110,6 +119,26 @@ void GLDevice::ClearStencil(const int& stencil) noexcept
 void GLDevice::ClearStencil() noexcept
 {
   return ClearStencil(0);
+}
+
+void GLDevice::SetAlpha(const double& alpha) noexcept
+{
+  mAlpha = alpha;
+}
+
+std::vector<GLTextureUnit*>& GLDevice::GetTextureUnits() noexcept
+{
+  return mTextureUnits;
+}
+
+GLTextureCache& GLDevice::GetTextureCache() noexcept
+{
+  return mTextureCache;
+}
+
+const double& GLDevice::GetAlpha() const noexcept
+{
+  return mAlpha;
 }
 }
 

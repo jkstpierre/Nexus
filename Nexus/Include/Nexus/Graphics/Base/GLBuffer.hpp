@@ -28,6 +28,7 @@ protected:
   /// Date: 4/10/2020
   GLBuffer() noexcept;
 
+public:
   /// Function: GLBuffer::~GLBuffer
   ///
   /// Summary:  Destructor.

@@ -14,6 +14,7 @@
 #include <Nexus\Graphics\GLProgram.hpp>
 #include <Nexus\ResourceLoader.hpp>
 #include <Nexus\Graphics\GLVertexArray.hpp>
+#include <Nexus\Graphics\GLSprite.hpp>
 
 namespace Nexus
 {
@@ -91,15 +92,19 @@ public:
   ///
   /// Parameters:
   /// glDevice -  [in,out] The gl device.
-  /// alpha -     The alpha.
   ///
   /// See:
-  /// Nexus::Test.OnRender(Graphics::GLDevice&,const double&) - 
-  void OnRender(Graphics::GLDevice& glDevice, const double& alpha) override
+  /// Nexus::Test.OnRender(Graphics::GLDevice&) - 
+  ///                                               Nexus::Test.OnRender(Graphics::GLDevice&) -
+  ///                                               Nexus::Test.OnRender(Graphics::GLDevice&,const
+  ///                                               double&) -.
+  void OnRender(Graphics::GLDevice& glDevice) override
   {
     if ( GetMouse().IsPressed(MouseButton::_LEFT) )
     {
       glDevice.ClearColor(1.0f, 0.0f, 1.0f, 1.0f);
+      Graphics::GLSprite sprite;
+      
     }
 
     if ( GetMouse().IsPressed(MouseButton::_RIGHT) )
@@ -108,7 +113,8 @@ public:
       auto& attributes = vao.GetAttributes();
       auto& bindingPoints = vao.GetBindingPoints();
 
-
+      DebugWriter().Write("Max attributes: %u\n", Graphics::GLVertexArrayAttribute::QueryMaxVertexArrayAttributes());
+      DebugWriter().Write("Max binding points: %u\n", Graphics::GLVertexArrayBindingPoint::QueryMaxVertexArrayBindingPoints());
     }
   }
 };

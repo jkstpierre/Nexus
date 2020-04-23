@@ -11,8 +11,8 @@
 
 namespace Nexus::Graphics
 {
-/// Summary:  The maximum number of texture binding units
-const unsigned int GLTEXTUREUNIT_MAX_TEXTURE_UNITS = 16U;
+/// Summary:  The default maximum number of texture units
+const unsigned int GLTEXTUREUNIT_DEFAULT_TEXTURES = 16U;
 
 /// Class:  GLTextureUnit
 ///
@@ -81,6 +81,17 @@ public:
   /// Parameters:
   /// textureUnits -  [in,out] [in,out] If non-null, the texture units.
   static void FreeTextureUnits(std::vector<GLTextureUnit*>& textureUnits) noexcept;
+
+  /// Function: QueryMaxTextureUnits
+  ///
+  /// Summary:  Queries maximum texture units that can be bound for the fragment shader.
+  ///
+  /// Author: jkstpierre
+  ///
+  /// Date: 4/20/2020
+  ///
+  /// Returns:  The maximum texture units.
+  static unsigned int QueryMaxTextureUnits() noexcept;
 
 public:
   /// Function: SetSampler

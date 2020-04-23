@@ -5,7 +5,7 @@
 #ifndef __NEXUS_GRAPHICS_BASE_GLRENDERER_HPP__
 #define __NEXUS_GRAPHICS_BASE_GLRENDERER_HPP__
 
-#include <Nexus\Graphics\GLTextureUnit.hpp>
+#include <Nexus\Graphics\Base\GLDeviceChild.hpp>
 #include <Nexus\Graphics\GLVertexArray.hpp>
 
 namespace Nexus::Graphics::Base
@@ -78,11 +78,9 @@ struct GLDrawElementsIndirectCommand
 /// Author: jkstpierre.
 ///
 /// Date: 4/17/2020.
-class GLRenderer
+class GLRenderer : public Base::GLDeviceChild
 {
 protected:
-  /// Summary:  The texture units.
-  std::vector<GLTextureUnit*> mTextureUnits;
   /// Summary:  The vao.
   GLVertexArray mVAO;
 
@@ -96,6 +94,7 @@ protected:
   /// Date: 4/17/2020
   GLRenderer();
 
+public:
   /// Function: GLRenderer::~GLRenderer
   ///
   /// Summary:  Destructor.

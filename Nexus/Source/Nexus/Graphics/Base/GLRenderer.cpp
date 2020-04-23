@@ -10,14 +10,11 @@ namespace Nexus::Graphics::Base
 {
 GLRenderer::GLRenderer()
 {
-  /// Summary:  Generate the texture units for this renderer
-  mTextureUnits = GLTextureUnit::AllocateTextureUnits(GLTEXTUREUNIT_MAX_TEXTURE_UNITS);
   DebugWriter().Write("GLRenderer created.\n");
 }
 
 GLRenderer::~GLRenderer() noexcept
 {
-  GLTextureUnit::FreeTextureUnits(mTextureUnits);
   DebugWriter().Write("GLRenderer destroyed.\n");
 }
 

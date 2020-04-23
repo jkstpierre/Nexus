@@ -125,8 +125,7 @@ public:
   ///
   /// Parameters:
   /// glDevice -  [in,out] The gl device.
-  /// alpha -     The alpha value used for interpolation.
-  virtual void OnRender(Graphics::GLDevice& glDevice, const double& alpha) = 0;
+  virtual void OnRender(Graphics::GLDevice& glDevice) = 0;
 
 public:
   /// Function: SetTicksPerSecond
