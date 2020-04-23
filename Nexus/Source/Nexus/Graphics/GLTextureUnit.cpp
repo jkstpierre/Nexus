@@ -12,17 +12,11 @@ namespace Nexus::Graphics
 GLTextureUnit::GLTextureUnit(const unsigned int& textureUnitIndex) noexcept : 
   mTextureUnitIndex(textureUnitIndex), mSampler(nullptr), mTexture(nullptr)
 {
-  BindSampler(nullptr);   // No sampler by default
-  BindTexture(nullptr);   // No texture by default
-
   DebugWriter().Write("GLTextureUnit %u created.\n", textureUnitIndex);
 }
 
 GLTextureUnit::~GLTextureUnit() noexcept
 {
-  BindSampler(nullptr);   // Unbind sampler from this unit
-  BindTexture(nullptr);   // Unbind texture from this unit
-
   DebugWriter().Write("GLTextureUnit %u destroyed.\n", mTextureUnitIndex);
 }
 
